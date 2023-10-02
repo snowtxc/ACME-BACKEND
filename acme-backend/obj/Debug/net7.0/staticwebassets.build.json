@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "BP4uA3r/eiey22v8ccNVsNj0pTRZmvwJ0AxAvUj76Tk=",
+  "Source": "acme-backend",
+  "BasePath": "_content/acme-backend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
