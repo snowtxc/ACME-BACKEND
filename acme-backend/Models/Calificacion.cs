@@ -16,7 +16,7 @@ namespace acme_backend.Models
 
         public string Comentario { get; set; } = "";
 
-        public int UsuarioId { get; set; }
+        public string UsuarioId { get; set; }
         public int ProductoId { get; set; }
 
 

@@ -16,7 +16,7 @@ namespace acme_backend.Models
         public int ProductoId { get; set; }
 
         [Required]
-        public int UsuarioId { get; set; }
+        public string UsuarioId { get; set; }
 
         public Producto Producto { get; set; } = null!;
         public Usuario Usuario { get; set; } = null!;

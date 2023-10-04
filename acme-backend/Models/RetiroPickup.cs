@@ -13,6 +13,6 @@ namespace acme_backend.Models
         public bool Entregado = false;
 
         [Required]
-        public DateTime FechaLlegada;
+        public DateTime FechaLlegada; 
     }
 }
