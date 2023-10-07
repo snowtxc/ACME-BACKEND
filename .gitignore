@@ -1,0 +1,200 @@
+# Carpeta bin y obj generada por compilación
+**/bin/
+**/obj/
+
+# Archivos de configuración específicos de Visual Studio
+.vscode/
+.vs/
+*_i.c
+*_p.c
+*.suo
+*.user
+*.sln.docstates
+
+# Carpetas y archivos de caché
+[Cc]ache/
+[Nn]ode_modules/
+
+# Archivos temporales y copias de seguridad
+[Tt]emp/
+[Tt]estResults/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+[Ll]ogFiles/
+_UpgradeReport_Files/
+TestResults/
+
+# Archivos de usuario
+*.suo
+*.user
+*.sln.docstates
+
+# Archivos de compilación de Visual Studio
+[Bb]in/
+[Oo]bj/
+
+# Carpeta de paquetes de NuGet
+packages/
+
+# Archivos de respaldo de Visual Studio
+*.[Pp]ublish.xml
+*.pfx
+# Los archivos .pem
+*.pem
+# archivos de firma
+*.cer
+# los certificados provisionales
+*.pfx
+# Microsoft Azure Service Fabric
+AppPackages/
+[Oo]ut/
+
+# Carpeta de publicación de Visual Studio
+_PublishedWebsites/
+
+# Carpeta de artefactos generada por Azure DevOps
+drop/
+
+# Rider
+.idea/
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VS Code directories
+.vscode/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# JetBrains Rider
+.idea/
+.idea/
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VS Code directories
+.vscode/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# Rider
+.idea/
+.idea/
+*.suo
+*.user
+*.sln.docstates
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VS Code directories
+.vscode/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# Rider
+.idea/
+.idea/
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VS Code directories
+.vscode/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# Rider
+.idea/
+.idea/

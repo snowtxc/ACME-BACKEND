@@ -13,7 +13,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<AuthService>();
 
-
 builder.Services.AddControllers();
 builder.Services.AddDbContext<ApplicationDbContext>(o => o.UseMySQL(builder.Configuration.GetConnectionString("DbConnection")));
 
@@ -27,6 +26,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+var scope = app.Services.CreateScope();
+
+var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+db.Database.Migrate();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
