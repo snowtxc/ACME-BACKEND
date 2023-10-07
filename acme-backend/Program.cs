@@ -32,6 +32,29 @@ var scope = app.Services.CreateScope();
 var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 db.Database.Migrate();
 
+async Task CreateDefaultRoles(IServiceScope scopeContext)
+{
+    var roleManager = scopeContext.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+    // Verificar si los roles ya existen
+    if (!await roleManager.RoleExistsAsync("Admin"))
+    {
+        await roleManager.CreateAsync(new IdentityRole("Admin"));
+    }
+
+    if (!await roleManager.RoleExistsAsync("Vendedor"))
+    {
+        await roleManager.CreateAsync(new IdentityRole("Vendedor"));
+    }
+    if (!await roleManager.RoleExistsAsync("Usuario"))
+    {
+        await roleManager.CreateAsync(new IdentityRole("Usuario"));
+    }
+}
+
+await CreateDefaultRoles(scope);
+
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
