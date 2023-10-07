@@ -54,22 +54,34 @@ namespace acme_backend.Services
             throw new Exception("Credenciales invalidas");
         }
 
+        // this method will only create users with role "Usuario"
         public async Task<UsuarioDto?> register(UsuarioDto userDto)
         {
-           
-            if(await _userManager.FindByEmailAsync(userDto.Email) != null)
+
+            if (await _userManager.FindByEmailAsync(userDto.Email) != null)
             {
                 throw new Exception("Email ya esta en uso");
             }
             Usuario user = new Usuario
             {
-                Nombre =  userDto.Nombre,
+                Nombre = userDto.Nombre,
                 Celular = userDto.Celular,
                 Imagen = userDto.Imagen,
                 UserName = userDto.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
             };
             var result = await _userManager.CreateAsync(user, userDto.Password);
+            /* if (result.Succeeded)
+            {
+                var rolesToThisUser = new List<string> { "Vendedor" };
+                foreach (var roleName in rolesToThisUser)
+                {
+                    if (!await _userManager.IsInRoleAsync(user, roleName))
+                    {
+                        await _userManager.AddToRoleAsync(user, roleName);
+                    }
+                }
+            } */
             if (!result.Succeeded)
             {
                 foreach(var item in result.Errors)
