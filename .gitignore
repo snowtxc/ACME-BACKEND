@@ -202,3 +202,13 @@ $RECYCLE.BIN/
 ./appSettings.json
 
 appsettings.json
+acme-backend/obj/Debug/net7.0/refint/acme-backend.dll
+acme-backend/obj/Debug/net7.0/ref/acme-backend.dll
+acme-backend/obj/Debug/net7.0/acme-backend.pdb
+acme-backend/obj/Debug/net7.0/acme-backend.dll
+acme-backend/obj/Debug/net7.0/acme-backend.csproj.AssemblyReference.cache
+acme-backend/obj/Debug/net7.0/acme-backend.assets.cache
+acme-backend/bin/Debug/net7.0/acme-backend.pdb
+acme-backend/bin/Debug/net7.0/acme-backend.dll
+.vs/acme-backend/v17/.suo
+.vs/acme-backend/DesignTimeBuild/.dtbcache.v2

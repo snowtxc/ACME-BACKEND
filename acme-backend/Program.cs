@@ -54,6 +54,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors();
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<UserService>();
 
 
 var app = builder.Build();
