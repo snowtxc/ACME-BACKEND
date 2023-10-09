@@ -16,6 +16,7 @@ namespace acme_backend.Models.Dtos
 
         public string Password { get; set; } = string.Empty;
 
+        public string[] Roles { get; set; } = new string[] { };
 
     }
 }

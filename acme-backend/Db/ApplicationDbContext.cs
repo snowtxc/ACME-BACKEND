@@ -1,4 +1,5 @@
 ﻿using acme_backend.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -60,11 +61,9 @@ namespace acme_backend.Db
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
 
             modelBuilder.Entity<CategoriaProducto>().HasOne(cp => cp.Categoria).WithMany(c => c.CategoriasProductos).HasForeignKey(cp => cp.ProductoId);
             modelBuilder.Entity<CategoriaProducto>().HasOne(cp => cp.Producto).WithMany(p => p.CategoriasProductos).HasForeignKey(cp => cp.CategoriaId);
@@ -76,8 +75,6 @@ namespace acme_backend.Db
             modelBuilder.Entity<CompraProducto>().HasOne(cp => cp.Producto).WithMany(p => p.ComprasProductos).HasForeignKey(cp => cp.ProductoId);
 
             modelBuilder.Entity<LineaCarrito>().HasOne(lc => lc.Usuario).WithMany(u => u.LineasCarrito).HasForeignKey(cp => cp.UsuarioId).HasPrincipalKey(u => u.Id);
-
-
 
         }
 

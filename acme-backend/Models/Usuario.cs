@@ -7,10 +7,6 @@ namespace acme_backend.Models
 {
     public class Usuario: IdentityUser
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string? Id { get; set; }
-
         [Required]
         public string Nombre { get; set; } = "";
 
@@ -33,7 +29,7 @@ namespace acme_backend.Models
 
         public ICollection<LineaCarrito> LineasCarrito { get; set; } = new List<LineaCarrito>();
 
-        
+
 
 
     }

@@ -1,9 +1,14 @@
 using acme_backend.Db;
 using acme_backend.Models;
 using acme_backend.Services;
+using Microsoft.AspNetCore.Authentication.Facebook;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -11,21 +16,44 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddScoped<AuthService>();
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<ApplicationDbContext>(o => o.UseMySQL(builder.Configuration.GetConnectionString("DbConnection")));
 
 
-builder.Services.AddIdentity<Usuario, IdentityRole>()
+builder.Services.AddIdentity<Usuario, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
+    .AddRoleManager<RoleManager<IdentityRole>>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
+
+  string secret = "JWTAuthenticationHIGHsecuredPasswordVVVp1OH7Xzyr";
+
+  var key = Encoding.ASCII.GetBytes(secret); // Reemplaza con tu propia clave secreta
+  builder.Services.AddAuthentication(options =>
+  {
+      options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+      options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+  })
+  .AddJwtBearer(options =>
+  {
+      options.RequireHttpsMetadata = false; // En producción, configura esto como true para usar HTTPS
+      options.SaveToken = true;
+      options.TokenValidationParameters = new TokenValidationParameters
+      {
+          ValidateIssuerSigningKey = true,
+          IssuerSigningKey = new SymmetricSecurityKey(key),
+          ValidateIssuer = false, // Reemplaza con tu emisor si es necesario
+          ValidateAudience = false // Reemplaza con tu audiencia si es necesario
+      };
+  });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors();
+builder.Services.AddScoped<AuthService>();
 
 
 var app = builder.Build();
@@ -38,20 +66,13 @@ db.Database.Migrate();
 async Task CreateDefaultRoles(IServiceScope scopeContext)
 {
     var roleManager = scopeContext.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-
-    // Verificar si los roles ya existen
-    if (!await roleManager.RoleExistsAsync("Admin"))
+    var roles = new[] { "Admin", "Vendedor", "Usuario" };
+    foreach (var role in roles)
     {
-        await roleManager.CreateAsync(new IdentityRole("Admin"));
-    }
-
-    if (!await roleManager.RoleExistsAsync("Vendedor"))
-    {
-        await roleManager.CreateAsync(new IdentityRole("Vendedor"));
-    }
-    if (!await roleManager.RoleExistsAsync("Usuario"))
-    {
-        await roleManager.CreateAsync(new IdentityRole("Usuario"));
+        if (!await roleManager.RoleExistsAsync(role))
+        {
+            await roleManager.CreateAsync(new IdentityRole(role));
+        }
     }
 }
 
@@ -71,9 +92,11 @@ app.UseCors(builder => builder
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
-
 
 app.MapControllers();
 
 app.Run();
+
+

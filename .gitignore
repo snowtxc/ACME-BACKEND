@@ -198,3 +198,7 @@ $RECYCLE.BIN/
 # Rider
 .idea/
 .idea/
+
+./appSettings.json
+
+appsettings.json

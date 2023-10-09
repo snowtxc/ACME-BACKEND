@@ -514,3 +514,4 @@ C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\obj
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\obj\Debug\net7.0\acme-backend.pdb
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\obj\Debug\net7.0\acme-backend.genruntimeconfig.cache
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\obj\Debug\net7.0\ref\acme-backend.dll
+C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.Facebook.dll
