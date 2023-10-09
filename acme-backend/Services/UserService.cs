@@ -1,6 +1,8 @@
 ﻿using acme_backend.Db;
 using acme_backend.Models;
 using acme_backend.Models.Dtos;
+using acme_backend.Shared.Utils;
+using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MySqlX.XDevAPI.Common;
@@ -13,22 +15,26 @@ namespace acme_backend.Services
         private ApplicationDbContext _db;
         private readonly UserManager<Usuario> _userManager;
         private readonly IConfiguration _configuration;
-
-        public UserService(UserManager<Usuario> userManager, IConfiguration configuration, ApplicationDbContext db)
+        private readonly IMapper _mapper;
+        public UserService(UserManager<Usuario> userManager, IConfiguration configuration, ApplicationDbContext db, IMapper mapper)
         {
             _configuration = configuration;
             _userManager = userManager;
             _db = db;
+            _mapper = mapper;
         }
 
         public async Task<UsuarioListDto> getUserById(string id)
         {
-            var user = await _userManager.FindByIdAsync(id);
+            var user = await _userManager.Users
+                .Include(u => u.Direcciones)
+                .FirstOrDefaultAsync(u => u.Id == id);
             if (user == null)
             {
                 throw new Exception("Usuario no encontrado.");
             }
 
+            var direccionMapper = new DireccionMapper(_mapper);
             var userDto = new UsuarioListDto
             {
                 Id = user.Id,
@@ -37,12 +43,14 @@ namespace acme_backend.Services
                 Email = user.Email,
                 Imagen = user.Imagen,
                 EmpresaId = (int)user.EmpresaId,
+                Direcciones = user.Direcciones.Select(direccion => direccionMapper.MapDireccionToDto(direccion)).ToList(),
             };
             return userDto;
         }
 
         public async Task<List<UsuarioListDto>> listUsers()
         {
+            var direccionMapper = new DireccionMapper(_mapper);
             var users = await _userManager.Users
                 .Select(u => new UsuarioListDto
                 {
@@ -52,6 +60,7 @@ namespace acme_backend.Services
                     Celular = u.Celular,
                     Imagen = u.Imagen,
                     EmpresaId = (int)u.EmpresaId,
+                    Direcciones = u.Direcciones.Select(direccion => direccionMapper.MapDireccionToDto(direccion)).ToList(),
                 })
                 .ToListAsync();
             return users;
@@ -71,11 +80,23 @@ namespace acme_backend.Services
                 Empresa = empresa,
             };
 
+            var foundCiudad = await _db.Ciudades.FindAsync(userDto.Direccion.CiudadId);
+            Direccion dir = new Direccion
+            { 
+                Calle = userDto.Direccion.Calle,
+                CalleEntre1 = userDto.Direccion.CalleEntre1,
+                CalleEntre2 = userDto.Direccion.CalleEntre2,
+                NroPuerta = userDto.Direccion.NroPuerta,
+                Ciudad = foundCiudad,
+            };
+            user.Direcciones.Add(dir);
+
             var result = await _userManager.CreateAsync(user);
             if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(user, "Usuario");
                 userDto.Id = user.Id;
+                userDto.Direccion.Id = user.Direcciones.First().Id;
                 MailService mailService = new MailService();
 
                 string path = @"./Templates/ActivateAccount.html";

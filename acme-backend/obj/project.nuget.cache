@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "XW1JsIz2vLFkWMmZyxQlNOvIDaWcfjmjiK8m1Eq5BHa5Xo5hZuvhHqcY0K/tH9/jHQb9pIWgjJT0dBjOm5O81w==",
+  "dgSpecHash": "1PqhoVzPZFbefV1sxnyrsfJsZDr4dpPQsw40ahu3I9hosKqBrgyZKuhlPpt24RW+IKuYt5PRJ6YrRf3sb1pIzw==",
   "success": true,
   "projectFilePath": "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\acme-backend\\acme-backend.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\mdiu\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\mdiu\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\mdiu\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\mdiu\\.nuget\\packages\\google.protobuf\\3.21.9\\google.protobuf.3.21.9.nupkg.sha512",
     "C:\\Users\\mdiu\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
@@ -80,7 +82,7 @@
     "C:\\Users\\mdiu\\.nuget\\packages\\microsoft.codeanalysis.razor\\6.0.11\\microsoft.codeanalysis.razor.6.0.11.nupkg.sha512",
     "C:\\Users\\mdiu\\.nuget\\packages\\microsoft.codeanalysis.scripting.common\\4.4.0\\microsoft.codeanalysis.scripting.common.4.4.0.nupkg.sha512",
     "C:\\Users\\mdiu\\.nuget\\packages\\microsoft.codeanalysis.workspaces.common\\4.4.0\\microsoft.codeanalysis.workspaces.common.4.4.0.nupkg.sha512",
-    "C:\\Users\\mdiu\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\mdiu\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\mdiu\\.nuget\\packages\\microsoft.diasymreader\\1.4.0\\microsoft.diasymreader.1.4.0.nupkg.sha512",
     "C:\\Users\\mdiu\\.nuget\\packages\\microsoft.dotnet.scaffolding.shared\\7.0.9\\microsoft.dotnet.scaffolding.shared.7.0.9.nupkg.sha512",
     "C:\\Users\\mdiu\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.11\\microsoft.entityframeworkcore.7.0.11.nupkg.sha512",

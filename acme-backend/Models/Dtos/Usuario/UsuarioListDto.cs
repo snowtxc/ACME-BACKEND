@@ -14,5 +14,7 @@ namespace acme_backend.Models.Dtos
         public string Email { get; set; } = string.Empty;
 
         public int EmpresaId { get; set; }
+
+        public IList<DireccionDTO> Direcciones { get; set; } = new List<DireccionDTO>();
     }
 }
