@@ -44,6 +44,7 @@ namespace acme_backend.Services
                 Imagen = user.Imagen,
                 EmpresaId = (int)user.EmpresaId,
                 Direcciones = user.Direcciones.Select(direccion => direccionMapper.MapDireccionToDto(direccion)).ToList(),
+                Calificaciones = _db.Calificaciones.Count(c => c.UsuarioId == user.Id),
             };
             return userDto;
         }
@@ -61,6 +62,7 @@ namespace acme_backend.Services
                     Imagen = u.Imagen,
                     EmpresaId = (int)u.EmpresaId,
                     Direcciones = u.Direcciones.Select(direccion => direccionMapper.MapDireccionToDto(direccion)).ToList(),
+                    Calificaciones = _db.Calificaciones.Count(c => c.UsuarioId == u.Id),
                 })
                 .ToListAsync();
             return users;
@@ -88,6 +90,7 @@ namespace acme_backend.Services
                 CalleEntre2 = userDto.Direccion.CalleEntre2,
                 NroPuerta = userDto.Direccion.NroPuerta,
                 Ciudad = foundCiudad,
+                CiudadId = userDto.Direccion.CiudadId,
             };
             user.Direcciones.Add(dir);
 

@@ -15,6 +15,8 @@ namespace acme_backend.Models.Dtos
 
         public int EmpresaId { get; set; }
 
+        public int Calificaciones { get; set; } = 0;
+
         public IList<DireccionDTO> Direcciones { get; set; } = new List<DireccionDTO>();
     }
 }
