@@ -58,6 +58,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<ProductoService>();
+builder.Services.AddScoped<CategoriaService>();
+builder.Services.AddScoped<TipoIvaService>();
 
 
 var app = builder.Build();

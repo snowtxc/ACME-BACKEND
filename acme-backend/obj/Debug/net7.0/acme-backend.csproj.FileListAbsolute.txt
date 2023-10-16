@@ -776,3 +776,5 @@ C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\obj\Debug\net7.0\acme-b
 C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\obj\Debug\net7.0\ref\acme-backend.dll
 C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\bin\Debug\net7.0\AutoMapper.dll
 C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\AutoMapper.dll
+C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

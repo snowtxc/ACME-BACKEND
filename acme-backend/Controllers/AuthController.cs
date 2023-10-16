@@ -34,7 +34,6 @@ namespace acme_backend.Controllers
             try
             {
                 var registrationResult = await _authService.register(userDto);
-                Console.WriteLine("Id es", registrationResult);
                 if (registrationResult != null)
                 {
                    await _authService.addRoleToUser(registrationResult.Id, "Usuario");
