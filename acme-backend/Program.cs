@@ -18,6 +18,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<EmpresaService>();
+
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<ApplicationDbContext>(o => o.UseMySQL(builder.Configuration.GetConnectionString("DbConnection")));
@@ -40,7 +43,7 @@ builder.Services.AddIdentity<Usuario, IdentityRole>(options => options.SignIn.Re
   })
   .AddJwtBearer(options =>
   {
-      options.RequireHttpsMetadata = false; // En producción, configura esto como true para usar HTTPS
+      options.RequireHttpsMetadata = false; // En producciï¿½n, configura esto como true para usar HTTPS
       options.SaveToken = true;
       options.TokenValidationParameters = new TokenValidationParameters
       {
