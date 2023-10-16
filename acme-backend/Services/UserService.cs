@@ -68,18 +68,29 @@ namespace acme_backend.Services
             return users;
         }
 
-        public async Task<UsuarioCreateDto> createUser(UsuarioCreateDto userDto)
+        public async Task<UsuarioCreateDto> createUser(string userId, UsuarioCreateDto userDto)
         {
-            var empresa = await _db.Empresas.FindAsync(userDto.EmpresaId);
+            var userInfo = await _userManager.Users
+           .Include(u => u.Empresa)
+           .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (userInfo == null)
+            {
+                throw new Exception("Usuario invalido");
+            }
+            var empresaId = userInfo.Empresa?.Id;
+
+
             var user = new Usuario
             {
                 Email = userDto.Email,
                 Nombre = userDto.Nombre,
                 Celular = userDto.Celular,
                 Imagen = userDto.Imagen,
-                EmpresaId = userDto.EmpresaId,
+                EmpresaId = userInfo.Empresa.Id,
                 UserName = userDto.Email,
-                Empresa = empresa,
+                Empresa = userInfo.Empresa,
+
             };
 
             var foundCiudad = await _db.Ciudades.FindAsync(userDto.Direccion.CiudadId);
@@ -97,7 +108,7 @@ namespace acme_backend.Services
             var result = await _userManager.CreateAsync(user);
             if (result.Succeeded)
             {
-                await _userManager.AddToRoleAsync(user, "Usuario");
+                await _userManager.AddToRoleAsync(user, "Vendedor");
                 userDto.Id = user.Id;
                 userDto.Direccion.Id = user.Direcciones.First().Id;
                 MailService mailService = new MailService();

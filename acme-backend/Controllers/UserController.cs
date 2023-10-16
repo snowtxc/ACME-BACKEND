@@ -1,6 +1,7 @@
 ﻿using acme_backend.Models.Dtos;
 using acme_backend.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace acme_backend.Controllers
 {
@@ -54,7 +55,13 @@ namespace acme_backend.Controllers
         {
             try
             {
-                var newUser = await _userService.createUser(userDto);
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                if (userId == null)
+                {
+                    return BadRequest("Usuario logeado invalido");
+
+                }
+                var newUser = await _userService.createUser(userId,userDto);
 
                 if (newUser == null)
                 {
