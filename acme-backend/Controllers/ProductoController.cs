@@ -1,6 +1,8 @@
 ﻿using acme_backend.Models.Dtos;
 using acme_backend.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace acme_backend.Controllers
 {
@@ -20,21 +22,74 @@ namespace acme_backend.Controllers
             return Ok("Producto creado correctamente");
         }
 
+        [HttpGet, Route("mis-productos"), Authorize(Roles = "Vendedor")]
+        public async Task<IActionResult> listarProductos()
+        {
+            try
+            {
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                if (userId != null)
+                {
+                    var productos = await _productService.listarProductosDeMiEmpresa(userId);
+                    return Ok(productos);
+                }
+                else
+                {
+                    throw new Exception("Error al crear producto");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet, Route("{productoId}"), Authorize(Roles = "Vendedor")]
+        public async Task<IActionResult> obtenerProductoById(int productoId)
+        {
+            try
+            {
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                if (userId != null)
+                {
+                    var producto = await _productService.obtenerProductoById(userId ,productoId);
+                    return Ok(producto);
+                }
+                else
+                {
+                    throw new Exception("Error al crear producto");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> crearProducto(CrearProductoDTO data)
         {
             try
             {
-                var resp = await _productService.createProduct(data);
-                if (resp == true)
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                if (userId != null)
                 {
-                    return Ok(new OkDTO
+                    var resp = await _productService.createProduct(data, userId);
+                    if (resp == true)
                     {
-                        message = "Producto creado correctamente",
-                        ok = true,
-                    });
-                } else{
-                    throw new Exception("Error al crear producto");
+                        return Ok(new OkDTO
+                        {
+                            message = "Producto creado correctamente",
+                            ok = true,
+                        });
+                    }
+                    else
+                    {
+                        throw new Exception("Error al crear producto");
+                    }
+                } else
+                {
+                    throw new Exception("Usuario invalido");
                 }
             } catch (Exception ex)
             {

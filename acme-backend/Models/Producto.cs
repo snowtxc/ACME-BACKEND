@@ -35,9 +35,9 @@ namespace acme_backend.Models
         public ICollection<CompraProducto> ComprasProductos { get; set; }
 
 
-        public ICollection<ProductoFoto> Fotos;
+        public ICollection<ProductoFoto> Fotos { get; set; }
 
-
+        public Empresa Empresa { get; set; }
 
     }
 }
