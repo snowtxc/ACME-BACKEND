@@ -7,7 +7,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace acme_backend.Migrations
 {
     /// <inheritdoc />
-    public partial class firstmigration : Migration
+    public partial class FirstMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -441,9 +441,11 @@ namespace acme_backend.Migrations
                     Titulo = table.Column<string>(type: "longtext", nullable: false),
                     Descripcion = table.Column<string>(type: "longtext", nullable: false),
                     DocumentoPdf = table.Column<string>(type: "longtext", nullable: false),
+                    Activo = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     Precio = table.Column<double>(type: "double", nullable: false),
                     TipoIvaId = table.Column<int>(type: "int", nullable: false),
                     LinkFicha = table.Column<string>(type: "longtext", nullable: false),
+                    EmpresaId = table.Column<int>(type: "int", nullable: false),
                     CompraId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -454,6 +456,12 @@ namespace acme_backend.Migrations
                         column: x => x.CompraId,
                         principalTable: "Compras",
                         principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Productos_Empresas_EmpresaId",
+                        column: x => x.EmpresaId,
+                        principalTable: "Empresas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Productos_TiposIva_TipoIvaId",
                         column: x => x.TipoIvaId,
@@ -545,12 +553,14 @@ namespace acme_backend.Migrations
                 name: "CategoriasProductos",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     CategoriaId = table.Column<int>(type: "int", nullable: false),
                     ProductoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CategoriasProductos", x => x.CategoriaId);
+                    table.PrimaryKey("PK_CategoriasProductos", x => x.Id);
                     table.ForeignKey(
                         name: "FK_CategoriasProductos_Categorias_ProductoId",
                         column: x => x.ProductoId,
@@ -644,6 +654,33 @@ namespace acme_backend.Migrations
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "ProductosRelacionados",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    productoId = table.Column<int>(type: "int", nullable: false),
+                    productoRelId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductosRelacionados", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductosRelacionados_Productos_productoId",
+                        column: x => x.productoId,
+                        principalTable: "Productos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductosRelacionados_Productos_productoRelId",
+                        column: x => x.productoRelId,
+                        principalTable: "Productos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -700,6 +737,11 @@ namespace acme_backend.Migrations
                 name: "IX_Categorias_EmpresaId",
                 table: "Categorias",
                 column: "EmpresaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CategoriasProductos_CategoriaId",
+                table: "CategoriasProductos",
+                column: "CategoriaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CategoriasProductos_ProductoId",
@@ -787,9 +829,24 @@ namespace acme_backend.Migrations
                 column: "CompraId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Productos_EmpresaId",
+                table: "Productos",
+                column: "EmpresaId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Productos_TipoIvaId",
                 table: "Productos",
                 column: "TipoIvaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductosRelacionados_productoId",
+                table: "ProductosRelacionados",
+                column: "productoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductosRelacionados_productoRelId",
+                table: "ProductosRelacionados",
+                column: "productoRelId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reclamos_CompraId",
@@ -841,6 +898,9 @@ namespace acme_backend.Migrations
 
             migrationBuilder.DropTable(
                 name: "ProductoFotos");
+
+            migrationBuilder.DropTable(
+                name: "ProductosRelacionados");
 
             migrationBuilder.DropTable(
                 name: "Reclamos");

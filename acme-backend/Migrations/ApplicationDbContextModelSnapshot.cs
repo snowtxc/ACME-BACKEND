@@ -202,14 +202,19 @@ namespace acme_backend.Migrations
 
             modelBuilder.Entity("acme_backend.Models.CategoriaProducto", b =>
                 {
-                    b.Property<int>("CategoriaId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoriaId")
                         .HasColumnType("int");
 
                     b.Property<int>("ProductoId")
                         .HasColumnType("int");
 
-                    b.HasKey("CategoriaId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoriaId");
 
                     b.HasIndex("ProductoId");
 
@@ -533,6 +538,9 @@ namespace acme_backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<bool>("Activo")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<int?>("CompraId")
                         .HasColumnType("int");
 
@@ -590,6 +598,27 @@ namespace acme_backend.Migrations
                     b.HasIndex("ProductoId");
 
                     b.ToTable("ProductoFotos");
+                });
+
+            modelBuilder.Entity("acme_backend.Models.ProductosRelacionados", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("productoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("productoRelId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("productoId");
+
+                    b.HasIndex("productoRelId");
+
+                    b.ToTable("ProductosRelacionados");
                 });
 
             modelBuilder.Entity("acme_backend.Models.Reclamo", b =>
@@ -981,6 +1010,25 @@ namespace acme_backend.Migrations
                         .IsRequired();
 
                     b.Navigation("Producto");
+                });
+
+            modelBuilder.Entity("acme_backend.Models.ProductosRelacionados", b =>
+                {
+                    b.HasOne("acme_backend.Models.Producto", "producto")
+                        .WithMany()
+                        .HasForeignKey("productoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("acme_backend.Models.Producto", "productoRel")
+                        .WithMany()
+                        .HasForeignKey("productoRelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("producto");
+
+                    b.Navigation("productoRel");
                 });
 
             modelBuilder.Entity("acme_backend.Models.Reclamo", b =>

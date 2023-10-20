@@ -19,6 +19,9 @@ namespace acme_backend.Models
         public string DocumentoPdf { get; set; } = "";
 
         [Required]
+        public bool Activo { get; set; } = true;
+
+        [Required]
         public double Precio { get; set; } = 0;
 
         [Required]

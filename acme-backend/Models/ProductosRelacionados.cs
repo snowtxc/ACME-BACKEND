@@ -3,18 +3,18 @@ using System.ComponentModel.DataAnnotations;
 
 namespace acme_backend.Models
 {
-    public class CategoriaProducto
+    public class ProductosRelacionados
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        public Producto producto { get; set; } = null!;
 
-        public int CategoriaId { get; set; }
+        public int productoId { get; set; }
 
-        public Categoria Categoria { get; set; } = null!;
+        public Producto productoRel { get; set; } = null!;
 
-        public int ProductoId { get; set; }
-        public Producto Producto { get; set; } = null!;
+        public int productoRelId { get; set; }
 
     }
 }

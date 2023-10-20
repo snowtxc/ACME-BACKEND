@@ -22,7 +22,7 @@ namespace acme_backend.Controllers
             return Ok("Producto creado correctamente");
         }
 
-        [HttpGet, Route("mis-productos"), Authorize(Roles = "Vendedor")]
+        [HttpGet, Route("mis-productos")]
         public async Task<IActionResult> listarProductos()
         {
             try
@@ -44,15 +44,15 @@ namespace acme_backend.Controllers
             }
         }
 
-        [HttpGet, Route("{productoId}"), Authorize(Roles = "Vendedor")]
+        [HttpGet, Route("{productoId}")]
         public async Task<IActionResult> obtenerProductoById(int productoId)
         {
             try
             {
-                var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier);
                 if (userId != null)
                 {
-                    var producto = await _productService.obtenerProductoById(userId ,productoId);
+                    var producto = await _productService.obtenerProductoById(userId.Value ,productoId);
                     return Ok(producto);
                 }
                 else
@@ -63,6 +63,66 @@ namespace acme_backend.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete, Route("{productoId}")]
+        public async Task<IActionResult> eliminarProducto(int productoId)
+        {
+            try
+            {
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier);
+                if (userId != null)
+                {
+                    var productoResp = await _productService.deshabilitarProducto(userId.Value, productoId);
+                    return Ok(new
+                    {
+                        ok = productoResp,
+                        message = "Producto eliminado correctamente"
+                    });
+                }
+                else
+                {
+                    throw new Exception("Error al crear producto");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    ok = false,
+                    message = ex.Message
+                });
+            }
+        }
+
+        [HttpPost, Route("updateProduct")]
+        public async Task<IActionResult> editarProducto(EditProductoDTO productoInfo)
+        {
+            try
+            {
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier);
+                if (userId != null)
+                {
+                    var productoResp = await _productService.editProducto(productoInfo, userId.Value);
+                    return Ok(new
+                    {
+                        ok = productoResp,
+                        message = "Producto actualizado correctamente"
+                    });
+                }
+                else
+                {
+                    throw new Exception("Error al actualizar producto");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    ok = false,
+                    message = ex.Message
+                });
             }
         }
 

@@ -11,8 +11,8 @@ using acme_backend.Db;
 namespace acme_backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231007214439_NombreDeLaMigracion4")]
-    partial class NombreDeLaMigracion4
+    [Migration("20231019230453_FirstMigration")]
+    partial class FirstMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -205,14 +205,19 @@ namespace acme_backend.Migrations
 
             modelBuilder.Entity("acme_backend.Models.CategoriaProducto", b =>
                 {
-                    b.Property<int>("CategoriaId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoriaId")
                         .HasColumnType("int");
 
                     b.Property<int>("ProductoId")
                         .HasColumnType("int");
 
-                    b.HasKey("CategoriaId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoriaId");
 
                     b.HasIndex("ProductoId");
 
@@ -536,6 +541,9 @@ namespace acme_backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<bool>("Activo")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<int?>("CompraId")
                         .HasColumnType("int");
 
@@ -546,6 +554,9 @@ namespace acme_backend.Migrations
                     b.Property<string>("DocumentoPdf")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<int>("EmpresaId")
+                        .HasColumnType("int");
 
                     b.Property<string>("LinkFicha")
                         .IsRequired()
@@ -564,6 +575,8 @@ namespace acme_backend.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CompraId");
+
+                    b.HasIndex("EmpresaId");
 
                     b.HasIndex("TipoIvaId");
 
@@ -588,6 +601,27 @@ namespace acme_backend.Migrations
                     b.HasIndex("ProductoId");
 
                     b.ToTable("ProductoFotos");
+                });
+
+            modelBuilder.Entity("acme_backend.Models.ProductosRelacionados", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("productoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("productoRelId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("productoId");
+
+                    b.HasIndex("productoRelId");
+
+                    b.ToTable("ProductosRelacionados");
                 });
 
             modelBuilder.Entity("acme_backend.Models.Reclamo", b =>
@@ -953,11 +987,19 @@ namespace acme_backend.Migrations
                         .WithMany("Productos")
                         .HasForeignKey("CompraId");
 
+                    b.HasOne("acme_backend.Models.Empresa", "Empresa")
+                        .WithMany("Productos")
+                        .HasForeignKey("EmpresaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("acme_backend.Models.TipoIva", "TipoIva")
                         .WithMany()
                         .HasForeignKey("TipoIvaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Empresa");
 
                     b.Navigation("TipoIva");
                 });
@@ -965,12 +1007,31 @@ namespace acme_backend.Migrations
             modelBuilder.Entity("acme_backend.Models.ProductoFoto", b =>
                 {
                     b.HasOne("acme_backend.Models.Producto", "Producto")
-                        .WithMany()
+                        .WithMany("Fotos")
                         .HasForeignKey("ProductoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Producto");
+                });
+
+            modelBuilder.Entity("acme_backend.Models.ProductosRelacionados", b =>
+                {
+                    b.HasOne("acme_backend.Models.Producto", "producto")
+                        .WithMany()
+                        .HasForeignKey("productoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("acme_backend.Models.Producto", "productoRel")
+                        .WithMany()
+                        .HasForeignKey("productoRelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("producto");
+
+                    b.Navigation("productoRel");
                 });
 
             modelBuilder.Entity("acme_backend.Models.Reclamo", b =>
@@ -1020,6 +1081,8 @@ namespace acme_backend.Migrations
 
                     b.Navigation("Pickups");
 
+                    b.Navigation("Productos");
+
                     b.Navigation("Usuarios");
                 });
 
@@ -1033,6 +1096,8 @@ namespace acme_backend.Migrations
                     b.Navigation("CategoriasProductos");
 
                     b.Navigation("ComprasProductos");
+
+                    b.Navigation("Fotos");
                 });
 
             modelBuilder.Entity("acme_backend.Models.Usuario", b =>

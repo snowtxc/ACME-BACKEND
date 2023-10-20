@@ -23,6 +23,8 @@ namespace acme_backend.Db
 
         public DbSet<CompraProducto> ComprasProductos { get; set; }
 
+        public DbSet<ProductosRelacionados> ProductosRelacionados { get; set; }
+
         public DbSet<Departamento> Departamentos { get; set; }
 
         public DbSet<Direccion> Direcciones { get; set; }
