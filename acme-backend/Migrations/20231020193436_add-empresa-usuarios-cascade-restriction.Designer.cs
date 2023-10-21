@@ -11,8 +11,8 @@ using acme_backend.Db;
 namespace acme_backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231007214439_NombreDeLaMigracion4")]
-    partial class NombreDeLaMigracion4
+    [Migration("20231020193436_add-empresa-usuarios-cascade-restriction")]
+    partial class addempresausuarioscascaderestriction
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -986,7 +986,8 @@ namespace acme_backend.Migrations
                 {
                     b.HasOne("acme_backend.Models.Empresa", "Empresa")
                         .WithMany("Usuarios")
-                        .HasForeignKey("EmpresaId");
+                        .HasForeignKey("EmpresaId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Empresa");
                 });

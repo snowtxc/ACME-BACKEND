@@ -983,7 +983,8 @@ namespace acme_backend.Migrations
                 {
                     b.HasOne("acme_backend.Models.Empresa", "Empresa")
                         .WithMany("Usuarios")
-                        .HasForeignKey("EmpresaId");
+                        .HasForeignKey("EmpresaId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Empresa");
                 });

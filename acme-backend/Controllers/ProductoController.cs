@@ -15,10 +15,7 @@ namespace acme_backend.Controllers
             _productService = prodService;
         }
 
-        public IActionResult Index()
-        {
-            return Ok("Producto creado correctamente");
-        }
+        
 
         [HttpPost]
         public async Task<IActionResult> crearProducto(CrearProductoDTO data)

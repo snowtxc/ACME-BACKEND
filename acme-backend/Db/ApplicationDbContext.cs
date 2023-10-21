@@ -76,6 +76,12 @@ namespace acme_backend.Db
 
             modelBuilder.Entity<LineaCarrito>().HasOne(lc => lc.Usuario).WithMany(u => u.LineasCarrito).HasForeignKey(cp => cp.UsuarioId).HasPrincipalKey(u => u.Id);
 
+            modelBuilder.Entity<Empresa>()
+              .HasMany(e => e.Usuarios)
+              .WithOne(u => u.Empresa)
+              .HasForeignKey(u => u.EmpresaId)
+              .OnDelete(DeleteBehavior.Cascade);
+
         }
 
 

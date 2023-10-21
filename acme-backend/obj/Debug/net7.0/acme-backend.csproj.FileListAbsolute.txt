@@ -778,3 +778,6 @@ C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\bin\Debug\net7.0\AutoMa
 C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\AutoMapper.dll
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Lenovo\Desktop\utec\acme-backend\acme-backend\bin\Debug\net7.0\AutoMapper.dll
+C:\Users\Lenovo\Desktop\utec\acme-backend\acme-backend\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Lenovo\Desktop\utec\acme-backend\acme-backend\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.Facebook.dll

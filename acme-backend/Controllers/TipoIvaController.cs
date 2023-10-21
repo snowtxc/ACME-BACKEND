@@ -16,10 +16,7 @@ namespace acme_backend.Controllers
             _tipoIvaService = tipoIvaService;
         }
 
-        public IActionResult Index()
-        {
-            return Ok("");
-        }
+      
 
         [HttpGet]
         public async Task<IActionResult> listarTiposIVA()

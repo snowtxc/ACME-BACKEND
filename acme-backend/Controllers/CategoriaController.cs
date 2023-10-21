@@ -16,10 +16,7 @@ namespace acme_backend.Controllers
             _categoriaService = catService;
         }
 
-        public IActionResult Index()
-        {
-            return Ok("Producto creado correctamente");
-        }
+       
 
         [HttpGet]
         public async Task<IActionResult> listarCategorias()
