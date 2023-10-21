@@ -64,6 +64,8 @@ builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<ProductoService>();
 builder.Services.AddScoped<CategoriaService>();
 builder.Services.AddScoped<TipoIvaService>();
+builder.Services.AddScoped<DepartamentoService>();
+builder.Services.AddScoped<CiudadService>();
 
 
 var app = builder.Build();

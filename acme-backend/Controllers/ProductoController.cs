@@ -17,11 +17,6 @@ namespace acme_backend.Controllers
             _productService = prodService;
         }
 
-        public IActionResult Index()
-        {
-            return Ok("Producto creado correctamente");
-        }
-
         [HttpGet, Route("mis-productos")]
         public async Task<IActionResult> listarProductos()
         {

@@ -4,6 +4,7 @@ using acme_backend.Models.Dtos;
 using acme_backend.Models.Dtos.Usuario;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using acme_backend.Models.Dtos.TipoIVA;
 
 namespace acme_backend.Services
 {
