@@ -85,6 +85,11 @@ namespace acme_backend.Services
                 throw new Exception("Departamento no encontrado.");
             }
 
+            if (depto.Ciudades.Any())
+            {
+                throw new Exception("El departamento tiene ciudades asociadas.");
+            }
+
             _db.Departamentos.Remove(depto);
             await _db.SaveChangesAsync();
         }
