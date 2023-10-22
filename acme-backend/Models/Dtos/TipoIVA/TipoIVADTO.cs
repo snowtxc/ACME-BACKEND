@@ -1,4 +1,4 @@
-﻿namespace acme_backend.Models.Dtos
+﻿namespace acme_backend.Models.Dtos.TipoIVA
 {
     public class TipoIVADTO
     {

@@ -1,4 +1,5 @@
-﻿using acme_backend.Models.Dtos.Usuario;
+﻿using acme_backend.Models.Dtos.TipoIVA;
+using acme_backend.Models.Dtos.Usuario;
 
 namespace acme_backend.Models.Dtos
 {
