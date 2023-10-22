@@ -136,8 +136,6 @@ namespace acme_backend.Services
                 await _db.ProductoFotos.AddAsync(prodFoto);
                 prod.Fotos.Add(prodFoto);
             }
-            var currentProductosRelacionados = await _db.ProductosRelacionados.Include((p) => p.producto).Where((pr) => pr.productoId == prod.Id).ToListAsync();
-
 
             foreach (int prodId in data.ProductosRelacionados)
             {
@@ -151,8 +149,9 @@ namespace acme_backend.Services
                         prodRel.producto = prod;
                         prodRel.productoRel = producto;
                         await _db.ProductosRelacionados.AddAsync(prodRel);
+                        await _db.SaveChangesAsync();
                     }
-                   
+
                 }
             }
 
@@ -183,11 +182,14 @@ namespace acme_backend.Services
                     await _db.SaveChangesAsync();
                 }
             }
+            var currentProductosRelacionados = await _db.ProductosRelacionados.Include((p) => p.producto).Include((p) => p.productoRel).Where((pr) => pr.productoId == prod.Id).ToListAsync();
 
             foreach (ProductosRelacionados prodRel in currentProductosRelacionados)
             {
-                var exists = data.ProductosRelacionados.Contains(prodRel.producto.Id);
-                if (exists == false)
+                var exists = data.ProductosRelacionados.FirstOrDefault((item) => item == prodRel.productoRel.Id);
+                var notexist = exists == 0;
+
+                if (notexist)
                 {
                     //borrar
                     _db.ProductosRelacionados.Remove(prodRel);
