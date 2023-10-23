@@ -49,10 +49,23 @@ namespace acme_backend.Services
             return userDto;
         }
 
-        public async Task<List<UsuarioListDto>> listUsers()
+        public async Task<List<UsuarioListDto>> listUsers(string userId)
         {
+            var userInfo = await _userManager.Users
+          .Include(u => u.Empresa)
+          .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (userInfo == null)
+            {
+                throw new Exception("Usuario invalido");
+            }
+            var empresaId = userInfo.Empresa?.Id;
+
+
             var direccionMapper = new DireccionMapper(_mapper);
             var users = await _userManager.Users
+                .Include(u => u.Empresa)
+                .Where(u => u.Empresa.Id == empresaId)
                 .Select(u => new UsuarioListDto
                 {
                     Id = u.Id,
@@ -60,7 +73,7 @@ namespace acme_backend.Services
                     Nombre = u.Nombre,
                     Celular = u.Celular,
                     Imagen = u.Imagen,
-                    EmpresaId = (int)u.EmpresaId,
+                    EmpresaId = u.Empresa.Id,
                     Direcciones = u.Direcciones.Select(direccion => direccionMapper.MapDireccionToDto(direccion)).ToList(),
                     Calificaciones = _db.Calificaciones.Count(c => c.UsuarioId == u.Id),
                 })
