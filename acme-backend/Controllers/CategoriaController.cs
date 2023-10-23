@@ -16,7 +16,6 @@ namespace acme_backend.Controllers
             _categoriaService = catService;
         }
 
-       
 
         [HttpGet]
         public async Task<IActionResult> listarCategorias()

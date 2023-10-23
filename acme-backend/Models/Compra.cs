@@ -15,15 +15,24 @@ namespace acme_backend.Models
         public double CostoTotal { get; set; } = 0;
 
         [Required]
-        public MetodoPago MetodoPago { get; set; }
+        public MetodoPago MetodoPago { get; set; } 
 
         [Required]
         public MetodoEnvio MetodoEnvio { get; set; }
+
+        [Required]
+        public DateTime Fecha { get; set; }
 
 
         public int? EnvioPaqueteId { get; set; } = null;
 
         public EnvioPaquete? EnvioPaquete { get; set; } = null!;
+
+        public string UsuarioId { get; set; }
+
+
+
+        public Usuario Usuario { get; set; }    
 
 
 
@@ -37,7 +46,7 @@ namespace acme_backend.Models
 
 
 
-        public List<Producto> Productos { get; set; } = new();
+        public List<Producto> Productos { get; set; } = new();  
         public List<CompraProducto> ComprasProductos { get; set; } = new();
 
 

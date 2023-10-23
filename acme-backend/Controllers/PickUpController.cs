@@ -1,4 +1,7 @@
-﻿using acme_backend.Models.Dtos.Pickup;
+﻿using acme_backend.Models;
+using acme_backend.Models.Dtos.Empresa;
+using acme_backend.Models.Dtos;
+using acme_backend.Models.Dtos.Pickup;
 using acme_backend.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,8 +27,7 @@ namespace acme_backend.Controllers
 
 
         [HttpGet]
-        [Authorize(Roles = "Vendedor")]
-        public async Task<IActionResult> list(PickupCreateDto pickupCreate)
+        public async Task<IActionResult> list()
         {
             try
             {
@@ -43,10 +45,12 @@ namespace acme_backend.Controllers
         [Authorize(Roles = "Vendedor")]
         public async Task<IActionResult> create(PickupCreateDto pickupCreate)
         {
+           
             try
             {
                 string userLoggedId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 PickupDto pickupCreated = await _pickupService.create(userLoggedId, pickupCreate);
+          
                 return Ok(pickupCreated);
             }
             catch (Exception ex)
@@ -55,21 +59,25 @@ namespace acme_backend.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
-        [Authorize(Roles = "Vendedor")]
-        public async Task<IActionResult> delete(int pickupId)
+        
+
+        [HttpPost]
+        [Route("deletesById")]
+        public async Task<IActionResult> deletesByIds(PickupsForDelete pickupsForDeletes)
         {
             try
             {
-                string userLoggedId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                PickupDto pickupDeleted = await _pickupService.delete(userLoggedId, pickupId);
-                return Ok(pickupDeleted);
+                List<PickupDto> pickupsDeleted = await _pickupService.deletesByIds(pickupsForDeletes.pickupsIds);
+                return Ok(pickupsDeleted);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return StatusCode(500, ex.Message);
             }
+
+
         }
+
 
 
 

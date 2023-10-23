@@ -5,6 +5,8 @@ using acme_backend.Models.Dtos.Pickup;
 using System.Security.Claims;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.Intrinsics.X86;
+using MySqlX.XDevAPI.Common;
 
 namespace acme_backend.Services
 {
@@ -21,19 +23,19 @@ namespace acme_backend.Services
         }
         public async Task<PickupDto> create(string userLoggedId, PickupCreateDto pickupCreate)
         {
-            Usuario? user =  await _db.Usuarios.FindAsync(userLoggedId);
-            if(user == null)
+            Usuario? user = await _db.Usuarios.Include(u => u.Empresa).FirstOrDefaultAsync(u => u.Id == userLoggedId);
+            if (user == null)
             {
                 throw new Exception("Usuario logeado no existe");
             }
             Empresa? empresa = user.Empresa;
-            if(empresa == null)
+            if (empresa == null)
             {
                 throw new Exception("La empresa no existe");
 
             }
-            Ciudad?  ciudad =   _db.Ciudades.Find(pickupCreate.LocalidadId);
-            if(ciudad == null)
+            Ciudad? ciudad = _db.Ciudades.Include(c => c.Departamento).FirstOrDefault(c => c.Id == pickupCreate.LocalidadId);
+            if (ciudad == null)
             {
                 throw new Exception("No existe la ciudad");
             }
@@ -45,64 +47,64 @@ namespace acme_backend.Services
                 CalleEntre1 = pickupCreate.CalleEntre1,
                 CalleEntre2 = pickupCreate.CalleEntre2,
                 NroPuerta = pickupCreate.NroPuerta,
-                Ciudad =  ciudad,
+                Ciudad = ciudad,
                 CiudadId = ciudad.Id,
             };
-     
+
             pickup.Direccion = dir;
-            await  _db.SaveChangesAsync();
-            PickupDto pickupCreated = _mapper.Map<PickupDto>(pickup);
+            _db.Pickups.Add(pickup);
+            await _db.SaveChangesAsync();
+
+            PickupDto pickupCreated = new PickupDto { Id = pickup.Id, Nombre = pickup.Nombre, Telefono = pickup.Telefono, Foto = pickup.Foto, PlazosDiasPreparacion = pickup.PlazoDiasPreparacion, Lat = pickup.Lat, Lng = pickup.Lng, CiudadNombre = ciudad.Nombre, DepartamentoNombre = ciudad.Departamento.Nombre, Calle = dir.Calle, CalleEntre1 = dir.CalleEntre1, CalleEntre2 = dir.CalleEntre2, NroPuerta = dir.NroPuerta };
+
             return pickupCreated;
         }
 
         public async Task<List<PickupDto>> list(string userLoggedId)
         {
-            Usuario? user = await _db.Usuarios.FindAsync(userLoggedId);
+            Usuario? user = await _db.Usuarios
+               .Include(u => u.Empresa)
+               .ThenInclude(e => e.Pickups)
+               .ThenInclude(p => p.Direccion)
+               .ThenInclude(d => d.Ciudad)
+               .ThenInclude(c => c.Departamento)
+               .FirstOrDefaultAsync(u => u.Id == userLoggedId);
             if (user == null)
             {
                 throw new Exception("Usuario logeado no existe");
             }
+          
+            ICollection<PickUp> pickups = user.Empresa.Pickups; 
 
-            ICollection<PickUp> pickups = user.Empresa.Pickups.ToList();
             List<PickupDto> result = new List<PickupDto>();
             foreach(PickUp pickup in pickups)
             {
-                result.Add(_mapper.Map<PickupDto>(pickup));
-              
+
+                Direccion dirPickup = pickup.Direccion;
+
+                result.Add(new PickupDto { Id = pickup.Id, Nombre = pickup.Nombre, Telefono = pickup.Telefono, Foto = pickup.Foto, PlazosDiasPreparacion = pickup.PlazoDiasPreparacion, Lat = pickup.Lat, Lng = pickup.Lng, CiudadNombre = dirPickup.Ciudad.Nombre, DepartamentoNombre = dirPickup.Ciudad.Departamento.Nombre, Calle = dirPickup.Calle , CalleEntre1 = dirPickup.CalleEntre1 , CalleEntre2 = dirPickup.CalleEntre2 , NroPuerta = dirPickup.NroPuerta });
+                
+
             }
             return result;
 
+
         }
 
-
-        public async Task<PickupDto> delete(string userLoggedId, int pickupId)
+        public async Task<List<PickupDto>> deletesByIds(int[] pickupsIds)
         {
-            Usuario? user = await _db.Usuarios.FindAsync(userLoggedId);
-            if (user.Empresa == null)
+            List<PickUp> pickupsToDeletes = await _db.Pickups.Where(e => pickupsIds.Contains(e.Id)).ToListAsync();
+
+            _db.Pickups.RemoveRange(pickupsToDeletes);
+            _db.SaveChanges();
+
+            List<PickupDto> eliminatedPickups = new List<PickupDto>();
+            foreach (PickUp pickupDeleted in pickupsToDeletes)
             {
-                throw new Exception("El usuario no está asociado a ninguna empresa");
+                eliminatedPickups.Add(_mapper.Map<PickupDto>(pickupDeleted));
             }
-
-            Empresa empresa = user.Empresa;
-
-            PickUp? pickupEntity = await _db.Pickups
-                .FirstOrDefaultAsync(p => p.EmpresaId == empresa.Id && p.Id == pickupId);
-
-            if (pickupEntity != null)
-            {
-                _db.Pickups.Remove(pickupEntity);
-                await _db.SaveChangesAsync();
-                return _mapper.Map<PickupDto>(pickupEntity);
-            }
-            else
-            {
-                throw new Exception("Pickup no encontrada");
-            }
-
-
-
+            return eliminatedPickups;
         }
-
 
     }
 }

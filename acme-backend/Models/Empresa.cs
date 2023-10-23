@@ -41,9 +41,6 @@ namespace acme_backend.Models
 
        public ICollection<Categoria> Categorias { get; } = new List<Categoria>();
 
-
-       
-
-
+       public ICollection<Producto> Productos { get; } = new List<Producto>();
     }
 }

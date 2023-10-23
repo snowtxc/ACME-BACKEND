@@ -15,19 +15,19 @@ namespace acme_backend.Models
 
         [Required]
         [Phone]
-        public string Telefono = "";
+        public string Telefono { get; set; } = "";
+
+        [Required] 
+        public string Foto { get; set; } = "";
 
         [Required]
-        public string Foto = "";
+        public double Lat { get; set; } = 0;
 
         [Required]
-        public double Lat = 0;
+        public double Lng { get; set; } = 0;
 
         [Required]
-        public double Lng = 0;
-
-        [Required]
-        public int PlazoDiasPreparacion = 0;
+        public int PlazoDiasPreparacion { get; set; } = 0;
 
         public int EmpresaId { get; set; } // Required foreign key property
         public Empresa Empresa { get; set; } = null!;

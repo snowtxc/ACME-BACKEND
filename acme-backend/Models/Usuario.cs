@@ -30,6 +30,13 @@ namespace acme_backend.Models
         public ICollection<LineaCarrito> LineasCarrito { get; set; } = new List<LineaCarrito>();
 
 
+        public ICollection<Compra> compras { get; set; } = new List<Compra>(); 
+
+
+
+
+
+
 
 
     }

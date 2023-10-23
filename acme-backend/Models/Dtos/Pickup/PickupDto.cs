@@ -19,6 +19,22 @@
         public double Lng { get; set; } = 0;
 
         public int PlazosDiasPreparacion { get; set; } = 0;
+
+        public string CiudadNombre { get; set; } = string.Empty;
+
+        public string DepartamentoNombre { get; set; } = string.Empty;
+
+        public string Calle { get; set; } = string.Empty;
+
+        public string NroPuerta { get; set; } = string.Empty;
+
+        public string CalleEntre1 { get; set; } = string.Empty;
+
+        public string CalleEntre2 { get; set; } = string.Empty;
+
+
+
+
     }
 
 }

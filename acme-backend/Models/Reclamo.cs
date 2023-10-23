@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using acme_backend.Shared.Enums;
 
 namespace acme_backend.Models
 {
@@ -12,12 +13,14 @@ namespace acme_backend.Models
 
         [Required]
         public string Descripcion { get; set; } = "";
+        public EstadoReclamo EstadoReclamo { get; set; }
+
 
         [Required]
         public int CompraId { get; set; }
 
         [Required]
-        public Compra Compra = null!;
+        public Compra Compra { get; set; } = null!;
     }
 }
  

@@ -25,23 +25,19 @@ namespace acme_backend.Models.Dtos.Pickup
         [Required]
         public int PlazosDiasPreparacion { get; set; } = 0;
 
-        [Required]
-        public int EmpresaId;
 
         [Required]
-        public int LocalidadId;
+        public int LocalidadId { get; set; }
 
         [Required]
-        public string Calle = string.Empty;
+        public string Calle { get; set; } = string.Empty;
+         
+        public string NroPuerta { get; set; } = string.Empty;
 
-        public string NroPuerta = string.Empty;
+        public string CalleEntre1 { get; set; } = string.Empty;
 
-        public string CalleEntre1 = string.Empty;
+        public string CalleEntre2 { get; set; } = string.Empty;
 
-        public string CalleEntre2 = string.Empty;
-
-        [Required]
-        public int LocalidaId;
 
     }
 }

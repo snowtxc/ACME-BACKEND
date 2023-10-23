@@ -67,6 +67,10 @@ builder.Services.AddScoped<CategoriaService>();
 builder.Services.AddScoped<TipoIvaService>();
 builder.Services.AddScoped<PickupService>();
 
+builder.Services.AddScoped<DepartamentoService>();
+builder.Services.AddScoped<CiudadService>();
+builder.Services.AddScoped<ReclamoService>();
+
 
 
 var app = builder.Build();
@@ -74,7 +78,7 @@ var app = builder.Build();
 var scope = app.Services.CreateScope();
 
 var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-db.Database.Migrate();
+db.Database.Migrate(); 
 
 async Task CreateDefaultRoles(IServiceScope scopeContext)
 {

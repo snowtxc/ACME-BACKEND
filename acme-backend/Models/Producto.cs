@@ -19,6 +19,9 @@ namespace acme_backend.Models
         public string DocumentoPdf { get; set; } = "";
 
         [Required]
+        public bool Activo { get; set; } = true;
+
+        [Required]
         public double Precio { get; set; } = 0;
 
         [Required]
@@ -35,9 +38,9 @@ namespace acme_backend.Models
         public ICollection<CompraProducto> ComprasProductos { get; set; }
 
 
-        public ICollection<ProductoFoto> Fotos;
+        public ICollection<ProductoFoto> Fotos { get; set; }
 
-
+        public Empresa Empresa { get; set; }
 
     }
 }
