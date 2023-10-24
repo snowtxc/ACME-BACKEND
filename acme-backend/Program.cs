@@ -69,6 +69,7 @@ builder.Services.AddScoped<PickupService>();
 
 builder.Services.AddScoped<DepartamentoService>();
 builder.Services.AddScoped<CiudadService>();
+builder.Services.AddScoped<EstadisticasService>();
 builder.Services.AddScoped<ReclamoService>();
 
 

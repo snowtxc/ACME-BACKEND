@@ -14,7 +14,6 @@ namespace acme_backend.Controllers
     {
         private readonly EmpresaService _empresaService;
 
-
         public EmpresaController(EmpresaService empresaService)
         {
             _empresaService =  empresaService;
