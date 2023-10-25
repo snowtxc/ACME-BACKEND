@@ -6,5 +6,8 @@
         public int CategoriaId { get; set; } = 0;
         public string CategoriaNombre { get; set; } = "";
 
+        public int CantidadProductos { get; set; } = 0;
+
+
     }
 }

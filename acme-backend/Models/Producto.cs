@@ -27,6 +27,10 @@ namespace acme_backend.Models
         [Required]
         public int  TipoIvaId { get;set;}
 
+
+        [Column]
+        public DateTime CreatedAt { get; set; }
+
         public TipoIva TipoIva { get; set; } = null!;
 
 

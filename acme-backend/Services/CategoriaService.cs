@@ -36,11 +36,32 @@ namespace acme_backend.Services
                 throw new Exception("Empresa invalida");
             }
 
-            var categorias = _db.Categorias.Where((p) => p.EmpresaId == empresaId)
+            var categorias = _db.Categorias.Include((cat) => cat.CategoriasProductos).Where((p) => p.EmpresaId == empresaId)
                 .Select((c) => new CategoriaDTO
                 {
                     CategoriaNombre = c.Nombre,
                     CategoriaId = c.Id,
+                    CantidadProductos = c.CategoriasProductos.Count()
+                })
+                .ToList();
+
+            return categorias;
+        }
+
+        public async Task<List<CategoriaDTO>> listarCategoriasByEmpresa(int empresaId)
+        {
+            var empresaInfo = await _db.Empresas.FindAsync(empresaId);
+            if (empresaInfo == null)
+            {
+                throw new Exception("Empresa invalida");
+            }
+
+            var categorias = _db.Categorias.Include((cat) => cat.CategoriasProductos).Where((p) => p.EmpresaId == empresaId)
+                .Select((c) => new CategoriaDTO
+                {
+                    CategoriaNombre = c.Nombre,
+                    CategoriaId = c.Id,
+                    CantidadProductos = c.CategoriasProductos.Count()
                 })
                 .ToList();
 

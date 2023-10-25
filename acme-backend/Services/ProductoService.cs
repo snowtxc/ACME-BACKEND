@@ -45,6 +45,7 @@ namespace acme_backend.Services
             prod.Titulo = data.Nombre;
             prod.Precio = data.Precio;
             prod.Empresa = empresa;
+            prod.CreatedAt = DateTime.Now.Date;
             var tipoIva = await _db.TiposIva.FindAsync(data.TipoIva);
             prod.TipoIva = tipoIva;
 
@@ -275,6 +276,68 @@ namespace acme_backend.Services
             return lista;
         }
 
+        public async Task<List<ProductoLista>> listarProductos(int empresaId)
+        {
+            var lista = new List<ProductoLista>();
+            var empresa = await _db.Empresas.FindAsync(empresaId);
+            if (empresa == null)
+            {
+                throw new Exception("Empresa invalida");
+            }
+
+            var productos = _db.Productos.Include((p) => p.CategoriasProductos).ThenInclude((p) => p.Categoria).Include((p) => p.TipoIva).Include((p) => p.Fotos).Where((p) => p.Empresa.Id == empresaId).ToList();
+
+
+            productos.ForEach(p =>
+            {
+                ProductoLista newProduct = new ProductoLista();
+                newProduct.DocumentoPdf = p.DocumentoPdf;
+                newProduct.Id = p.Id;
+                newProduct.Descripcion = p.Descripcion;
+                newProduct.Nombre = p.Titulo;
+                newProduct.Precio = p.Precio;
+                newProduct.Activo = p.Activo;
+                newProduct.CreatedAt = p.CreatedAt;
+                newProduct.LinkFicha = p.LinkFicha;
+                newProduct.Imagenes = p.Fotos.Select((imagen) => new ImagenList
+                {
+                    Id = imagen.Id,
+                    Url = imagen.Url,
+                }).ToArray();
+                newProduct.Categorias = p.CategoriasProductos.Select((categoria) => new CategoriaLista
+                {
+                    Nombre = categoria.Categoria.Nombre,
+                    Id = categoria.Categoria.Id,
+                }).ToArray();
+                newProduct.TipoIva = new TipoIvaList
+                {
+                    Id = p.TipoIva.Id,
+                    Nombre = p.TipoIva.Nombre,
+                    Porcentaje = p.TipoIva.Porcentaje,
+                };
+
+                var calificaciones = _db.Calificaciones.Where((p) => p.ProductoId == newProduct.Id).ToList();
+
+                var sumOfRates = 0;
+
+                foreach (var calificacion in calificaciones)
+                {
+                    sumOfRates += calificacion.Rate;
+                }
+
+                if (calificaciones.Count() > 0)
+                {
+                    newProduct.CantCalificaciones = calificaciones.Count();
+                    newProduct.Rate = sumOfRates / calificaciones.Count();
+                }
+
+                lista.Add(newProduct);
+            });
+
+            return lista;
+        }
+
+
         public async Task<ProductoLista> obtenerProductoById(string userId, int productoId)
         {
 
@@ -303,6 +366,7 @@ namespace acme_backend.Services
                 newProduct.Precio = p.Precio;
                 newProduct.LinkFicha = p.LinkFicha;
                 newProduct.Activo = p.Activo;
+                newProduct.CreatedAt = p.CreatedAt;
 
                 newProduct.Imagenes = p.Fotos.Select((imagen) => new ImagenList
                 {
@@ -333,6 +397,7 @@ namespace acme_backend.Services
                     prod.Descripcion = productoRel.Descripcion;
                     prod.Nombre = productoRel.Titulo;
                     prod.Precio = productoRel.Precio;
+                    prod.CreatedAt = productoRel.CreatedAt;
                     prod.Imagenes = productoRel.Fotos.Select((imagen) => new ImagenList
                     {
                         Id = imagen.Id,

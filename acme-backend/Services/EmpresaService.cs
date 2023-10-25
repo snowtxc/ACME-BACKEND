@@ -112,12 +112,5 @@ namespace acme_backend.Services
              List<EmpresaDto> empresas =  await _db.Empresas.Select(e=> new EmpresaDto { Id = e.Id, Correo = e.Correo, CostoEnvio = e.CostoEnvio, Direccion = e.Direccion, Telefono = e.Telefono, Nombre = e.Nombre, Imagen = e.Imagen, Wallet = e.Wallet }).ToListAsync();
             return empresas;
         }
-
-
-
-
-
-
-
     }
 }

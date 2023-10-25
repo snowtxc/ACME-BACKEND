@@ -31,7 +31,29 @@ namespace acme_backend.Controllers
                 }
                 else
                 {
-                    throw new Exception("Error al crear producto");
+                    throw new Exception("Error al cargar producto");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet, Route("productos-empresa")]
+        public async Task<IActionResult> listarProductosByEmpresa(int empresaId)
+        {
+            try
+            {
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                if (userId != null)
+                {
+                    var productos = await _productService.listarProductos(empresaId);
+                    return Ok(productos);
+                }
+                else
+                {
+                    throw new Exception("Error al cargar producto");
                 }
             }
             catch (Exception ex)

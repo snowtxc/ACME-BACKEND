@@ -11,6 +11,8 @@ namespace acme_backend.Models.Dtos
         public string DocumentoPdf { get; set; } = "";
         public string LinkFicha { get; set; } = "";
 
+        public DateTime CreatedAt { get; set; }
+
         public double Precio { get; set; }
         public bool Activo { get; set; }
 
