@@ -1,5 +1,5 @@
-﻿using acme_backend.Models.Dtos;
-using acme_backend.Services;
+﻿using BusinessLayer.IBLs;
+using DataAccessLayer.Models.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -10,9 +10,9 @@ namespace acme_backend.Controllers
     [Route("api/[controller]")]
     public class ProductoController : ControllerBase
     {
-        private readonly ProductoService _productService;
+        private readonly IBL_Producto _productService;
 
-        public ProductoController(ProductoService prodService)
+        public ProductoController(IBL_Producto prodService)
         {
             _productService = prodService;
         }

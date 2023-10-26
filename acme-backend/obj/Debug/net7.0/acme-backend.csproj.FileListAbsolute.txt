@@ -266,9 +266,6 @@ C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\BCrypt.Net-Next.dll
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\Google.Protobuf.dll
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\Humanizer.dll
-C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\K4os.Compression.LZ4.dll
-C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\K4os.Compression.LZ4.Streams.dll
-C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\K4os.Hash.xxHash.dll
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
@@ -326,7 +323,6 @@ C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\NuGet.ProjectModel.dll
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\NuGet.Protocol.dll
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\NuGet.Versioning.dll
-C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\BouncyCastle.Crypto.dll
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -343,7 +339,6 @@ C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\System.Security.Permissions.dll
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\System.Windows.Extensions.dll
-C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\ZstdSharp.dll
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\af\Humanizer.resources.dll
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\ar\Humanizer.resources.dll
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\az\Humanizer.resources.dll
@@ -484,11 +479,6 @@ C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
-C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\runtimes\win-x64\native\comerr64.dll
-C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\runtimes\win-x64\native\gssapi64.dll
-C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\runtimes\win-x64\native\k5sprt64.dll
-C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\runtimes\win-x64\native\krb5_64.dll
-C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\runtimes\win-x64\native\krbcc64.dll
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
@@ -498,7 +488,6 @@ C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\obj
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\obj\Debug\net7.0\acme-backend.AssemblyInfoInputs.cache
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\obj\Debug\net7.0\acme-backend.AssemblyInfo.cs
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\obj\Debug\net7.0\acme-backend.csproj.CoreCompileInputs.cache
-C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\obj\Debug\net7.0\acme-backend.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\obj\Debug\net7.0\acme-backend.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\obj\Debug\net7.0\staticwebassets\msbuild.acme-backend.Microsoft.AspNetCore.StaticWebAssets.props
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\obj\Debug\net7.0\staticwebassets\msbuild.build.acme-backend.props
@@ -781,3 +770,24 @@ C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin
 C:\Users\Lenovo\Desktop\utec\acme-backend\acme-backend\bin\Debug\net7.0\AutoMapper.dll
 C:\Users\Lenovo\Desktop\utec\acme-backend\acme-backend\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\Lenovo\Desktop\utec\acme-backend\acme-backend\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.Facebook.dll
+C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\BusinessLayer.deps.json
+C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\BusinessLayer.runtimeconfig.json
+C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\DataAccessLayer.deps.json
+C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\DataAccessLayer.runtimeconfig.json
+C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\DataAccessLayer.exe
+C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\BusinessLayer.exe
+C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\BusinessLayer.dll
+C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\DataAccessLayer.dll
+C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\BusinessLayer.pdb
+C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\DataAccessLayer.pdb
+C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\obj\Debug\net7.0\acme-backend.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\BouncyCastle.Cryptography.dll
+C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\K4os.Compression.LZ4.dll
+C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\K4os.Compression.LZ4.Streams.dll
+C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\K4os.Hash.xxHash.dll
+C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\ZstdSharp.dll
+C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\runtimes\win-x64\native\comerr64.dll
+C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\runtimes\win-x64\native\gssapi64.dll
+C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\runtimes\win-x64\native\k5sprt64.dll
+C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\runtimes\win-x64\native\krb5_64.dll
+C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\runtimes\win-x64\native\krbcc64.dll

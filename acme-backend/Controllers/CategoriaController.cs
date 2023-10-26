@@ -1,5 +1,5 @@
-﻿using acme_backend.Models.Dtos;
-using acme_backend.Services;
+﻿
+using BusinessLayer.IBLs;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -9,9 +9,9 @@ namespace acme_backend.Controllers
     [Route("api/[controller]")]
     public class CategoriaController : ControllerBase
     {
-        private readonly CategoriaService _categoriaService;
+        private readonly IBL_Categoria _categoriaService;
 
-        public CategoriaController(CategoriaService catService)
+        public CategoriaController(IBL_Categoria catService)
         {
             _categoriaService = catService;
         }
@@ -44,7 +44,7 @@ namespace acme_backend.Controllers
             try
             {
                 var default_Categories = new string[] { };
-                var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier);
                 if (userId != null)
                 {
                     var categorias = await _categoriaService.listarCategoriasByEmpresa(empresaId);

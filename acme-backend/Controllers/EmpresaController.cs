@@ -1,7 +1,7 @@
-﻿using acme_backend.Models;
-using acme_backend.Models.Dtos;
-using acme_backend.Models.Dtos.Empresa;
-using acme_backend.Services;
+﻿
+using BusinessLayer.IBLs;
+using DataAccessLayer.Models.Dtos;
+using DataAccessLayer.Models.Dtos.Empresa;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +12,9 @@ namespace acme_backend.Controllers
     [ApiController]
     public class EmpresaController : ControllerBase
     {
-        private readonly EmpresaService _empresaService;
+        private readonly IBL_Empresa _empresaService;
 
-        public EmpresaController(EmpresaService empresaService)
+        public EmpresaController(IBL_Empresa empresaService)
         {
             _empresaService =  empresaService;
 

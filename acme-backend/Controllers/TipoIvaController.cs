@@ -1,5 +1,5 @@
-﻿using acme_backend.Models.Dtos.TipoIVA;
-using acme_backend.Services;
+﻿using BusinessLayer.IBLs;
+using DataAccessLayer.Models.Dtos.TipoIVA;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -9,9 +9,9 @@ namespace acme_backend.Controllers
     [Route("api/[controller]")]
     public class TipoIvaController : ControllerBase
     {
-        private readonly TipoIvaService _tipoIvaService;
+        private readonly IBL_TipoIVA _tipoIvaService;
 
-        public TipoIvaController(TipoIvaService tipoIvaService)
+        public TipoIvaController(IBL_TipoIVA tipoIvaService)
         {
             _tipoIvaService = tipoIvaService;
         }

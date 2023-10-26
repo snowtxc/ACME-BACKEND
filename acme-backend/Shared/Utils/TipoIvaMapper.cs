@@ -1,6 +1,6 @@
-﻿using acme_backend.Models;
-using AutoMapper;
-using acme_backend.Models.Dtos.TipoIVA;
+﻿using AutoMapper;
+using DataAccessLayer.Models;
+using DataAccessLayer.Models.Dtos.TipoIVA;
 
 namespace acme_backend.Shared.Utils
 {

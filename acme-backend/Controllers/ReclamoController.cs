@@ -1,5 +1,5 @@
-﻿using acme_backend.Models.Dtos.Reclamo;
-using acme_backend.Services;
+﻿using BusinessLayer.IBLs;
+using DataAccessLayer.Models.Dtos.Reclamo;
 using Microsoft.AspNetCore.Mvc;
 
 namespace acme_backend.Controllers
@@ -9,9 +9,9 @@ namespace acme_backend.Controllers
     public class ReclamoController : Controller
     {
 
-        private readonly ReclamoService _reclamoService;
+        private readonly IBL_Reclamo _reclamoService;
 
-        public ReclamoController(ReclamoService reclamoService)
+        public ReclamoController(IBL_Reclamo reclamoService)
         {
             _reclamoService = reclamoService;
         }

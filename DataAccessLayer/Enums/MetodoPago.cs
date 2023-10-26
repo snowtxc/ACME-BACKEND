@@ -1,4 +1,4 @@
-﻿namespace DataAccessLayer.Shared.Enums
+﻿namespace DataAccessLayer.Enums
 {
     public enum MetodoPago
     {

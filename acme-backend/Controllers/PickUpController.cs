@@ -1,8 +1,5 @@
-﻿using acme_backend.Models;
-using acme_backend.Models.Dtos.Empresa;
-using acme_backend.Models.Dtos;
-using acme_backend.Models.Dtos.Pickup;
-using acme_backend.Services;
+﻿using BusinessLayer.IBLs;
+using DataAccessLayer.Models.Dtos.Pickup;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -15,10 +12,10 @@ namespace acme_backend.Controllers
     [ApiController]
     public class PickUpController : Controller
     {
-        private readonly PickupService _pickupService;
-        private readonly AuthService _authService;
+        private readonly IBL_Pickup _pickupService;
+        private readonly IBL_Auth _authService;
 
-        public PickUpController(PickupService pickupService, AuthService authService = null)
+        public PickUpController(IBL_Pickup pickupService, IBL_Auth authService = null)
         {
             _pickupService = pickupService;
             _authService = authService;

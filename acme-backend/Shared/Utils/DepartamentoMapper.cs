@@ -1,6 +1,6 @@
-﻿using acme_backend.Models;
-using AutoMapper;
-using acme_backend.Models.Dtos.Departamento;
+﻿using AutoMapper;
+using DataAccessLayer.Models;
+using DataAccessLayer.Models.Dtos.Departamento;
 
 namespace acme_backend.Shared.Utils
 {

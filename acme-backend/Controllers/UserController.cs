@@ -1,5 +1,5 @@
-﻿using acme_backend.Models.Dtos;
-using acme_backend.Services;
+﻿using BusinessLayer.IBLs;
+using DataAccessLayer.Models.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -10,9 +10,9 @@ namespace acme_backend.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly UserService _userService;
+        private readonly IBL_Users _userService;
 
-        public UserController(UserService userService)
+        public UserController(IBL_Users userService)
         {
             _userService = userService;
         }

@@ -1,5 +1,4 @@
-﻿using acme_backend.Models.Dtos.Ciudad;
-using acme_backend.Services;
+﻿using BusinessLayer.IBLs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace acme_backend.Controllers
@@ -8,9 +7,9 @@ namespace acme_backend.Controllers
     [Route("api/[controller]")]
     public class EstadisticasController : ControllerBase
     {
-        private readonly EstadisticasService _estadisticaService;
+        private readonly IBL_Estadisticas _estadisticaService;
 
-        public EstadisticasController(EstadisticasService estadServic)
+        public EstadisticasController(IBL_Estadisticas estadServic)
         {
             _estadisticaService = estadServic;
         }

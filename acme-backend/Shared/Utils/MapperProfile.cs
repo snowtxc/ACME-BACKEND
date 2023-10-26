@@ -1,7 +1,7 @@
-﻿using acme_backend.Models;
-using acme_backend.Models.Dtos;
-using acme_backend.Models.Dtos.Pickup;
-using AutoMapper;
+﻿using AutoMapper;
+using DataAccessLayer.Models;
+using DataAccessLayer.Models.Dtos;
+using DataAccessLayer.Models.Dtos.Pickup;
 
 namespace acme_backend.Shared.Utils
 {

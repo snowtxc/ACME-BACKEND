@@ -1,27 +1,18 @@
-using acme_backend.Services;
-using Microsoft.AspNetCore.Authentication.Facebook;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using AutoMapper;
-using Microsoft.Extensions.DependencyInjection;
 using DataAccessLayer.Db;
 using DataAccessLayer.Models;
+using DataAccessLayer.IDALs;
+using BusinessLayer.IBLs;
+using BusinessLayer.BLs;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-builder.Services.AddScoped<AuthService>();
-builder.Services.AddScoped<EmpresaService>();
-
-
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<ApplicationDbContext>(o => o.UseMySQL(builder.Configuration.GetConnectionString("DbConnection")));
@@ -60,19 +51,42 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors();
-builder.Services.AddScoped<AuthService>();
-builder.Services.AddScoped<UserService>();
-builder.Services.AddScoped<ProductoService>();
-builder.Services.AddScoped<CategoriaService>();
-builder.Services.AddScoped<TipoIvaService>();
-builder.Services.AddScoped<PickupService>();
 
-builder.Services.AddScoped<DepartamentoService>();
-builder.Services.AddScoped<CiudadService>();
-builder.Services.AddScoped<EstadisticasService>();
-builder.Services.AddScoped<ReclamoService>();
+builder.Services.AddTransient<IDAL_Auth, DAL_Auth>();
+builder.Services.AddTransient<IBL_Auth, BL_Auth>();
 
+builder.Services.AddTransient<IDAL_Categoria, DAL_Categoria>();
+builder.Services.AddTransient<IBL_Categoria, BL_Categoria>();
 
+builder.Services.AddTransient<IDAL_Ciudad, DAL_Ciudad>();
+builder.Services.AddTransient<IBL_Ciudad, BL_Ciudad>();
+
+builder.Services.AddTransient<IDAL_Departamento, DAL_Departamento>();
+builder.Services.AddTransient<IBL_Departamento, BL_Departamento>();
+
+builder.Services.AddTransient<IDAL_Empresa, DAL_Empresa>();
+builder.Services.AddTransient<IBL_Empresa, BL_Empresa>();
+
+builder.Services.AddTransient<IDAL_Estadisticas, DAL_Estadisticas>();
+builder.Services.AddTransient<IBL_Estadisticas, BL_Estadisticas>();
+
+builder.Services.AddTransient<IDAL_Mail, DAL_Mail>();
+builder.Services.AddTransient<IBL_Mail, BL_Mail>();
+
+builder.Services.AddTransient<IDAL_Pickup, DAL_Pickup>();
+builder.Services.AddTransient<IBL_Pickup, BL_Pickup>();
+
+builder.Services.AddTransient<IDAL_Producto, DAL_Producto>();
+builder.Services.AddTransient<IBL_Producto, BL_Producto>();
+
+builder.Services.AddTransient<IDAL_Reclamo, DAL_Reclamo>();
+builder.Services.AddTransient<IBL_Reclamo, BL_Reclamo>();
+
+builder.Services.AddTransient<IDAL_TipoIVA, DAL_TipoIVA>();
+builder.Services.AddTransient<IBL_TipoIVA, BL_TipoIVA>();
+
+builder.Services.AddTransient<IDAL_User, DAL_User>();
+builder.Services.AddTransient<IBL_Users, BL_Users>();
 
 var app = builder.Build();
 

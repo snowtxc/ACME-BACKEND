@@ -1,6 +1,6 @@
-﻿using acme_backend.Models.Dtos.Ciudad;
-using acme_backend.Models.Dtos.Departamento;
-using acme_backend.Services;
+﻿using BusinessLayer.IBLs;
+using DataAccessLayer.Models.Dtos.Ciudad;
+using DataAccessLayer.Models.Dtos.Departamento;
 using Microsoft.AspNetCore.Mvc;
 
 namespace acme_backend.Controllers
@@ -9,10 +9,10 @@ namespace acme_backend.Controllers
     [Route("api/[controller]")]
     public class DepartamentoController : ControllerBase
     {
-        private readonly DepartamentoService _departamentoService;
-        private readonly CiudadService _ciudadService;
+        private readonly IBL_Departamento _departamentoService;
+        private readonly IBL_Ciudad _ciudadService;
 
-        public DepartamentoController(DepartamentoService deptoService, CiudadService ciudadService)
+        public DepartamentoController(IBL_Departamento deptoService, IBL_Ciudad ciudadService)
         {
             _departamentoService = deptoService;
             _ciudadService = ciudadService;

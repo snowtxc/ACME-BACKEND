@@ -1,14 +1,7 @@
-﻿using acme_backend.Models;
-using acme_backend.Models.Dtos;
-using acme_backend.Services;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.Facebook;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿
+using BusinessLayer.IBLs;
+using DataAccessLayer.Models.Dtos;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 using System.Security.Claims;
 
 namespace acme_backend.Controllers
@@ -18,10 +11,10 @@ namespace acme_backend.Controllers
     public class AuthController : ControllerBase
     {
 
-        private readonly AuthService _authService;
+        private readonly IBL_Auth _authService;
 
 
-        public AuthController(AuthService authService)
+        public AuthController(IBL_Auth authService)
         {
             _authService = authService;
 

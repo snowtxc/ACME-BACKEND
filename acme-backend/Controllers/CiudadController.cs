@@ -1,5 +1,5 @@
-﻿using acme_backend.Models.Dtos.Ciudad;
-using acme_backend.Services;
+﻿using BusinessLayer.IBLs;
+using DataAccessLayer.Models.Dtos.Ciudad;
 using Microsoft.AspNetCore.Mvc;
 
 namespace acme_backend.Controllers
@@ -8,9 +8,9 @@ namespace acme_backend.Controllers
     [Route("api/[controller]")]
     public class CiudadController : ControllerBase
     {
-        private readonly CiudadService _ciudadService;
+        private readonly IBL_Ciudad _ciudadService;
 
-        public CiudadController(CiudadService ciudadService)
+        public CiudadController(IBL_Ciudad ciudadService)
         {
             _ciudadService = ciudadService;
         }

@@ -1,9 +1,9 @@
-﻿using acme_backend.Models.Dtos;
-using acme_backend.Models;
-using AutoMapper;
-using acme_backend.Models.Dtos.Departamento;
-using acme_backend.Models.Dtos.TipoIVA;
-using acme_backend.Models.Dtos.Ciudad;
+﻿using AutoMapper;
+using DataAccessLayer.Models;
+using DataAccessLayer.Models.Dtos;
+using DataAccessLayer.Models.Dtos.Ciudad;
+using DataAccessLayer.Models.Dtos.Departamento;
+using DataAccessLayer.Models.Dtos.TipoIVA;
 
 public class MappingProfile : Profile
 {
