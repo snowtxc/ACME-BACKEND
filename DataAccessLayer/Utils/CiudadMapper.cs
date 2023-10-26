@@ -1,0 +1,21 @@
+﻿using DataAccessLayer.Models;
+using AutoMapper;
+using DataAccessLayer.Models.Dtos.Ciudad;
+
+namespace DataAccessLayer.Utils
+{
+    public class CiudadMapper
+    {
+        private readonly IMapper _mapper;
+
+        public CiudadMapper(IMapper mapper)
+        {
+            _mapper = mapper;
+        }
+
+        public CiudadDTO MapCiudadToDto(Ciudad ciudad)
+        {
+            return _mapper.Map<CiudadDTO>(ciudad);
+        }
+    }
+}

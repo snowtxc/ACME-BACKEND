@@ -1,5 +1,3 @@
-using acme_backend.Db;
-using acme_backend.Models;
 using acme_backend.Services;
 using Microsoft.AspNetCore.Authentication.Facebook;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -13,6 +11,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
+using DataAccessLayer.Db;
+using DataAccessLayer.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
