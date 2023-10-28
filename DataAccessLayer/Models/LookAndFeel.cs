@@ -13,16 +13,23 @@ namespace DataAccessLayer.Models
         [Required]
         public string LogoUrl { get; set; } = "";
 
+        [Required]
+        public int? NavBarId { get; set; } = null;
 
         [Required]
-        public string NavBarId { get; set; } = "";
-
-
-        [Required]
-        public int HomeId { get; set; }
+        public int? HomeId { get; set; } = null;
 
         [Required]
         public string NombreSitio { get; set; } = "";
+
+        [Required]
+        public string ColorPrincipal { get; set; } = "";
+
+        [Required]
+        public string ColorSecundario { get; set; } = "";
+
+        [Required]
+        public string ColorFondo { get; set; } = "";
 
         [Required]
         public int EmpresaId;
@@ -30,7 +37,10 @@ namespace DataAccessLayer.Models
         [Required]
         public Empresa Empresa = null!;
 
+        [Required]
+        public int? CategoriaDestacadaId = null;
 
-
+        [Required]
+        public CategoriaDestacada? CategoriaDestacada = null;
     }
 }
