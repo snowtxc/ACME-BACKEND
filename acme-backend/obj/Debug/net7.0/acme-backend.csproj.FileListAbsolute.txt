@@ -575,7 +575,6 @@ C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\bin\Debug\net7.0\NuGet.
 C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\bin\Debug\net7.0\NuGet.ProjectModel.dll
 C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\bin\Debug\net7.0\NuGet.Protocol.dll
 C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\bin\Debug\net7.0\NuGet.Versioning.dll
-C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\bin\Debug\net7.0\BouncyCastle.Crypto.dll
 C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -791,3 +790,14 @@ C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\runtimes\win-x64\native\k5sprt64.dll
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\runtimes\win-x64\native\krb5_64.dll
 C:\Users\Maximiliano\Documents\Proyecto Final UTEC\ACME-BACKEND\acme-backend\bin\Debug\net7.0\runtimes\win-x64\native\krbcc64.dll
+C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\bin\Debug\net7.0\BusinessLayer.deps.json
+C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\bin\Debug\net7.0\BusinessLayer.runtimeconfig.json
+C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\bin\Debug\net7.0\DataAccessLayer.deps.json
+C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\bin\Debug\net7.0\DataAccessLayer.runtimeconfig.json
+C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\bin\Debug\net7.0\DataAccessLayer.exe
+C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\bin\Debug\net7.0\BusinessLayer.exe
+C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\bin\Debug\net7.0\BouncyCastle.Cryptography.dll
+C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\bin\Debug\net7.0\BusinessLayer.dll
+C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\bin\Debug\net7.0\DataAccessLayer.dll
+C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\bin\Debug\net7.0\BusinessLayer.pdb
+C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\bin\Debug\net7.0\DataAccessLayer.pdb
