@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231028194349_LookAndFeelImplementation")]
+    [Migration("20231028195632_LookAndFeelImplementation")]
     partial class LookAndFeelImplementation
     {
         /// <inheritdoc />
@@ -73,6 +73,31 @@ namespace DataAccessLayer.Migrations
                     b.HasIndex("EmpresaId");
 
                     b.ToTable("Categorias");
+                });
+
+            modelBuilder.Entity("DataAccessLayer.Models.CategoriaDestacada", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CategoriaId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImagenUrl")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoriaId");
+
+                    b.ToTable("CategoriasDestacadas");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Models.CategoriaProducto", b =>
@@ -825,6 +850,17 @@ namespace DataAccessLayer.Migrations
                         .HasForeignKey("EmpresaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("DataAccessLayer.Models.CategoriaDestacada", b =>
+                {
+                    b.HasOne("DataAccessLayer.Models.Categoria", "Categoria")
+                        .WithMany()
+                        .HasForeignKey("CategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Categoria");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Models.CategoriaProducto", b =>
