@@ -15,9 +15,17 @@ namespace DataAccessLayer.Migrations
                 name: "NavBarId",
                 table: "LooksAndFeels",
                 type: "int",
-                nullable: false,
+                nullable: true,
                 oldClrType: typeof(string),
                 oldType: "longtext");
+
+            migrationBuilder.AlterColumn<int>(
+                name: "HomeId",
+                table: "LooksAndFeels",
+                type: "int",
+                nullable: true,
+                oldClrType: typeof(int),
+                oldType: "int");
 
             migrationBuilder.AddColumn<string>(
                 name: "ColorFondo",
@@ -36,6 +44,12 @@ namespace DataAccessLayer.Migrations
                 table: "LooksAndFeels",
                 type: "longtext",
                 nullable: false);
+
+            migrationBuilder.AddColumn<int>(
+                name: "EmpresaId",
+                table: "LooksAndFeels",
+                type: "int",
+                nullable: true);
 
             migrationBuilder.CreateTable(
                 name: "CategoriasDestacadas",
@@ -45,7 +59,8 @@ namespace DataAccessLayer.Migrations
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Nombre = table.Column<string>(type: "longtext", nullable: false),
                     ImagenUrl = table.Column<string>(type: "longtext", nullable: false),
-                    CategoriaId = table.Column<int>(type: "int", nullable: false)
+                    CategoriaId = table.Column<int>(type: "int", nullable: true),
+                    LookAndFeelId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -54,22 +69,53 @@ namespace DataAccessLayer.Migrations
                         name: "FK_CategoriasDestacadas_Categorias_CategoriaId",
                         column: x => x.CategoriaId,
                         principalTable: "Categorias",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_CategoriasDestacadas_LooksAndFeels_LookAndFeelId",
+                        column: x => x.LookAndFeelId,
+                        principalTable: "LooksAndFeels",
+                        principalColumn: "Id");
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LooksAndFeels_EmpresaId",
+                table: "LooksAndFeels",
+                column: "EmpresaId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_CategoriasDestacadas_CategoriaId",
                 table: "CategoriasDestacadas",
                 column: "CategoriaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CategoriasDestacadas_LookAndFeelId",
+                table: "CategoriasDestacadas",
+                column: "LookAndFeelId",
+                unique: true);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_LooksAndFeels_Empresas_EmpresaId",
+                table: "LooksAndFeels",
+                column: "EmpresaId",
+                principalTable: "Empresas",
+                principalColumn: "Id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_LooksAndFeels_Empresas_EmpresaId",
+                table: "LooksAndFeels");
+
             migrationBuilder.DropTable(
                 name: "CategoriasDestacadas");
+
+            migrationBuilder.DropIndex(
+                name: "IX_LooksAndFeels_EmpresaId",
+                table: "LooksAndFeels");
 
             migrationBuilder.DropColumn(
                 name: "ColorFondo",
@@ -83,13 +129,29 @@ namespace DataAccessLayer.Migrations
                 name: "ColorSecundario",
                 table: "LooksAndFeels");
 
+            migrationBuilder.DropColumn(
+                name: "EmpresaId",
+                table: "LooksAndFeels");
+
             migrationBuilder.AlterColumn<string>(
                 name: "NavBarId",
                 table: "LooksAndFeels",
                 type: "longtext",
                 nullable: false,
+                defaultValue: "",
                 oldClrType: typeof(int),
-                oldType: "int");
+                oldType: "int",
+                oldNullable: true);
+
+            migrationBuilder.AlterColumn<int>(
+                name: "HomeId",
+                table: "LooksAndFeels",
+                type: "int",
+                nullable: false,
+                defaultValue: 0,
+                oldClrType: typeof(int),
+                oldType: "int",
+                oldNullable: true);
         }
     }
 }

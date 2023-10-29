@@ -18,6 +18,6 @@
 
         public string Wallet { get; set; } = "";
 
-
+        public LookAndFeelDTO? LookAndFeel { get; set; } = null;
     }
 }

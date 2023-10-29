@@ -15,17 +15,13 @@ namespace DataAccessLayer.Models
         [Required]
         public string ImagenUrl { get; set; } = "";
 
-        [Required]
         public int? CategoriaId { get; set; } = null;
 
-        [Required]
         public Categoria Categoria { get; set; } = null!;
 
-        [Required]
-        public int LookAndFeelId;
+        public int? LookAndFeelId { get; set; } = null;
 
-        [Required]
-        public LookAndFeel LookAndFeel = null!;
+        public LookAndFeel LookAndFeel { get; set; } = null!;
 
     }
 }

@@ -28,7 +28,7 @@ builder.Services.AddIdentity<Usuario, IdentityRole>(options => options.SignIn.Re
 
 string secret = "JWTAuthenticationHIGHsecuredPasswordVVVp1OH7Xzyr";
 
-var key = Encoding.ASCII.GetBytes(secret); // Reemplaza con tu propia clave secreta
+var key = Encoding.ASCII.GetBytes(secret);
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -36,14 +36,14 @@ builder.Services.AddAuthentication(options =>
 })
 .AddJwtBearer(options =>
 {
-    options.RequireHttpsMetadata = false; // En producci�n, configura esto como true para usar HTTPS
+    options.RequireHttpsMetadata = false;
     options.SaveToken = true;
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(key),
-        ValidateIssuer = false, // Reemplaza con tu emisor si es necesario
-        ValidateAudience = false // Reemplaza con tu audiencia si es necesario
+        ValidateIssuer = false,
+        ValidateAudience = false
     };
 });
 

@@ -28,13 +28,10 @@ namespace DataAccessLayer.Models
         public double CostoEnvio { get; set; } = 0;
 
         public string Wallet { get; set; } = "";
+        
+        public LookAndFeel? LookAndFeel { get; set; } = null!;
 
-        [Required]
-        public int LookAndFeelId;
-
-        public LookAndFeel LookAndFeel = null!;
-
-       public ICollection<Usuario> Usuarios { get; } = new List<Usuario>();
+        public ICollection<Usuario> Usuarios { get; } = new List<Usuario>();
 
        public ICollection<PickUp> Pickups { get; } = new List<PickUp>();
 

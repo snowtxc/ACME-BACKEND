@@ -79,12 +79,14 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("CategoriaId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("ImagenUrl")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<int?>("LookAndFeelId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -93,6 +95,9 @@ namespace DataAccessLayer.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoriaId");
+
+                    b.HasIndex("LookAndFeelId")
+                        .IsUnique();
 
                     b.ToTable("CategoriasDestacadas");
                 });
@@ -405,8 +410,10 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int?>("EmpresaId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("HomeId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("LogoUrl")
@@ -414,7 +421,6 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<int?>("NavBarId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("NombreSitio")
@@ -422,6 +428,9 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EmpresaId")
+                        .IsUnique();
 
                     b.ToTable("LooksAndFeels");
                 });
@@ -853,11 +862,15 @@ namespace DataAccessLayer.Migrations
                 {
                     b.HasOne("DataAccessLayer.Models.Categoria", "Categoria")
                         .WithMany()
-                        .HasForeignKey("CategoriaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoriaId");
+
+                    b.HasOne("DataAccessLayer.Models.LookAndFeel", "LookAndFeel")
+                        .WithOne("CategoriaDestacada")
+                        .HasForeignKey("DataAccessLayer.Models.CategoriaDestacada", "LookAndFeelId");
 
                     b.Navigation("Categoria");
+
+                    b.Navigation("LookAndFeel");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Models.CategoriaProducto", b =>
@@ -995,6 +1008,15 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Producto");
 
                     b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("DataAccessLayer.Models.LookAndFeel", b =>
+                {
+                    b.HasOne("DataAccessLayer.Models.Empresa", "Empresa")
+                        .WithOne("LookAndFeel")
+                        .HasForeignKey("DataAccessLayer.Models.LookAndFeel", "EmpresaId");
+
+                    b.Navigation("Empresa");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Models.PickUp", b =>
@@ -1168,6 +1190,8 @@ namespace DataAccessLayer.Migrations
                 {
                     b.Navigation("Categorias");
 
+                    b.Navigation("LookAndFeel");
+
                     b.Navigation("Pickups");
 
                     b.Navigation("Productos");
@@ -1178,6 +1202,11 @@ namespace DataAccessLayer.Migrations
             modelBuilder.Entity("DataAccessLayer.Models.EstadoCompra", b =>
                 {
                     b.Navigation("ComprasEstados");
+                });
+
+            modelBuilder.Entity("DataAccessLayer.Models.LookAndFeel", b =>
+                {
+                    b.Navigation("CategoriaDestacada");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Models.Producto", b =>
