@@ -14,6 +14,12 @@
 
         public string Imagen { get; set; } = "";
 
+        public string ColorPrincipal { get; set; } = "";
+
+        public string ColorSecundario { get; set; } = "";
+
+        public string ColorFondo { get; set; } = "";
+
         public double CostoEnvio { get; set; } = 0;
 
         public string Wallet { get; set; } = "";

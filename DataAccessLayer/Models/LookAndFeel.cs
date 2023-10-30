@@ -16,24 +16,26 @@ namespace DataAccessLayer.Models
         public bool Activo { get; set; } = true;
 
 
+        public int? NavBarId { get; set; } = null;
 
-        [Required]
-        public string NavBarId { get; set; } = "";
-
-
-        [Required]
-        public int HomeId { get; set; }
+        public int? HomeId { get; set; } = null;
 
         [Required]
         public string NombreSitio { get; set; } = "";
 
         [Required]
-        public int EmpresaId;
+        public string ColorPrincipal { get; set; } = "";
 
         [Required]
-        public Empresa Empresa = null!;
+        public string ColorSecundario { get; set; } = "";
 
+        [Required]
+        public string ColorFondo { get; set; } = "";
 
+        public int? EmpresaId { get; set; } = null;
 
+        public Empresa? Empresa { get; set; } = null!;
+
+        public CategoriaDestacada? CategoriaDestacada { get; set; } = null;
     }
 }
