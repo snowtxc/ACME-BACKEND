@@ -28,7 +28,7 @@ namespace DataAccessLayer.IDALs
         public async Task<SortEstadisticasDTO> listarEstadisticas()
         {
             var estadisticas = new SortEstadisticasDTO();
-            var empresas = _db.Empresas.ToList();
+            var empresas = _db.Empresas.Where(e => e.Activo == true).ToList();
             var userRole = await _roleManager.FindByNameAsync("Usuario");
             if (userRole == null)
             {

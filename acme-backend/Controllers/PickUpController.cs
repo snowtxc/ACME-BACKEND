@@ -39,7 +39,6 @@ namespace acme_backend.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Vendedor")]
         public async Task<IActionResult> create(PickupCreateDto pickupCreate)
         {
            

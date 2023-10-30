@@ -37,7 +37,7 @@ namespace DataAccessLayer.IDALs
                 throw new Exception("Empresa invalida");
             }
 
-            var categorias = _db.Categorias.Include((cat) => cat.CategoriasProductos).Where((p) => p.EmpresaId == empresaId)
+            var categorias = _db.Categorias.Include((cat) => cat.CategoriasProductos).Where((p) => p.EmpresaId == empresaId).Where(c => c.Activo == true)
                 .Select((c) => new CategoriaDTO
                 {
                     CategoriaNombre = c.Nombre,
@@ -57,7 +57,7 @@ namespace DataAccessLayer.IDALs
                 throw new Exception("Empresa invalida");
             }
 
-            var categorias = _db.Categorias.Include((cat) => cat.CategoriasProductos).Where((p) => p.EmpresaId == empresaId)
+            var categorias = _db.Categorias.Include((cat) => cat.CategoriasProductos).Where((p) => p.EmpresaId == empresaId).Where((c) => c.Activo == true)
                 .Select((c) => new CategoriaDTO
                 {
                     CategoriaNombre = c.Nombre,

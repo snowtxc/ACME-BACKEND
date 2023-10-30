@@ -13,6 +13,9 @@ namespace DataAccessLayer.Models
         public int CompraId { get; set; }
         public int EstadoCompraId { get; set; }
 
+        public bool Activo { get; set; } = true;
+
+
 
         [JsonIgnore]
         public Compra Compra { get; set; } = null!;

@@ -13,6 +13,9 @@ namespace DataAccessLayer.Models
         [Required]
         public string CodigoSeguimiento { get; set; } = "";
 
+        public bool Activo { get; set; } = true;
+
+
 
         [Required]
         public DateTime FechaEstimadaEntrega;

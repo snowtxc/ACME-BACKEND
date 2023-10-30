@@ -13,6 +13,9 @@ namespace DataAccessLayer.Models
         [Required]
         public string Nombre { get; set; } = "";
 
+        public bool Activo { get; set; } = true;
+
+
 
         public List<CompraEstado> ComprasEstados { get; set; } = new();
     }

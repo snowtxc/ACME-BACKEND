@@ -12,6 +12,9 @@ namespace DataAccessLayer.Models
         [Required]
         public string Calle { get; set; } = "";
 
+        public bool Activo { get; set; } = true;
+
+
         [Required]
         public string NroPuerta { get; set; } = "";
 

@@ -13,6 +13,9 @@ namespace DataAccessLayer.Models
         [Required]
         public string LogoUrl { get; set; } = "";
 
+        public bool Activo { get; set; } = true;
+
+
 
         [Required]
         public string NavBarId { get; set; } = "";

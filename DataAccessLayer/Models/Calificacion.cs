@@ -19,6 +19,8 @@ namespace DataAccessLayer.Models
         public string UsuarioId { get; set; }
         public int ProductoId { get; set; }
 
+        public bool Activo { get; set; } = true;
+
 
         [JsonIgnore]
         public Producto Producto { get; set; } = null!;

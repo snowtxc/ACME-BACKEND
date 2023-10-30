@@ -67,6 +67,7 @@ namespace DataAccessLayer.IDALs
             var users = await _userManager.Users
                 .Include(u => u.Empresa)
                 .Where(u => u.Empresa.Id == empresaId)
+                .Where(u => u.Activo == true)
                 .Select(u => new UsuarioListDto
                 {
                     Id = u.Id,
@@ -168,7 +169,8 @@ namespace DataAccessLayer.IDALs
             var user = await _userManager.FindByIdAsync(id);
             if (user != null)
             {
-                await _userManager.DeleteAsync(user);
+                user.Activo = false;
+                await _userManager.UpdateAsync(user);
             }
             else
             {

@@ -15,11 +15,11 @@ namespace DataAccessLayer.Models
         [Required]
         public string Descripcion { get; set; } = "";
 
-        [Required]
-        public string DocumentoPdf { get; set; } = "";
+        public bool Activo { get; set; } = true;
+
 
         [Required]
-        public bool Activo { get; set; } = true;
+        public string DocumentoPdf { get; set; } = "";
 
         [Required]
         public double Precio { get; set; } = 0;

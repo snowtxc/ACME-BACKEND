@@ -14,6 +14,9 @@ namespace DataAccessLayer.Models
         [Required]
         public double CostoTotal { get; set; } = 0;
 
+        public bool Activo { get; set; } = true;
+
+
         [Required]
         public MetodoPago MetodoPago { get; set; } 
 

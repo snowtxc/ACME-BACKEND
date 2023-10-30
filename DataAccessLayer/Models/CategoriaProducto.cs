@@ -13,6 +13,9 @@ namespace DataAccessLayer.Models
 
         public Categoria Categoria { get; set; } = null!;
 
+        public bool Activo { get; set; } = true;
+
+
         public int ProductoId { get; set; }
         public Producto Producto { get; set; } = null!;
 

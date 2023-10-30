@@ -35,6 +35,7 @@ namespace DataAccessLayer.IDALs
         public async Task<List<TipoIVADTO>> listarTiposIVA()
         {
             var tiposIVA = _db.TiposIva
+                .Where((c) => c.Activo == true)
                 .Select((c) => new TipoIVADTO
                 {
                     Nombre = c.Nombre,
@@ -90,8 +91,8 @@ namespace DataAccessLayer.IDALs
             {
                 throw new Exception("Tipo de IVA no encontrado.");
             }
-
-            _db.TiposIva.Remove(tipoIva);
+            tipoIva.Activo = false;
+            _db.TiposIva.Update(tipoIva);
             await _db.SaveChangesAsync();
         }
     }

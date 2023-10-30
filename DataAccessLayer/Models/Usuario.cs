@@ -14,6 +14,9 @@ namespace DataAccessLayer.Models
         [Phone]
         public string Celular { get; set; } = "";
 
+        public bool Activo { get; set; } = true;
+
+
         [Required]
         public string Imagen { get; set; } = "";
 

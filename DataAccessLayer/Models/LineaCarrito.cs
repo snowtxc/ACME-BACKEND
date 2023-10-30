@@ -12,6 +12,9 @@ namespace DataAccessLayer.Models
         [Required]
         public int Cantidad { get; set; } = 0;
 
+
+        public bool Activo { get; set; } = true;
+
         [Required]
         public int ProductoId { get; set; }
 

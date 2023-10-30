@@ -71,16 +71,17 @@ namespace DataAccessLayer.IDALs
                 throw new Exception("Usuario logeado no existe");
             }
           
-            ICollection<PickUp> pickups = user.Empresa.Pickups; 
+            ICollection<PickUp> pickups = user.Empresa.Pickups;
 
             List<PickupDto> result = new List<PickupDto>();
             foreach(PickUp pickup in pickups)
             {
-
-                Direccion dirPickup = pickup.Direccion;
-
-                result.Add(new PickupDto { Id = pickup.Id, Nombre = pickup.Nombre, Telefono = pickup.Telefono, Foto = pickup.Foto, PlazosDiasPreparacion = pickup.PlazoDiasPreparacion, Lat = pickup.Lat, Lng = pickup.Lng, CiudadNombre = dirPickup.Ciudad.Nombre, DepartamentoNombre = dirPickup.Ciudad.Departamento.Nombre, Calle = dirPickup.Calle , CalleEntre1 = dirPickup.CalleEntre1 , CalleEntre2 = dirPickup.CalleEntre2 , NroPuerta = dirPickup.NroPuerta });
-                
+                if (pickup.Activo)
+                {
+                  Direccion dirPickup = pickup.Direccion;
+                  result.Add(new PickupDto { Id = pickup.Id, Nombre = pickup.Nombre, Telefono = pickup.Telefono, Foto = pickup.Foto, PlazosDiasPreparacion = pickup.PlazoDiasPreparacion, Lat = pickup.Lat, Lng = pickup.Lng, CiudadNombre = dirPickup.Ciudad.Nombre, DepartamentoNombre = dirPickup.Ciudad.Departamento.Nombre, Calle = dirPickup.Calle , CalleEntre1 = dirPickup.CalleEntre1 , CalleEntre2 = dirPickup.CalleEntre2 , NroPuerta = dirPickup.NroPuerta });
+                }
+               
 
             }
             return result;

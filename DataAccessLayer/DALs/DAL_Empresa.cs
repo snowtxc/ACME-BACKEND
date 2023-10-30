@@ -84,13 +84,17 @@ namespace DataAccessLayer.IDALs
         public async Task<List<EmpresaDto>> deletesByIds(int[] empresasIds)
         {
             List<Empresa> empresasToDeletes = await  _db.Empresas.Where(e => empresasIds.Contains(e.Id)).ToListAsync();
-
-            _db.Empresas.RemoveRange(empresasToDeletes);
-            _db.SaveChanges();
             List<EmpresaDto> eliminatedEmpresas = new List<EmpresaDto>();
             foreach(Empresa empresaDeleted in empresasToDeletes)
             {
-                eliminatedEmpresas.Add(new EmpresaDto { Id = empresaDeleted.Id, Correo = empresaDeleted.Correo, CostoEnvio  = empresaDeleted.CostoEnvio, Direccion = empresaDeleted.Direccion, Telefono = empresaDeleted.Telefono, Nombre = empresaDeleted.Nombre, Imagen = empresaDeleted.Imagen, Wallet = empresaDeleted.Wallet });
+                if (empresaDeleted != null)
+                {
+                    empresaDeleted.Activo = false;
+                    _db.Empresas.Update(empresaDeleted);
+                    await _db.SaveChangesAsync();
+                    eliminatedEmpresas.Add(new EmpresaDto { Id = empresaDeleted.Id, Correo = empresaDeleted.Correo, CostoEnvio = empresaDeleted.CostoEnvio, Direccion = empresaDeleted.Direccion, Telefono = empresaDeleted.Telefono, Nombre = empresaDeleted.Nombre, Imagen = empresaDeleted.Imagen, Wallet = empresaDeleted.Wallet });
+                } 
+           
             }
             return eliminatedEmpresas;
         }
@@ -110,7 +114,7 @@ namespace DataAccessLayer.IDALs
 
         public async Task<List<EmpresaDto>> List()
         {
-             List<EmpresaDto> empresas =  await _db.Empresas.Select(e=> new EmpresaDto { Id = e.Id, Correo = e.Correo, CostoEnvio = e.CostoEnvio, Direccion = e.Direccion, Telefono = e.Telefono, Nombre = e.Nombre, Imagen = e.Imagen, Wallet = e.Wallet }).ToListAsync();
+            List<EmpresaDto> empresas =  await _db.Empresas.Where(e => e.Activo == true).Select(e=> new EmpresaDto { Id = e.Id, Correo = e.Correo, CostoEnvio = e.CostoEnvio, Direccion = e.Direccion, Telefono = e.Telefono, Nombre = e.Nombre, Imagen = e.Imagen, Wallet = e.Wallet }).ToListAsync();
             return empresas;
         }
     }

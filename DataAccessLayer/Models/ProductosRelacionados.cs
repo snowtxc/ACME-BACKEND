@@ -14,6 +14,9 @@ namespace DataAccessLayer.Models
 
         public Producto productoRel { get; set; } = null!;
 
+        public bool Activo { get; set; } = true;
+
+
         public int productoRelId { get; set; }
 
     }

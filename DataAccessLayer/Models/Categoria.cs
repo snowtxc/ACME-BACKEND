@@ -14,6 +14,9 @@ namespace DataAccessLayer.Models
         
         public int EmpresaId { get; set; }
 
+        public bool Activo { get; set; } = true;
+
+
         public Empresa empresa = null!;
 
         public List<CategoriaProducto> CategoriasProductos { get; set; }
