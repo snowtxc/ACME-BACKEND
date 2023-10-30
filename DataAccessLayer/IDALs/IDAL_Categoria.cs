@@ -10,6 +10,11 @@ namespace DataAccessLayer.IDALs
     public interface IDAL_Categoria
     {
         Task<List<CategoriaDTO>> listarCategorias(string userId);
+
+        Task crearCategoria(CreateCategoriaDTO categoria, string userId);
+
+        public Task borrarCategorias(int[] categorias, string userId);
+
         Task<List<CategoriaDTO>> listarCategoriasByEmpresa(int empresaId);
     }
 }

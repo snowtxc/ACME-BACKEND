@@ -2,6 +2,7 @@
 using BusinessLayer.IBLs;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using DataAccessLayer.Models.Dtos;
 
 namespace acme_backend.Controllers
 {
@@ -58,6 +59,76 @@ namespace acme_backend.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> crearCategoria(CreateCategoriaDTO categoria)
+        {
+            try
+            {
+                var default_Categories = new string[] { };
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier);
+                if (userId != null)
+                {
+                    await _categoriaService.crearCategoria(categoria, userId.Value);
+                    return Ok(new OkDTO
+                    {
+                        ok = true,
+                        message = "Categoria creada correctamente"
+                    });
+                }
+                else
+                {
+                    return Ok(new OkDTO
+                    {
+                        ok = false,
+                        message = "error al crear categoria"
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new OkDTO
+                {
+                    ok = true,
+                    message = ex.Message
+                });
+            }
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> borrarCategorias(int[] categoriasIds)
+        {
+            try
+            {
+                var default_Categories = new string[] { };
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier);
+                if (userId != null)
+                {
+                    await _categoriaService.borrarCategorias(categoriasIds, userId.Value);
+                    return Ok(new OkDTO
+                    {
+                        ok = true,
+                        message = "Categorias eliminadas correctamente"
+                    });
+                }
+                else
+                {
+                    return Ok(new OkDTO
+                    {
+                        ok = false,
+                        message = "error al eliminar categorias"
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new OkDTO
+                {
+                    ok = true,
+                    message = ex.Message
+                });
             }
         }
     }

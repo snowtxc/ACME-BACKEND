@@ -18,6 +18,17 @@ namespace BusinessLayer.BLs
             _cat = cat;
         }
 
+        public Task crearCategoria(CreateCategoriaDTO categoria, string userId)
+        {
+            return _cat.crearCategoria(categoria, userId);
+        }
+
+        public Task borrarCategorias(int[] categorias, string userId)
+        {
+            return _cat.borrarCategorias(categorias, userId);
+        }
+
+
         public Task<List<CategoriaDTO>> listarCategorias(string userId)
         {
             return _cat.listarCategorias(userId);

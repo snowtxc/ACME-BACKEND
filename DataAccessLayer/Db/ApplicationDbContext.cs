@@ -13,6 +13,8 @@ namespace DataAccessLayer.Db
 
         public DbSet<Calificacion> Calificaciones { get; set; }
 
+        public DbSet<CategoriaRelacionada> CategoriaRelacionadas { get; set; }
+
         public DbSet<Categoria> Categorias { get; set; }
 
         public DbSet<CategoriaProducto> CategoriasProductos { get; set; }
