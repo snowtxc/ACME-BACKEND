@@ -230,9 +230,9 @@ namespace DataAccessLayer.IDALs
                 uinfo.Roles = roles;
                 uinfo.Id = user.Id;
                 uinfo.Nombre = user.Nombre;
-                if (user.Empresa != null)
+                if (user.EmpresaId != null)
                 {
-                    uinfo.EmpresaId = user.Empresa.Id;
+                    uinfo.EmpresaId = user.EmpresaId;
                 }
                 return uinfo;
             }
