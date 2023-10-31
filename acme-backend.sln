@@ -5,9 +5,13 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "acme-backend", "acme-backend\acme-backend.csproj", "{3F9009AA-E644-48F9-828F-A20D998F4B72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{6F09B169-2B2F-401B-BA47-5649D5B1D842}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{6F09B169-2B2F-401B-BA47-5649D5B1D842}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{7381E920-AB47-42A6-84D0-E18004A1678D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{7381E920-AB47-42A6-84D0-E18004A1678D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAYMENTS", "PAYMENTS\PAYMENTS.csproj", "{78C461BA-776D-4A1C-B14E-DD55152494C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SHIPPING", "SHIPPING\SHIPPING.csproj", "{047ADC12-FE7C-4653-93D4-E64B672B036C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{7381E920-AB47-42A6-84D0-E18004A1678D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7381E920-AB47-42A6-84D0-E18004A1678D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7381E920-AB47-42A6-84D0-E18004A1678D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78C461BA-776D-4A1C-B14E-DD55152494C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78C461BA-776D-4A1C-B14E-DD55152494C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78C461BA-776D-4A1C-B14E-DD55152494C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78C461BA-776D-4A1C-B14E-DD55152494C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{047ADC12-FE7C-4653-93D4-E64B672B036C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{047ADC12-FE7C-4653-93D4-E64B672B036C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{047ADC12-FE7C-4653-93D4-E64B672B036C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{047ADC12-FE7C-4653-93D4-E64B672B036C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
