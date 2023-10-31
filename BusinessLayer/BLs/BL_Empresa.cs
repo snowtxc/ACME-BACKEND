@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessLayer.IBLs;
+using DataAccessLayer.Models.Dtos.Pickup;
+using DataAccessLayer.Models;
 
 namespace BusinessLayer.BLs
 {
@@ -34,6 +36,10 @@ namespace BusinessLayer.BLs
         public Task<List<EmpresaDto>> List()
         {
             return _empres.List();
+        }
+        public Task<LookAndFeelDTO> editLookAndFeel(string userLoggedId, LookAndFeelDTO laf)
+        {
+            return _empres.editLookAndFeel(userLoggedId, laf);
         }
     }
 }

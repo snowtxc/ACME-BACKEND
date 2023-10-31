@@ -2,9 +2,11 @@
 using BusinessLayer.IBLs;
 using DataAccessLayer.Models.Dtos;
 using DataAccessLayer.Models.Dtos.Empresa;
+using DataAccessLayer.Models.Dtos.Pickup;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace acme_backend.Controllers
 {
@@ -16,7 +18,7 @@ namespace acme_backend.Controllers
 
         public EmpresaController(IBL_Empresa empresaService)
         {
-            _empresaService =  empresaService;
+            _empresaService = empresaService;
 
         }
 
@@ -88,6 +90,20 @@ namespace acme_backend.Controllers
 
         }
 
-
+        [HttpPost]
+        [Route("editLookAndFeel")]
+        public async Task<IActionResult> editLookAndFeel(LookAndFeelDTO laf)
+        {
+            try
+            {
+                string userLoggedId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                LookAndFeelDTO lookAndFeel = await _empresaService.editLookAndFeel(userLoggedId, laf);
+                return Ok(lookAndFeel);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

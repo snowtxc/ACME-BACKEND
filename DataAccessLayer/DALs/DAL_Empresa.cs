@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DataAccessLayer.IDALs
 {
@@ -122,7 +123,8 @@ namespace DataAccessLayer.IDALs
             {
                 throw new Exception("Empresa no existe");
             }
-            EmpresaDto empresaDto = new EmpresaDto {
+            EmpresaDto empresaDto = new EmpresaDto
+            {
                 Id = empresa.Id,
                 Correo = empresa.Correo,
                 CostoEnvio = empresa.CostoEnvio,
@@ -157,6 +159,104 @@ namespace DataAccessLayer.IDALs
                 })
                 .ToListAsync();
             return empresas;
+        }
+
+        public async Task<LookAndFeelDTO> editLookAndFeel(string userLoggedId, LookAndFeelDTO laf)
+        {
+            Usuario? user = await _db.Usuarios
+                .Include(u => u.Empresa)
+                .Include(u => u.Empresa.LookAndFeel)
+                .Include(u => u.Empresa.LookAndFeel.CategoriaDestacada)
+                .FirstOrDefaultAsync(u => u.Id == userLoggedId);
+            if (user == null)
+            {
+                throw new Exception("Usuario logeado no existe");
+            }
+            Empresa? empresa = user.Empresa;
+            if (empresa == null)
+            {
+                throw new Exception("La empresa no existe");
+
+            }
+
+            if (empresa.LookAndFeel != null)
+            {
+                if (empresa.LookAndFeel.ColorPrincipal != laf.ColorPrincipal.Trim())
+                {
+                    empresa.LookAndFeel.ColorPrincipal = laf.ColorPrincipal.Trim();
+                }
+
+                if (empresa.LookAndFeel.ColorSecundario != laf.ColorSecundario.Trim())
+                {
+                    empresa.LookAndFeel.ColorSecundario = laf.ColorSecundario.Trim();
+                }
+
+                if (empresa.LookAndFeel.ColorFondo != laf.ColorFondo.Trim())
+                {
+                    empresa.LookAndFeel.ColorFondo = laf.ColorFondo.Trim();
+                }
+
+                if (empresa.LookAndFeel.NombreSitio != laf.NombreSitio.Trim())
+                {
+                    empresa.LookAndFeel.NombreSitio = laf.NombreSitio.Trim();
+                }
+                empresa.LookAndFeel.LogoUrl = laf.LogoUrl;
+
+                // si el lookandfeel ya tiene categoría destacada, solo modifico.
+                if (empresa.LookAndFeel.CategoriaDestacada != null)
+                {
+                    // Ya cuenta con una cat destacada.
+                    if (laf.CategoriaDestacada != null)
+                    {
+                        Categoria? categoriaFound = await _db.Categorias.FindAsync(laf.CategoriaDestacada.CategoriaId);
+                        if (categoriaFound == null)
+                        {
+                            throw new Exception("La categoría recibida para destacar, no existe.");
+                        }
+
+                        empresa.LookAndFeel.CategoriaDestacada.Categoria = categoriaFound;
+                        empresa.LookAndFeel.CategoriaDestacada.Nombre = laf.CategoriaDestacada.Nombre;
+                        if(laf.CategoriaDestacada.ImagenUrl != "")
+                        {
+                            empresa.LookAndFeel.CategoriaDestacada.ImagenUrl = laf.CategoriaDestacada.ImagenUrl;
+                        }
+                    }
+                    else
+                    // la empresa tenía categoría destacada pero la eliminó (viene null).
+                    {
+                        var categoriaDestacada = await _db.CategoriasDestacadas.FindAsync(empresa.LookAndFeel.CategoriaDestacada.Id);
+                        if (categoriaDestacada != null)
+                        {
+                            _db.CategoriasDestacadas.Remove(categoriaDestacada);
+                            await _db.SaveChangesAsync();
+                        }
+                        empresa.LookAndFeel.CategoriaDestacada = null;
+                    }
+                }
+                else
+                // No cuenta con una cat destacada, la creamos.
+                {
+                    if (laf.CategoriaDestacada != null)
+                    {
+                        Categoria? categoriaFound = await _db.Categorias.FindAsync(laf.CategoriaDestacada.CategoriaId);
+                        if (categoriaFound == null)
+                        {
+                            throw new Exception("La categoría recibida para destacar, no existe.");
+                        }
+
+                        CategoriaDestacada newCategoriaDestacada = new CategoriaDestacada()
+                        {
+                            Nombre = laf.CategoriaDestacada.Nombre,
+                            ImagenUrl = laf.CategoriaDestacada.ImagenUrl,
+                            Categoria = categoriaFound,
+                        };
+                        empresa.LookAndFeel.CategoriaDestacada = newCategoriaDestacada;
+                    }
+                }
+                _db.Entry(empresa).State = EntityState.Modified;
+                await _db.SaveChangesAsync();
+            }
+            return _mapper.Map<LookAndFeelDTO>(empresa.LookAndFeel);
         }
     }
 }

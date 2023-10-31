@@ -11,5 +11,6 @@ namespace DataAccessLayer.IDALs
         Task<List<EmpresaDto>> deletesByIds(int[] empresasIds);
         Task<EmpresaDto> getById(int id);
         Task<List<EmpresaDto>> List();
+        Task<LookAndFeelDTO> editLookAndFeel(string userLoggedId, LookAndFeelDTO laf);
     }
 }

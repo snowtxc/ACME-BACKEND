@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccessLayer.Models.Dtos.Pickup;
 
 namespace BusinessLayer.IBLs
 {
@@ -16,5 +17,6 @@ namespace BusinessLayer.IBLs
         public Task<List<EmpresaDto>> deletesByIds(int[] empresasIds);
         public Task<EmpresaDto> getById(int id);
         public Task<List<EmpresaDto>> List();
+        public Task<LookAndFeelDTO> editLookAndFeel(string userLoggedId, LookAndFeelDTO laf);
     }
 }
