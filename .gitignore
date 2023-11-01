@@ -1,214 +1,75 @@
-# Carpeta bin y obj generada por compilación
-**/bin/
-**/obj/
-
-# Archivos de configuración específicos de Visual Studio
-.vscode/
-.vs/
-*_i.c
-*_p.c
+###################
+# compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.pdb
+*.dll.config
+*.cache
 *.suo
-*.user
-*.sln.docstates
-
-# Carpetas y archivos de caché
-[Cc]ache/
-[Nn]ode_modules/
-
-# Archivos temporales y copias de seguridad
-[Tt]emp/
-[Tt]estResults/
-[Bb]in/
-[Oo]bj/
-[Ll]og/
-[Ll]ogs/
-[Ll]ogFiles/
+# Include dlls if they’re in the NuGet packages directory
+!/packages/*/lib/*.dll
+!/packages/*/lib/*/*.dll
+# Include dlls if they're in the CommonReferences directory
+!*CommonReferences/*.dll
+####################
+# VS Upgrade stuff #
+####################
+UpgradeLog.XML
 _UpgradeReport_Files/
+###############
+# Directories #
+###############
+bin/
+obj/
 TestResults/
-
-# Archivos de usuario
-*.suo
-*.user
-*.sln.docstates
-
-# Archivos de compilación de Visual Studio
-[Bb]in/
-[Oo]bj/
-
-# Carpeta de paquetes de NuGet
-packages/
-
-# Archivos de respaldo de Visual Studio
-*.[Pp]ublish.xml
-*.pfx
-# Los archivos .pem
-*.pem
-# archivos de firma
-*.cer
-# los certificados provisionales
-*.pfx
-# Microsoft Azure Service Fabric
-AppPackages/
-[Oo]ut/
-
-# Carpeta de publicación de Visual Studio
-_PublishedWebsites/
-
-# Carpeta de artefactos generada por Azure DevOps
-drop/
-
-# Rider
-.idea/
-
-# User-specific files
-*.suo
-*.user
-*.sln.docstates
-
-# Mono Auto Generated Files
-mono_crash.*
-
-# Windows image file caches
-Thumbs.db
+###################
+# Web publish log #
+###################
+*.Publish.xml
+#############
+# Resharper #
+#############
+/_ReSharper.*
+*.ReSharper.*
+############
+# Packages #
+############
+# it’s better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+######################
+# Logs and databases #
+######################
+*.log
+*.sqlite
+# OS generated files #
+######################
+.DS_Store?
 ehthumbs.db
-
-# Folder config file
-Desktop.ini
-
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
-
-# VS Code directories
-.vscode/
-
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
-
-# Windows shortcuts
-*.lnk
-
-# JetBrains Rider
-.idea/
-.idea/
-
-# User-specific files
-*.suo
-*.user
-*.sln.docstates
-
-# Mono Auto Generated Files
-mono_crash.*
-
-# Windows image file caches
+Icon?
 Thumbs.db
-ehthumbs.db
-
-# Folder config file
-Desktop.ini
-
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
-
-# VS Code directories
-.vscode/
-
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
-
-# Windows shortcuts
-*.lnk
-
-# Rider
-.idea/
-.idea/
+[Bb]in
+[Oo]bj
+[Tt]est[Rr]esults
 *.suo
 *.user
-*.sln.docstates
-
-# User-specific files
-*.suo
-*.user
-*.sln.docstates
-
-# Mono Auto Generated Files
-mono_crash.*
-
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
-
-# Folder config file
-Desktop.ini
-
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
-
-# VS Code directories
-.vscode/
-
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
-
-# Windows shortcuts
-*.lnk
-
-# Rider
-.idea/
-.idea/
-
-# User-specific files
-*.suo
-*.user
-*.sln.docstates
-
-# Mono Auto Generated Files
-mono_crash.*
-
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
-
-# Folder config file
-Desktop.ini
-
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
-
-# VS Code directories
-.vscode/
-
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
-
-# Windows shortcuts
-*.lnk
-
-# Rider
-.idea/
-.idea/
-
-./appSettings.json
-
-appsettings.json
-acme-backend/obj/Debug/net7.0/refint/acme-backend.dll
-acme-backend/obj/Debug/net7.0/ref/acme-backend.dll
-acme-backend/obj/Debug/net7.0/acme-backend.pdb
-acme-backend/obj/Debug/net7.0/acme-backend.dll
-acme-backend/obj/Debug/net7.0/acme-backend.csproj.AssemblyReference.cache
-acme-backend/obj/Debug/net7.0/acme-backend.assets.cache
-acme-backend/bin/Debug/net7.0/acme-backend.pdb
-acme-backend/bin/Debug/net7.0/acme-backend.dll
-.vs/acme-backend/v17/.suo
-.vs/acme-backend/DesignTimeBuild/.dtbcache.v2
+*.[Cc]ache
+*[Rr]esharper*
+packages
+NuGet.exe
+_[Ss]cripts
+*.exe
+*.dll
+*.nupkg
+*.ncrunchsolution
+*.dot[Cc]over
