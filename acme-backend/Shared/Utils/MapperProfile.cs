@@ -21,6 +21,10 @@ namespace acme_backend.Shared.Utils
             CreateMap<PickUp, PickupDto>();
             CreateMap<LookAndFeel, LookAndFeelDTO>();
             CreateMap<CategoriaDestacada, CategoriaDestacadaListDTO>();
+            CreateMap<LineaCarrito, LineaCarritoDTO>();
+            CreateMap<Producto, ProductoCarritoDTO>();
+            CreateMap<TipoIva, TipoIvaList>();
+            CreateMap<ProductoFoto, ImagenList>();
         }
     }
 }

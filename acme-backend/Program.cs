@@ -8,7 +8,7 @@ using DataAccessLayer.Models;
 using DataAccessLayer.IDALs;
 using BusinessLayer.IBLs;
 using BusinessLayer.BLs;
-
+using DataAccessLayer.DALs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -60,6 +60,9 @@ builder.Services.AddTransient<IBL_Categoria, BL_Categoria>();
 
 builder.Services.AddTransient<IDAL_Ciudad, DAL_Ciudad>();
 builder.Services.AddTransient<IBL_Ciudad, BL_Ciudad>();
+
+builder.Services.AddTransient<IDAL_Carrito, DAL_Carrito>();
+builder.Services.AddTransient<IBL_Carrito, BL_Carrito>();
 
 builder.Services.AddTransient<IDAL_Departamento, DAL_Departamento>();
 builder.Services.AddTransient<IBL_Departamento, BL_Departamento>();

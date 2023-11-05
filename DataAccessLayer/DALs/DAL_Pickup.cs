@@ -57,6 +57,25 @@ namespace DataAccessLayer.IDALs
             return pickupCreated;
         }
 
+        public async Task<List<PickupDto>> listByEmpresa(int empresaId) {
+            var listPickups = await _db.Pickups
+                .Include(p => p.Direccion)
+                .ThenInclude(d => d.Ciudad)
+                .ThenInclude(c => c.Departamento)
+                .Where((p) => p.EmpresaId == empresaId).ToListAsync();
+            List<PickupDto> result = new List<PickupDto>();
+            foreach (PickUp pickup in listPickups)
+            {
+                if (pickup.Activo)
+                {
+                    Direccion dirPickup = pickup.Direccion;
+                    result.Add(new PickupDto { Id = pickup.Id, Nombre = pickup.Nombre, Telefono = pickup.Telefono, Foto = pickup.Foto, PlazosDiasPreparacion = pickup.PlazoDiasPreparacion, Lat = pickup.Lat, Lng = pickup.Lng, CiudadNombre = dirPickup.Ciudad.Nombre, DepartamentoNombre = dirPickup.Ciudad.Departamento.Nombre, Calle = dirPickup.Calle, CalleEntre1 = dirPickup.CalleEntre1, CalleEntre2 = dirPickup.CalleEntre2, NroPuerta = dirPickup.NroPuerta });
+                }
+            }
+            return result;
+        }
+
+
         public async Task<List<PickupDto>> list(string userLoggedId)
         {
             Usuario? user = await _db.Usuarios

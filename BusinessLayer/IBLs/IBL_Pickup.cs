@@ -12,6 +12,9 @@ namespace BusinessLayer.IBLs
     {
         public Task<PickupDto> create(string userLoggedId, PickupCreateDto pickupCreate);
         public Task<List<PickupDto>> list(string userLoggedId);
+
+        public Task<List<PickupDto>> listByEmpresa(int empresaId);
+
         public Task<List<PickupDto>> deletesByIds(int[] pickupsIds);
     }
 }

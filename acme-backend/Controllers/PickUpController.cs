@@ -38,6 +38,29 @@ namespace acme_backend.Controllers
             }
         }
 
+
+        [HttpGet, Route("listarByEmpresa")]
+        public async Task<IActionResult> listPickupsByEmpresa([FromQuery] int empresaId)
+        {
+            try
+            {
+                string userLoggedId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                if (userLoggedId != null)
+                {
+                    List<PickupDto> pickups = await _pickupService.listByEmpresa(empresaId);
+                    return Ok(pickups);
+                }
+                else
+                {
+                    return Ok(new List<PickupDto>());
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> create(PickupCreateDto pickupCreate)
         {

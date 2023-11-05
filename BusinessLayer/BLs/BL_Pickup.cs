@@ -29,5 +29,11 @@ namespace BusinessLayer.BLs
         public Task<List<PickupDto>> deletesByIds(int[] pickupsIds) {
             return _pickup.deletesByIds(pickupsIds);
         }
+
+        public Task<List<PickupDto>> listByEmpresa(int empresaId)
+        {
+            return _pickup.listByEmpresa(empresaId);
+        }
+
     }
 }

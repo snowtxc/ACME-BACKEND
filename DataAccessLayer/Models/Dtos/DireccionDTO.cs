@@ -8,6 +8,8 @@ namespace DataAccessLayer.Models.Dtos
     {
         public int? Id { get; set; }
 
+        public string Nombre { get; set; } = string.Empty;
+
         public string Calle { get; set; } = string.Empty;
 
         public string NroPuerta { get; set; } = string.Empty;
@@ -17,5 +19,12 @@ namespace DataAccessLayer.Models.Dtos
         public string CalleEntre2 { get; set; } = string.Empty;
 
         public int CiudadId { get; set; }
+
+        public string CiudadNombre { get; set; }
+
+        public string CiudadDepartamentoNombre { get; set; }
+
+
+
     }
 }

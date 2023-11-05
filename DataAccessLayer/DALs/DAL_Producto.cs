@@ -349,11 +349,6 @@ namespace DataAccessLayer.IDALs
             {
                 throw new Exception("Usuario invalido");
             }
-            if (userInfo.Empresa == null)
-            {
-                throw new Exception("Empresa invalida");
-            }
-            var empresaId = userInfo.Empresa.Id;
             var p = await _db.Productos.Include((p) => p.CategoriasProductos).ThenInclude((p) => p.Categoria).Include((p) => p.TipoIva).Include((p) => p.Fotos).FirstOrDefaultAsync((p) => p.Id == productoId);
 
             if (p != null)

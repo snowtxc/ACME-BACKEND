@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.Db;
+﻿using AutoMapper;
+using DataAccessLayer.Db;
 using DataAccessLayer.IDALs;
 using DataAccessLayer.Models;
 using DataAccessLayer.Models.Dtos;
@@ -22,13 +23,16 @@ namespace DataAccessLayer.IDALs
         private readonly UserManager<Usuario> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
+        private readonly IMapper _mapper;
 
-        public DAL_Auth(UserManager<Usuario> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, ApplicationDbContext db)
+
+        public DAL_Auth(UserManager<Usuario> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, ApplicationDbContext db, IMapper mapper)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _configuration = configuration;
             _db = db;
+            _mapper = mapper;
         }
 
         public async Task<string> generateTokenByUser(Usuario user)
@@ -214,25 +218,29 @@ namespace DataAccessLayer.IDALs
         {
             try
             {
-                Console.WriteLine("userId " + userId);
               var user = await _userManager.FindByIdAsync(userId);
               if (user == null)
                 {
                     throw new Exception("Error al obtener usuario");
                 }
                 var roles = await _userManager.GetRolesAsync(user);
+                var userInfo = await _db.Usuarios.Include(u => u.Direcciones).ThenInclude(u => u.Ciudad).ThenInclude(u => u.Departamento).FirstOrDefaultAsync((u) => u.Id == userId);
 
-                Console.WriteLine(roles);
               UserInfoDTO uinfo = new UserInfoDTO();
-                uinfo.Celular = user.Celular;
-                uinfo.Email = user.Email;
-                uinfo.Imagen = user.Imagen;
+                uinfo.Celular = userInfo.Celular;
+                uinfo.Email = userInfo.Email;
+                uinfo.Imagen = userInfo.Imagen;
                 uinfo.Roles = roles;
-                uinfo.Id = user.Id;
-                uinfo.Nombre = user.Nombre;
+                uinfo.Id = userInfo.Id;
+                uinfo.Nombre = userInfo.Nombre;
                 if (user.EmpresaId != null)
                 {
                     uinfo.EmpresaId = user.EmpresaId;
+                }
+                List<DireccionDTO> direcciones = _mapper.Map<List<DireccionDTO>>(userInfo.Direcciones);
+                if (direcciones!= null)
+                {
+                    uinfo.Direcciones = direcciones;
                 }
                 return uinfo;
             }

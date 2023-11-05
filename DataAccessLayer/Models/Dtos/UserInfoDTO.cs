@@ -16,6 +16,7 @@ namespace DataAccessLayer.Models.Dtos
 
         public IList<string> Roles { get; set; } = new List<string>();
 
+        public List<DireccionDTO> Direcciones { get; set; } = new List<DireccionDTO>();
 
         public int? EmpresaId { get; set; } = null;
 
