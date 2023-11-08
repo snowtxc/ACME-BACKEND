@@ -3,6 +3,7 @@ using AutoMapper;
 using DataAccessLayer.Db;
 using DataAccessLayer.Models;
 using DataAccessLayer.Models.Dtos;
+using DataAccessLayer.Models.Dtos.TipoIVA;
 using DataAccessLayer.Utils;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace DataAccessLayer.IDALs
 {
-    public class DAL_User: IDAL_User
+    public class DAL_User : IDAL_User
     {
         private ApplicationDbContext _db;
         private readonly UserManager<Usuario> _userManager;
@@ -110,7 +111,7 @@ namespace DataAccessLayer.IDALs
 
             var foundCiudad = await _db.Ciudades.FindAsync(userDto.Direccion.CiudadId);
             Direccion dir = new Direccion
-            { 
+            {
                 Calle = userDto.Direccion.Calle,
                 CalleEntre1 = userDto.Direccion.CalleEntre1,
                 CalleEntre2 = userDto.Direccion.CalleEntre2,
@@ -145,14 +146,14 @@ namespace DataAccessLayer.IDALs
             return null;
         }
 
-        public async Task updateUser(string id, UsuarioDto userDto)
+        public async Task updateUser(string id, UpdateUsuarioDto userDto)
         {
             var user = await _userManager.FindByIdAsync(id);
 
             if (user != null)
             {
                 user.Nombre = userDto.Nombre;
-                user.Email = userDto.Email;
+                //user.Email = userDto.Email;
                 user.Celular = userDto.Celular;
                 user.Imagen = userDto.Imagen;
 
@@ -176,6 +177,83 @@ namespace DataAccessLayer.IDALs
             {
                 throw new Exception("Usuario no encontradpo.");
             }
+        }
+
+        public async Task agregarDireccion(string userId, DireccionDTO direccionDto)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user != null)
+            {
+                var foundCiudad = await _db.Ciudades.FindAsync(direccionDto.CiudadId);
+                Direccion dir = new Direccion
+                {
+                    Calle = direccionDto.Calle,
+                    CalleEntre1 = direccionDto.CalleEntre1,
+                    CalleEntre2 = direccionDto.CalleEntre2,
+                    NroPuerta = direccionDto.NroPuerta,
+                    Ciudad = foundCiudad,
+                    CiudadId = direccionDto.CiudadId,
+                    Activo = true,
+                };
+                user.Direcciones.Add(dir);
+
+                await _userManager.UpdateAsync(user);
+            }
+            else
+            {
+                throw new Exception("Usuario no encontrado.");
+            }
+        }
+
+        public async Task modificarDireccion(string userId, DireccionDTO direccionDto)
+        {
+            var user = await _db.Usuarios
+                .Include(u => u.Direcciones)
+                .FirstOrDefaultAsync((u) => u.Id == userId);
+            var direccionExistente = user.Direcciones.FirstOrDefault(d => d.Id == direccionDto.Id);
+            if (user == null)
+            {
+                throw new Exception("Usuario no encontrado.");
+            }
+            if (direccionExistente != null)
+            {
+                var foundCiudad = await _db.Ciudades.FindAsync(direccionDto.CiudadId);
+                if (foundCiudad == null)
+                {
+                    throw new Exception("Ciudad no encontrada.");
+                }
+                direccionExistente.Calle = direccionDto.Calle;
+                direccionExistente.CalleEntre1 = direccionDto.CalleEntre1;
+                direccionExistente.CalleEntre2 = direccionDto.CalleEntre2;
+                direccionExistente.NroPuerta = direccionDto.NroPuerta;
+                direccionExistente.Ciudad = foundCiudad;
+                direccionExistente.CiudadId = direccionDto.CiudadId;
+                direccionExistente.Activo = direccionDto.Activo ?? true;
+
+                await _db.SaveChangesAsync();
+                await _userManager.UpdateAsync(user);
+            }
+            else
+            {
+                throw new Exception("La dirección no existe.");
+            }
+        }
+
+        public async Task<List<DireccionDTO>> listLoggUsrDirecciones(string userId)
+        {
+            var user = await _db.Usuarios
+                .Include(u => u.Direcciones)
+                .ThenInclude(d => d.Ciudad)
+                .ThenInclude(d => d.Departamento)
+                .FirstOrDefaultAsync((u) => u.Id == userId);
+            var direcciones = user.Direcciones
+                .Select(c => _mapper.Map<DireccionDTO>(c))
+                .ToList();
+            if (user == null)
+            {
+                throw new Exception("Usuario logueado inválido.");
+            }
+            return direcciones;
         }
     }
 }

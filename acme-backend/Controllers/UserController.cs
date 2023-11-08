@@ -85,12 +85,18 @@ namespace acme_backend.Controllers
             }
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> updateUser(string id, UsuarioDto userDto)
+        [HttpPut]
+        public async Task<IActionResult> updateUser(UpdateUsuarioDto userDto)
         {
             try
             {
-                await _userService.updateUser(id, userDto);
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                if (userId == null)
+                {
+                    return BadRequest("Usuario logeado inválido.");
+
+                }
+                await _userService.updateUser(userId, userDto);
                 return NoContent();
             }
             catch (Exception ex)
@@ -106,6 +112,73 @@ namespace acme_backend.Controllers
             {
                 await _userService.deleteUser(id);
                 return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("listarDirecciones")]
+        public async Task<ActionResult<List<DireccionDTO>>> getLoggUsrDirecciones()
+        {
+            try
+            {
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                if (userId == null)
+                {
+                    return BadRequest("Usuario logeado inválido.");
+
+                }
+                var direcciones = await _userService.listLoggUsrDirecciones(userId);
+                return Ok(direcciones);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("agregarDireccion")]
+        public async Task<IActionResult> agregarDireccion(DireccionDTO direccion)
+        {
+            try
+            {
+                if (User != null && User.FindFirst(ClaimTypes.NameIdentifier) != null)
+                {
+                    var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                    await _userService.agregarDireccion(userId, direccion);
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest("Usuario inválido");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("modificarDireccion")]
+        public async Task<IActionResult> modificarDireccion(DireccionDTO direccion)
+        {
+            try
+            {
+                if (User != null && User.FindFirst(ClaimTypes.NameIdentifier) != null)
+                {
+                    var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                    await _userService.modificarDireccion(userId, direccion);
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest("Usuario inválido");
+                }
             }
             catch (Exception ex)
             {

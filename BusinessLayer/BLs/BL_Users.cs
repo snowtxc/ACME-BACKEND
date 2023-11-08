@@ -25,13 +25,25 @@ namespace BusinessLayer.BLs
         {
             return _users.createUser(userId, userDto);
         }
-        public Task updateUser(string id, UsuarioDto userDto)
+        public Task updateUser(string id, UpdateUsuarioDto userDto)
         {
             return _users.updateUser(id, userDto);
         }
         public Task deleteUser(string id)
         {
             return _users.deleteUser(id);
+        }
+        public Task agregarDireccion(string userId, DireccionDTO direccionDto)
+        {
+            return _users.agregarDireccion(userId, direccionDto);
+        }
+        public Task modificarDireccion(string userId, DireccionDTO direccionDto)
+        {
+            return _users.modificarDireccion(userId, direccionDto);
+        }
+        public Task<List<DireccionDTO>> listLoggUsrDirecciones(string userId)
+        {
+            return _users.listLoggUsrDirecciones(userId);
         }
     }
 }

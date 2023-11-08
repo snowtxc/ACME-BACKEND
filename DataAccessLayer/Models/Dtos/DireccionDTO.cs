@@ -20,11 +20,12 @@ namespace DataAccessLayer.Models.Dtos
 
         public int CiudadId { get; set; }
 
-        public string CiudadNombre { get; set; }
+        public string? CiudadNombre { get; set; }
 
-        public string CiudadDepartamentoNombre { get; set; }
+        public int? CiudadDepartamentoId { get; set; }
 
+        public string? CiudadDepartamentoNombre { get; set; }
 
-
+        public Boolean? Activo { get; set; }
     }
 }
