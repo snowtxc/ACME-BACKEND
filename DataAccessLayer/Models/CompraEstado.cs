@@ -11,14 +11,18 @@ namespace DataAccessLayer.Models
         public int Id { get; set; }
 
         public int CompraId { get; set; }
+
+        [JsonIgnore]
+        public Compra compra { get; set; }
+
         public int EstadoCompraId { get; set; }
 
         public bool Activo { get; set; } = true;
 
+        public bool EstadoActual { get; set; } = true;
 
+        public DateTime Fecha { get; set; } = DateTime.Now;
 
-        [JsonIgnore]
-        public Compra Compra { get; set; } = null!;
 
         [JsonIgnore]
         public EstadoCompra EstadoCompra { get; set; } = null!;

@@ -10,5 +10,7 @@ namespace BusinessLayer.IBLs
     public  interface IBL_Shipping
     {
         public EnvioRastreoResponseDto createPackage(EnvioRequestDto request);
+        public void changeStatus(string trackingNumber, int newStatusId);
+
     }
 }

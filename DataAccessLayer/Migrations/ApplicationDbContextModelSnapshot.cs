@@ -185,7 +185,7 @@ namespace DataAccessLayer.Migrations
                     b.Property<double>("CostoTotal")
                         .HasColumnType("double");
 
-                    b.Property<int?>("EnvioPaqueteId")
+                    b.Property<int>("EmpresaId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Fecha")
@@ -203,7 +203,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EnvioPaqueteId");
+                    b.HasIndex("EmpresaId");
 
                     b.HasIndex("UsuarioId");
 
@@ -222,8 +222,14 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("CompraId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("EstadoActual")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<int>("EstadoCompraId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -382,10 +388,15 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int>("CompraId")
+                        .HasColumnType("int");
+
                     b.Property<int>("DireccionId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CompraId");
 
                     b.HasIndex("DireccionId");
 
@@ -543,9 +554,6 @@ namespace DataAccessLayer.Migrations
                     b.Property<bool>("Activo")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int?>("CompraId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
@@ -575,8 +583,6 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CompraId");
 
                     b.HasIndex("EmpresaId");
 
@@ -996,9 +1002,11 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("DataAccessLayer.Models.Compra", b =>
                 {
-                    b.HasOne("DataAccessLayer.Models.EnvioPaquete", "EnvioPaquete")
-                        .WithMany()
-                        .HasForeignKey("EnvioPaqueteId");
+                    b.HasOne("DataAccessLayer.Models.Empresa", "Empresa")
+                        .WithMany("Compras")
+                        .HasForeignKey("EmpresaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("DataAccessLayer.Models.Usuario", "Usuario")
                         .WithMany("compras")
@@ -1006,14 +1014,14 @@ namespace DataAccessLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("EnvioPaquete");
+                    b.Navigation("Empresa");
 
                     b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Models.CompraEstado", b =>
                 {
-                    b.HasOne("DataAccessLayer.Models.Compra", "Compra")
+                    b.HasOne("DataAccessLayer.Models.Compra", "compra")
                         .WithMany("ComprasEstados")
                         .HasForeignKey("CompraId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1025,9 +1033,9 @@ namespace DataAccessLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Compra");
-
                     b.Navigation("EstadoCompra");
+
+                    b.Navigation("compra");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Models.CompraProducto", b =>
@@ -1066,11 +1074,19 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("DataAccessLayer.Models.EnvioPaquete", b =>
                 {
+                    b.HasOne("DataAccessLayer.Models.Compra", "Compra")
+                        .WithMany()
+                        .HasForeignKey("CompraId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("DataAccessLayer.Models.Direccion", "Direccion")
                         .WithMany()
                         .HasForeignKey("DireccionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Compra");
 
                     b.Navigation("Direccion");
                 });
@@ -1131,10 +1147,6 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("DataAccessLayer.Models.Producto", b =>
                 {
-                    b.HasOne("DataAccessLayer.Models.Compra", null)
-                        .WithMany("Productos")
-                        .HasForeignKey("CompraId");
-
                     b.HasOne("DataAccessLayer.Models.Empresa", "Empresa")
                         .WithMany("Productos")
                         .HasForeignKey("EmpresaId")
@@ -1267,8 +1279,6 @@ namespace DataAccessLayer.Migrations
 
                     b.Navigation("Estados");
 
-                    b.Navigation("Productos");
-
                     b.Navigation("Reclamos");
                 });
 
@@ -1280,6 +1290,8 @@ namespace DataAccessLayer.Migrations
             modelBuilder.Entity("DataAccessLayer.Models.Empresa", b =>
                 {
                     b.Navigation("Categorias");
+
+                    b.Navigation("Compras");
 
                     b.Navigation("LookAndFeel");
 

@@ -16,7 +16,6 @@ namespace DataAccessLayer.Models
         public bool Activo { get; set; } = true;
 
 
-
         public List<CompraEstado> ComprasEstados { get; set; } = new();
     }
 }

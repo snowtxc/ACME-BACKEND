@@ -42,5 +42,9 @@ namespace DataAccessLayer.Models
        public ICollection<Categoria> Categorias { get; } = new List<Categoria>();
 
        public ICollection<Producto> Productos { get; } = new List<Producto>();
+
+
+        public ICollection<Compra> Compras { get; } = new List<Compra>();
+
     }
 }

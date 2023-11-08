@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata;
 
 namespace DataAccessLayer.Db
 {
@@ -75,11 +76,12 @@ namespace DataAccessLayer.Db
             modelBuilder.Entity<CategoriaProducto>().HasOne(cp => cp.Categoria).WithMany(c => c.CategoriasProductos).HasForeignKey(cp => cp.ProductoId);
             modelBuilder.Entity<CategoriaProducto>().HasOne(cp => cp.Producto).WithMany(p => p.CategoriasProductos).HasForeignKey(cp => cp.CategoriaId);
 
-            modelBuilder.Entity<CompraEstado>().HasOne(ce => ce.Compra).WithMany(c => c.ComprasEstados).HasForeignKey(ce => ce.CompraId);
             modelBuilder.Entity<CompraEstado>().HasOne(ce => ce.EstadoCompra).WithMany(e => e.ComprasEstados).HasForeignKey(ce => ce.EstadoCompraId);
 
             modelBuilder.Entity<CompraProducto>().HasOne(cp => cp.Compra).WithMany(c => c.ComprasProductos).HasForeignKey(cp => cp.CompraId);
             modelBuilder.Entity<CompraProducto>().HasOne(cp => cp.Producto).WithMany(p => p.ComprasProductos).HasForeignKey(cp => cp.ProductoId);
+
+
 
             modelBuilder.Entity<LineaCarrito>().HasOne(lc => lc.Usuario).WithMany(u => u.LineasCarrito).HasForeignKey(cp => cp.UsuarioId).HasPrincipalKey(u => u.Id);
 
@@ -88,6 +90,9 @@ namespace DataAccessLayer.Db
               .WithOne(u => u.Empresa)
               .HasForeignKey(u => u.EmpresaId)
               .OnDelete(DeleteBehavior.Cascade);
+;
+
+
 
         }
 
