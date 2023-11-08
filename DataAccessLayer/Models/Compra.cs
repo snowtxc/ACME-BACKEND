@@ -27,9 +27,6 @@ namespace DataAccessLayer.Models
         public DateTime Fecha { get; set; }
 
 
-        public int? EnvioPaqueteId { get; set; } = null;
-
-        public EnvioPaquete? EnvioPaquete { get; set; } = null!;
 
         public string UsuarioId { get; set; }
 
@@ -49,8 +46,15 @@ namespace DataAccessLayer.Models
 
 
 
-        public List<Producto> Productos { get; set; } = new();  
         public List<CompraProducto> ComprasProductos { get; set; } = new();
+
+        public int EmpresaId { get; set; }
+
+
+        public Empresa Empresa { get; set; }
+
+
+
 
 
     }

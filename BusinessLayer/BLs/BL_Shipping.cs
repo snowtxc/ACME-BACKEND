@@ -10,6 +10,7 @@ namespace BusinessLayer.BLs
 {
     public class BL_Shipping : IBL_Shipping
     {
+        
         public EnvioRastreoResponseDto createPackage(EnvioRequestDto data)
         {
 
@@ -52,5 +53,13 @@ namespace BusinessLayer.BLs
                 DireccionEnvio = data.NroPuerta + " " + data.Calle + " " + data.Ciudad + " " + data.Departamento
             };
         }
+
+        public void changeStatus(string trackingNumber, int newStatusId)
+        {
+            throw new NotImplementedException();
+        }
+
+
+
     }
 }

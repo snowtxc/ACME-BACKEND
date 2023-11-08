@@ -25,6 +25,10 @@ namespace DataAccessLayer.Models
 
         public Direccion Direccion { get; set; } = null!;
 
+        [Required]
+        public int CompraId { get; set; }
+        public Compra Compra { get; set; } = null!;
+
 
 
 

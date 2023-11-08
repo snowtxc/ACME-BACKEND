@@ -3,6 +3,7 @@ using System;
 using DataAccessLayer.Db;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231104153216_drop-columns")]
+    partial class dropcolumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -185,7 +188,7 @@ namespace DataAccessLayer.Migrations
                     b.Property<double>("CostoTotal")
                         .HasColumnType("double");
 
-                    b.Property<int>("EmpresaId")
+                    b.Property<int?>("EnvioPaqueteId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Fecha")
@@ -202,8 +205,6 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EmpresaId");
 
                     b.HasIndex("UsuarioId");
 
@@ -222,14 +223,8 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("CompraId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("EstadoActual")
-                        .HasColumnType("tinyint(1)");
-
                     b.Property<int>("EstadoCompraId")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("Fecha")
-                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -396,7 +391,8 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CompraId");
+                    b.HasIndex("CompraId")
+                        .IsUnique();
 
                     b.HasIndex("DireccionId");
 
@@ -1002,19 +998,11 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("DataAccessLayer.Models.Compra", b =>
                 {
-                    b.HasOne("DataAccessLayer.Models.Empresa", "Empresa")
-                        .WithMany("Compras")
-                        .HasForeignKey("EmpresaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DataAccessLayer.Models.Usuario", "Usuario")
                         .WithMany("compras")
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Empresa");
 
                     b.Navigation("Usuario");
                 });
@@ -1075,8 +1063,8 @@ namespace DataAccessLayer.Migrations
             modelBuilder.Entity("DataAccessLayer.Models.EnvioPaquete", b =>
                 {
                     b.HasOne("DataAccessLayer.Models.Compra", "Compra")
-                        .WithMany()
-                        .HasForeignKey("CompraId")
+                        .WithOne("EnvioPaquete")
+                        .HasForeignKey("DataAccessLayer.Models.EnvioPaquete", "CompraId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1277,6 +1265,8 @@ namespace DataAccessLayer.Migrations
 
                     b.Navigation("ComprasProductos");
 
+                    b.Navigation("EnvioPaquete");
+
                     b.Navigation("Estados");
 
                     b.Navigation("Reclamos");
@@ -1290,8 +1280,6 @@ namespace DataAccessLayer.Migrations
             modelBuilder.Entity("DataAccessLayer.Models.Empresa", b =>
                 {
                     b.Navigation("Categorias");
-
-                    b.Navigation("Compras");
 
                     b.Navigation("LookAndFeel");
 

@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 
+
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -52,6 +55,33 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors();
+
+builder.Services.AddTransient<IDAL_Auth, DAL_Auth>();
+
+builder.Services.AddTransient<IDAL_Categoria, DAL_Categoria>();
+
+builder.Services.AddTransient<IDAL_Ciudad, DAL_Ciudad>();
+
+builder.Services.AddTransient<IDAL_Departamento, DAL_Departamento>();
+
+builder.Services.AddTransient<IDAL_Empresa, DAL_Empresa>();
+
+builder.Services.AddTransient<IDAL_Estadisticas, DAL_Estadisticas>();
+
+builder.Services.AddTransient<IDAL_Mail, DAL_Mail>();
+
+builder.Services.AddTransient<IDAL_Pickup, DAL_Pickup>();
+
+builder.Services.AddTransient<IDAL_Producto, DAL_Producto>();
+
+builder.Services.AddTransient<IDAL_Reclamo, DAL_Reclamo>();
+
+builder.Services.AddTransient<IDAL_TipoIVA, DAL_TipoIVA>();
+
+builder.Services.AddTransient<IDAL_User, DAL_User>();
+
+
+
 
 var app = builder.Build();
 
