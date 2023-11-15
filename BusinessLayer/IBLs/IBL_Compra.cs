@@ -1,4 +1,6 @@
-﻿using DataAccessLayer.Models.Dtos.Compra;
+﻿
+using DataAccessLayer.Models;
+using DataAccessLayer.Models.Dtos.Compra;
 using DataAccessLayer.Models.Dtos.Factura;
 using System;
 using System.Collections.Generic;
@@ -13,5 +15,12 @@ namespace BusinessLayer.IBLs
         public  Task<FacturaDTO> getFacturaByCompraId(int id);
         public Task cambiarEstado(int compraId, int nuevoEstadoCompra);
         public Task<SortCompra> getCompraByNroRastreo(string trackingNumber);
+
+        public Task<List<SortCompra>> listByEmpresa(int empresa);
+
+        public Task<CompraDto> getById(int id);
+
+        public Task<List<CompraDto>> listByCliente(string clienteId);
+
     }
 }

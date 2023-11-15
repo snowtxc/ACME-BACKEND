@@ -12143,24 +12143,37 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "C:\\Users\\mdiu\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+=======
+    "C:\\Users\\Lenovo\\.nuget\\packages\\": {}
+>>>>>>> 6e2b2d4 (listado de ordenes)
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\acme-backend\\acme-backend.csproj",
       "projectName": "acme-backend",
       "projectPath": "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\acme-backend\\acme-backend.csproj",
       "packagesPath": "C:\\Users\\mdiu\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\acme-backend\\obj\\",
+=======
+      "projectUniqueName": "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\acme-backend\\acme-backend.csproj",
+      "projectName": "acme-backend",
+      "projectPath": "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\acme-backend\\acme-backend.csproj",
+      "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\acme-backend\\obj\\",
+>>>>>>> 6e2b2d4 (listado de ordenes)
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
+<<<<<<< HEAD
         "C:\\Users\\mdiu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+=======
+        "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> 6e2b2d4 (listado de ordenes)
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -12174,11 +12187,19 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
+<<<<<<< HEAD
             "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\BusinessLayer\\BusinessLayer.csproj": {
               "projectPath": "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\BusinessLayer\\BusinessLayer.csproj"
             },
             "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\DataAccessLayer\\DataAccessLayer.csproj": {
               "projectPath": "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\DataAccessLayer\\DataAccessLayer.csproj"
+=======
+            "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\BusinessLayer\\BusinessLayer.csproj": {
+              "projectPath": "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\BusinessLayer\\BusinessLayer.csproj"
+            },
+            "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\DataAccessLayer\\DataAccessLayer.csproj": {
+              "projectPath": "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\DataAccessLayer\\DataAccessLayer.csproj"
+>>>>>>> 6e2b2d4 (listado de ordenes)
             }
           }
         }
@@ -12270,6 +12291,12 @@
     }
   },
   "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\acme-backend\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    },
     {
       "code": "NU1603",
       "level": "Warning",

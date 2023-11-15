@@ -44,7 +44,7 @@ namespace DataAccessLayer.IDALs
                 CalleEntre1 = pickupCreate.CalleEntre1,
                 CalleEntre2 = pickupCreate.CalleEntre2,
                 NroPuerta = pickupCreate.NroPuerta,
-                Ciudad = ciudad,
+                Ciudad = ciudad, 
                 CiudadId = ciudad.Id,
             };
 

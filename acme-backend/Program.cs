@@ -91,6 +91,17 @@ builder.Services.AddTransient<IBL_TipoIVA, BL_TipoIVA>();
 builder.Services.AddTransient<IDAL_User, DAL_User>();
 builder.Services.AddTransient<IBL_Users, BL_Users>();
 
+builder.Services.AddTransient<IBL_Compra,BL_Compra>();
+builder.Services.AddTransient<IDAL_Compra, DAL_Compra>();
+
+
+
+
+builder.Services.AddTransient<IDAL_CompraEstado, DAL_CompraEstado>();
+builder.Services.AddTransient<IDAL_EstadoCompra, DAL_EstadoCompra>();
+
+builder.Services.AddTransient<IDAL_EnvioPaquete, DAL_EnvioPaquete>();
+
 var app = builder.Build();
 
 var scope = app.Services.CreateScope();

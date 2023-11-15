@@ -23,12 +23,16 @@ namespace DataAccessLayer.DALs
 
         public async Task<Compra?> getById(int id)
         {
-            Compra? compra = await _db.Compras.Include(c => c.Empresa).Include(c => c.Usuario).Include(c => c.ComprasProductos).ThenInclude(cp => cp.Producto).ThenInclude(p => p.Fotos).FirstOrDefaultAsync(c => c.Id == id);
+            Compra? compra = await _db.Compras.Include(c => c.Empresa)
+                .Include(c => c.Usuario).Include(c => c.ComprasProductos)
+                .ThenInclude(cp => cp.Producto).ThenInclude(p => p.Fotos)
+                .Include(c => c.ComprasEstados).ThenInclude(ce => ce.EstadoCompra).FirstOrDefaultAsync(c => c.Id == id);
             if(compra == null)
             {
                 return null;
             }
             return compra;
+
         }
 
         public async Task agregarEstado(int compraId,  EstadoCompra nuevoEstado)
@@ -50,5 +54,22 @@ namespace DataAccessLayer.DALs
             await _db.SaveChangesAsync();
         }
 
+        public async Task<List<Compra>> listByEmpresa(int empresaId)
+        {
+            List<Compra> compras =  await  _db.Compras.Where(c => c.EmpresaId == empresaId)
+                .OrderByDescending(c => c.Fecha).Include(c => c.Usuario).Include(c => c.ComprasProductos)
+                .Include(c => c.ComprasEstados).ThenInclude(ce => ce.EstadoCompra).ToListAsync();
+            return compras;
+        }
+
+        public async Task<List<Compra>> listByCliente(string clienteId) { 
+      
+            List<Compra> compras = await _db.Compras.Where(c => c.UsuarioId == clienteId).OrderByDescending(c => c.Fecha).Include(c => c.Usuario).Include(c => c.ComprasProductos).ThenInclude(cp => cp.Producto).ThenInclude(p => p.Fotos)
+                .Include(c => c.ComprasEstados).ThenInclude(ce => ce.EstadoCompra).ToListAsync();
+
+            return compras;
+
+
+        }
     }
 }

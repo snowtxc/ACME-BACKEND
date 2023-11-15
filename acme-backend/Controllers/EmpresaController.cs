@@ -1,11 +1,15 @@
 ﻿
 using BusinessLayer.IBLs;
+using DataAccessLayer.Models;
 using DataAccessLayer.Models.Dtos;
+using DataAccessLayer.Models.Dtos.Compra;
 using DataAccessLayer.Models.Dtos.Empresa;
 using DataAccessLayer.Models.Dtos.Pickup;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 using System.Security.Claims;
 
 namespace acme_backend.Controllers
@@ -15,11 +19,12 @@ namespace acme_backend.Controllers
     public class EmpresaController : ControllerBase
     {
         private readonly IBL_Empresa _empresaService;
+        private readonly IBL_Compra _compraIbl;
 
-        public EmpresaController(IBL_Empresa empresaService)
+        public EmpresaController(IBL_Empresa empresaService, IBL_Compra compraIbl)
         {
             _empresaService = empresaService;
-
+            _compraIbl = compraIbl;
         }
 
         [HttpPost]
@@ -35,7 +40,6 @@ namespace acme_backend.Controllers
             {
                 return StatusCode(500, ex.Message);
             }
-
 
         }
 
@@ -105,5 +109,26 @@ namespace acme_backend.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+
+        [HttpGet("ventas")]
+        [Authorize(Roles = "Vendedor")]
+
+        public async Task<IActionResult> getVentasByEmpresa()
+        {
+            try
+            {
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                EmpresaDto empresa =  await _empresaService.getByUser(userId);
+                List<SortCompra> compras  = await this._compraIbl.listByEmpresa(empresa.Id);
+                return Ok(compras);
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
     }
 }
