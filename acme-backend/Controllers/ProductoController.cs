@@ -70,7 +70,7 @@ namespace acme_backend.Controllers
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier);
                 if (userId != null)
                 {
-                    var producto = await _productService.obtenerProductoById(userId.Value ,productoId);
+                    var producto = await _productService.obtenerProductoById(userId.Value, productoId);
                     return Ok(producto);
                 }
                 else
@@ -188,16 +188,47 @@ namespace acme_backend.Controllers
                     {
                         throw new Exception("Error al crear producto");
                     }
-                } else
+                }
+                else
                 {
                     throw new Exception("Usuario invalido");
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 return BadRequest(new OkDTO
                 {
                     message = ex.Message,
                     ok = true,
+                });
+            }
+        }
+
+        [HttpPost, Route("calificarProducto")]
+        public async Task<IActionResult> calificarProducto(CreateCalificacionDTO calificacionDto)
+        {
+            try
+            {
+
+                string userLoggedId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                if (userLoggedId == null)
+                {
+                    throw new Exception("Usuario logueado inválido.");
+                }
+
+                await _productService.calificarProducto(userLoggedId, calificacionDto);
+                return Ok(new
+                {
+                    ok = true,
+                    message = "Calificación guardada correctamente."
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    ok = false,
+                    message = ex.Message
                 });
             }
         }

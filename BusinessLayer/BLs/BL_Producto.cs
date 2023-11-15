@@ -47,5 +47,9 @@ namespace BusinessLayer.BLs
         {
             return _producto.deshabilitarProducto(userId, productoId);
         }
+        public Task calificarProducto(string userId, CreateCalificacionDTO calificacionDto)
+        {
+            return _producto.calificarProducto(userId, calificacionDto);
+        }
     }
 }

@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\acme-backend\\acme-backend.csproj": {}
+    "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\acme-backend\\acme-backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\acme-backend\\acme-backend.csproj": {
+    "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\acme-backend\\acme-backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\acme-backend\\acme-backend.csproj",
+        "projectUniqueName": "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\acme-backend\\acme-backend.csproj",
         "projectName": "acme-backend",
-        "projectPath": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\acme-backend\\acme-backend.csproj",
-        "packagesPath": "C:\\Users\\Maximiliano\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\acme-backend\\obj\\",
+        "projectPath": "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\acme-backend\\acme-backend.csproj",
+        "packagesPath": "C:\\Users\\mdiu\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\acme-backend\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Maximiliano\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mdiu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,11 +32,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\BusinessLayer\\BusinessLayer.csproj": {
-                "projectPath": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\BusinessLayer\\BusinessLayer.csproj"
+              "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\BusinessLayer\\BusinessLayer.csproj": {
+                "projectPath": "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\BusinessLayer\\BusinessLayer.csproj"
               },
-              "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\DataAccessLayer\\DataAccessLayer.csproj": {
-                "projectPath": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\DataAccessLayer\\DataAccessLayer.csproj"
+              "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\DataAccessLayer\\DataAccessLayer.csproj": {
+                "projectPath": "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\DataAccessLayer\\DataAccessLayer.csproj"
               }
             }
           }
@@ -123,17 +127,21 @@
         }
       }
     },
-    "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\BusinessLayer\\BusinessLayer.csproj": {
+    "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\BusinessLayer\\BusinessLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\BusinessLayer\\BusinessLayer.csproj",
+        "projectUniqueName": "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\BusinessLayer\\BusinessLayer.csproj",
         "projectName": "BusinessLayer",
-        "projectPath": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\BusinessLayer\\BusinessLayer.csproj",
-        "packagesPath": "C:\\Users\\Maximiliano\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\BusinessLayer\\obj\\",
+        "projectPath": "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\BusinessLayer\\BusinessLayer.csproj",
+        "packagesPath": "C:\\Users\\mdiu\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\BusinessLayer\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Maximiliano\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mdiu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -147,8 +155,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\DataAccessLayer\\DataAccessLayer.csproj": {
-                "projectPath": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\DataAccessLayer\\DataAccessLayer.csproj"
+              "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\DataAccessLayer\\DataAccessLayer.csproj": {
+                "projectPath": "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\DataAccessLayer\\DataAccessLayer.csproj"
               }
             }
           }
@@ -182,17 +190,21 @@
         }
       }
     },
-    "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\DataAccessLayer\\DataAccessLayer.csproj": {
+    "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\DataAccessLayer\\DataAccessLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\DataAccessLayer\\DataAccessLayer.csproj",
+        "projectUniqueName": "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\DataAccessLayer\\DataAccessLayer.csproj",
         "projectName": "DataAccessLayer",
-        "projectPath": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\DataAccessLayer\\DataAccessLayer.csproj",
-        "packagesPath": "C:\\Users\\Maximiliano\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\DataAccessLayer\\obj\\",
+        "projectPath": "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\DataAccessLayer\\DataAccessLayer.csproj",
+        "packagesPath": "C:\\Users\\mdiu\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\DataAccessLayer\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Maximiliano\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mdiu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

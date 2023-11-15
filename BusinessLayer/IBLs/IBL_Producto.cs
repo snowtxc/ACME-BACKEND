@@ -10,7 +10,7 @@ namespace BusinessLayer.IBLs
         public Task<List<ProductoLista>> listarProductos(int empresaId);
         public Task<ProductoLista> obtenerProductoById(string userId, int productoId);
         public Task<bool> deshabilitarProducto(string userId, int productoId);
-
+        public Task calificarProducto(string userId, CreateCalificacionDTO calificacionDto);
         public Task<List<ProductoLista>> obtenerProductosRelacionados(string userId, int[] productosIds);
     }
 }

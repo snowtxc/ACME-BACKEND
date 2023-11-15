@@ -8,7 +8,7 @@ using DataAccessLayer.Models.Dtos.Usuario;
 
 namespace DataAccessLayer.IDALs
 {
-    public class DAL_Producto: IDAL_Producto
+    public class DAL_Producto : IDAL_Producto
     {
 
         private ApplicationDbContext _db;
@@ -432,7 +432,8 @@ namespace DataAccessLayer.IDALs
 
 
                 return newProduct;
-            } else
+            }
+            else
             {
                 return null;
             }
@@ -551,6 +552,47 @@ namespace DataAccessLayer.IDALs
 
 
             return lista;
+        }
+        public async Task calificarProducto(string userId, CreateCalificacionDTO calificacionDto)
+        {
+            var userInfo = await _db.Usuarios
+           .Include(u => u.Empresa)
+           .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (userInfo == null)
+            {
+                throw new Exception("Usuario inválido");
+            }
+
+            var producto = await _db.Productos
+               .FirstOrDefaultAsync(p => p.Id == calificacionDto.ProductoId);
+
+            if (userInfo == null)
+            {
+                throw new Exception("Producto inválido");
+            }
+
+            var existsCalificacion = _db.Calificaciones
+                .Include((p) => p.Usuario)
+                .Where((p) => p.ProductoId == calificacionDto.ProductoId)
+                .Where((p) => p.UsuarioId == userId)
+                .ToList();
+
+            if (existsCalificacion.Count > 0)
+            {
+                throw new Exception("El usuario ya cuenta con una calificación existente para este producto.");
+            }
+
+            Calificacion newCalificacion = new Calificacion()
+            {
+                UsuarioId = userId,
+                ProductoId = calificacionDto.ProductoId,
+                Comentario = calificacionDto.Comentario,
+                Rate = calificacionDto.Rate,
+            };
+
+            await _db.Calificaciones.AddAsync(newCalificacion);
+            await _db.SaveChangesAsync();
         }
     }
 }
