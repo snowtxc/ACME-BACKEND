@@ -2,6 +2,7 @@
 using DataAccessLayer.Models;
 using DataAccessLayer.Models.Dtos;
 using DataAccessLayer.Models.Dtos.Ciudad;
+using DataAccessLayer.Models.Dtos.Compra;
 using DataAccessLayer.Models.Dtos.Departamento;
 using DataAccessLayer.Models.Dtos.Pickup;
 using DataAccessLayer.Models.Dtos.TipoIVA;

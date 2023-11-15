@@ -1,4 +1,6 @@
-﻿namespace DataAccessLayer.Models.Dtos.Compra
+﻿using DataAccessLayer.Models.Dtos.Usuario;
+
+namespace DataAccessLayer.Models.Dtos.Compra
 {
     public class SortCompra
     {
@@ -9,9 +11,14 @@
 
         public string metodoPago { get; set; } = "";
          
-        public string metodoEnvio { get; set; } = ""; 
+        public string metodoEnvio { get; set; } = "";
+
+        public DateTime fecha { get; set; }
+        public SortUserDto user { get; set; } = null!;
+
+        public String estado { get; set; } = "";
+
+        public int cantidadDeProductos { get; set; } = 0;
       
-
-
     }
 }

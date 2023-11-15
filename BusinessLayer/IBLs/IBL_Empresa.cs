@@ -16,7 +16,12 @@ namespace BusinessLayer.IBLs
         public Task<EmpresaDto> create(EmpresaCreateDto newCompanyDto);
         public Task<List<EmpresaDto>> deletesByIds(int[] empresasIds);
         public Task<EmpresaDto> getById(int id);
+
+        public Task<EmpresaDto> getByUser(string userId);
+
         public Task<List<EmpresaDto>> List();
         public Task<LookAndFeelDTO> editLookAndFeel(string userLoggedId, LookAndFeelDTO laf);
+
+
     }
 }

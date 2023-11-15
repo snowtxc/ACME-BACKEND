@@ -3,12 +3,17 @@ using BusinessLayer.IBLs;
 using DataAccessLayer.IDALs;
 using DataAccessLayer.Models;
 using DataAccessLayer.Models.Dtos.Compra;
+using DataAccessLayer.Models.Dtos.Usuario;
 using DataAccessLayer.Models.Dtos.Factura;
+using Microsoft.AspNetCore.Http.HttpResults;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccessLayer.Models.Dtos;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLayer.BLs
 {
@@ -18,11 +23,12 @@ namespace BusinessLayer.BLs
         private IDAL_CompraEstado  _compraEstadoIdal;
         private IDAL_EstadoCompra _estadoCompra;
         private IDAL_EnvioPaquete _envioPaquete;
+        private readonly UserManager<Usuario> _userManager;
 
         private readonly IMapper _mapper;
 
 
-        public BL_Compra(IDAL_Compra compraDal, IDAL_CompraEstado compraEstadoIdal, IDAL_EstadoCompra estadoCompra, IDAL_EnvioPaquete envioPaquete, IMapper mapper)
+        public BL_Compra(IDAL_Compra compraDal, IDAL_CompraEstado compraEstadoIdal, IDAL_EstadoCompra estadoCompra, IDAL_EnvioPaquete envioPaquete, IMapper mapper, UserManager<Usuario> _userManage)
         {
             _compraIdal = compraDal;
             _compraEstadoIdal = compraEstadoIdal;
@@ -68,6 +74,7 @@ namespace BusinessLayer.BLs
                 throw new Exception("La compra no existe");
 
             }
+
             Usuario cliente = compra.Usuario;
             Empresa empresa = compra.Empresa;
             List<FacturaLinea> lineas = new List<FacturaLinea>();
@@ -101,6 +108,132 @@ namespace BusinessLayer.BLs
             };
             return factura;
 
+        }
+
+        public async Task<List<SortCompra>> listByEmpresa(int empresaId)
+        {
+            List<Compra> compras = await _compraIdal.listByEmpresa(empresaId);
+            List<SortCompra> result = new List<SortCompra>();
+            foreach(Compra compra in compras)
+            {
+                result.Add(new SortCompra
+                {
+                    Id = compra.Id,
+                    costoTotal = compra.CostoTotal,
+                    user = new SortUserDto { Id = compra.Usuario.Id, Email = compra.Usuario.Email, Imagen = compra.Usuario.Imagen, Nombre = compra.Usuario.Nombre, Tel = compra.Usuario.Celular },
+                    metodoEnvio = compra.MetodoEnvio.ToString(),
+                    metodoPago = compra.MetodoPago.ToString(),
+                    fecha = compra.Fecha,
+                    estado = compra.ComprasEstados.Where(ce => ce.EstadoActual).FirstOrDefault().EstadoCompra.Nombre,
+                    cantidadDeProductos = compra.ComprasProductos.Count
+                }) ;
+            }
+            return result;
+        }
+
+        public async Task<CompraDto> getById(int id)
+        {
+            Compra compra =  await  _compraIdal.getById(id);
+            if (compra == null)
+            {
+                throw new Exception("Compra no existe");
+            }
+            Usuario comprador = compra.Usuario;
+            List<CompraLineaDto> lineas = new List<CompraLineaDto>();
+            foreach(CompraProducto compraProducto  in compra.ComprasProductos) {
+                   Producto producto = compraProducto.Producto;
+                    List<ImagenList> imagenes = new List<ImagenList>();
+
+                    int nroImage = 0;
+                    foreach(ProductoFoto foto  in producto.Fotos)
+                    {
+                        imagenes.Add(new ImagenList { Id = foto.Id, Url = foto.Url });
+                    }
+
+                    ProductoLista productoDto = new ProductoLista
+                    {
+                        Id = producto.Id,
+                        Nombre = producto.Titulo,
+                        Descripcion = producto.Descripcion,
+                        DocumentoPdf = producto.DocumentoPdf,
+                        Precio = producto.Precio,
+                        Imagenes = imagenes.ToArray()
+                    };
+                    lineas.Add(
+                        new CompraLineaDto 
+                        { PrecioUnitario = compraProducto.PrecioUnitario, 
+                            Cantidad = compraProducto.Cantidad,
+                            ProductoLista = productoDto , 
+                            SubTotal = (compraProducto.Cantidad * compraProducto.PrecioUnitario)});
+            }
+            CompraDto compraInfo = new CompraDto
+            {
+                Id = compra.Id,
+                CantidadDeProductos = compra.ComprasProductos.Count,
+                Estado = compra.ComprasEstados.Where(ce => ce.EstadoActual).FirstOrDefault().EstadoCompra.Nombre,
+                MetodoEnvio = compra.MetodoEnvio.ToString(),
+                MetodoPago = compra.MetodoPago.ToString(),
+                Fecha = compra.Fecha,
+                Comprador = new UsuarioDto { Id = comprador.Id, Celular = comprador.Celular, Email = comprador.Email, Imagen = comprador.Imagen, Nombre = comprador.Nombre },
+                CostoTotal = compra.CostoTotal,
+                Lineas = lineas,
+    
+            };
+            return compraInfo;
+        }
+
+        public async Task<List<CompraDto>> listByCliente(string clienteId)
+        {
+            List<Compra> compras = await this._compraIdal.listByCliente(clienteId);
+            List<CompraDto> result = new List<CompraDto>();
+            foreach(Compra compra in compras)
+            {
+                Usuario comprador = compra.Usuario;
+                List<CompraLineaDto> lineas = new List<CompraLineaDto>();
+                foreach (CompraProducto compraProducto in compra.ComprasProductos)
+                {
+                    Producto producto = compraProducto.Producto;
+                    List<ImagenList> imagenes = new List<ImagenList>();
+
+                    foreach (ProductoFoto foto in producto.Fotos)
+                    {
+                        imagenes.Add(new ImagenList { Id = foto.Id, Url = foto.Url });
+                    }
+
+                    ProductoLista productoDto = new ProductoLista
+                    {
+                        Id = producto.Id,
+                        Nombre = producto.Titulo,
+                        Descripcion = producto.Descripcion,
+                        DocumentoPdf = producto.DocumentoPdf,
+                        Precio = producto.Precio,
+                        Imagenes = imagenes.ToArray()
+                    };
+                    lineas.Add(
+                        new CompraLineaDto
+                        {
+                            PrecioUnitario = compraProducto.PrecioUnitario,
+                            Cantidad = compraProducto.Cantidad,
+                            ProductoLista = productoDto,
+                            SubTotal = (compraProducto.Cantidad * compraProducto.PrecioUnitario)
+                        });
+                }
+                result.Add(new CompraDto
+                {
+                    Id = compra.Id,
+                    CantidadDeProductos = compra.ComprasProductos.Count,
+                    Estado = compra.ComprasEstados.Where(ce => ce.EstadoActual).FirstOrDefault().EstadoCompra.Nombre,
+                    MetodoEnvio = compra.MetodoEnvio.ToString(),
+                    MetodoPago = compra.MetodoPago.ToString(),
+                    Fecha = compra.Fecha,
+                    Comprador = new UsuarioDto { Id = comprador.Id, Celular = comprador.Celular, Email = comprador.Email, Imagen = comprador.Imagen, Nombre = comprador.Nombre },
+                    CostoTotal = compra.CostoTotal,
+                    Lineas = lineas,
+
+                });
+
+            }
+            return result;
         }
     }
 }

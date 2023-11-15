@@ -38,10 +38,8 @@ namespace FACTURACION.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> imprimirFactura(FacturaRequestDTO facturaRequest)
+        public async Task<IActionResult> imprimirFactura(FacturaDTO facturaData)
         {
-
-            FacturaDTO facturaData =  await _blCompra.getFacturaByCompraId(facturaRequest.compraId);
             var data = Document.Create(document =>
             {
                 document.Page(page =>
@@ -151,5 +149,5 @@ namespace FACTURACION.Controllers
             
 
         }
-    }
+        }
 }

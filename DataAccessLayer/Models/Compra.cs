@@ -47,7 +47,7 @@ namespace DataAccessLayer.Models
 
         public int EmpresaId { get; set; }
 
-
+        [JsonIgnore]
         public Empresa Empresa { get; set; }
 
 
