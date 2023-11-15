@@ -9,10 +9,17 @@ namespace DataAccessLayer.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        [Column]
         [Required]
-        public bool Entregado = false;
+        public bool Entregado { get; set; } = false;
 
+        [Column]
         [Required]
-        public DateTime FechaLlegada; 
+        public DateTime FechaLlegada { get; set; }
+
+        public Compra Compra { get; set; } = null;
+
+        public PickUp Pickup { get; set; } = null;
+
     }
 }

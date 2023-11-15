@@ -11,5 +11,7 @@ namespace DataAccessLayer.IDALs
         Task<List<ProductoLista>> listarProductos(int empresaId);
         Task<ProductoLista> obtenerProductoById(string userId, int productoId);
         Task<bool> deshabilitarProducto(string userId, int productoId);
+
+        Task<List<ProductoLista>> obtenerProductosRelacionados(string userId, int[] productosIds);
     }
 }

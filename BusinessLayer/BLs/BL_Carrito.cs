@@ -37,6 +37,10 @@ namespace BusinessLayer.BLs
             return _carrito.borrarCarritoLinea(carritoLinea, userId);
         }
 
+        public Task<CompraOKDTO> finalizarCarrito(FInalizarCarritoDTO data, string userId)
+        {
+            return _carrito.finalizarCarrito(data, userId);
+        }
 
     }
 }

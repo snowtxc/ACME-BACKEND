@@ -465,5 +465,92 @@ namespace DataAccessLayer.IDALs
             await _db.SaveChangesAsync();
             return true;
         }
+
+        public async Task<List<ProductoLista>> obtenerProductosRelacionados(string userId, int[] productosIds)
+        {
+            Random random = new Random();
+            var lista = new List<ProductoLista>();
+            var userInfo = await _userManager.Users
+            .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (userInfo == null)
+            {
+                throw new Exception("Usuario invalido");
+            }
+
+            foreach (var prodId in productosIds)
+            {
+                var producto = await _db.Productos.Include((p) => p.Empresa).Include((p) => p.CategoriasProductos).ThenInclude((p) => p.Categoria).FirstOrDefaultAsync((p) => p.Id == prodId);
+
+                if (producto != null)
+                {
+                    var productosRelacionados = _db.ProductosRelacionados.Include((p) => p.productoRel).ThenInclude((p) => p.Fotos).Where((p) => p.productoId == producto.Id).Take(2).OrderBy(o => Guid.NewGuid()).ToList();
+                    var counter = 0;
+                    foreach (var prodRel in productosRelacionados)
+                    {
+                        var productoRel = prodRel.productoRel;
+                        ProductoLista prod = new ProductoLista();
+                        prod.Activo = productoRel.Activo;
+                        prod.DocumentoPdf = productoRel.DocumentoPdf;
+                        prod.Id = productoRel.Id;
+                        prod.Descripcion = productoRel.Descripcion;
+                        prod.Nombre = productoRel.Titulo;
+                        prod.Precio = productoRel.Precio;
+                        prod.CreatedAt = productoRel.CreatedAt;
+                        prod.Imagenes = productoRel.Fotos.Select((imagen) => new ImagenList
+                        {
+                            Id = imagen.Id,
+                            Url = imagen.Url,
+                        }).ToArray();
+
+                        lista.Add(prod);
+                        counter++;
+                    }
+
+                    foreach (var catRel in producto.CategoriasProductos)
+                    {
+                        var categoriaId = catRel.ProductoId;
+
+                        var categoriasRelacionadasOfThisCat = await _db.CategoriaRelacionadas.Where((cat) => cat.Categoria.Id == categoriaId || cat.CategoriaRel.Id == categoriaId).ToListAsync();
+
+                        foreach (var rel in categoriasRelacionadasOfThisCat)
+                        {
+                            var categoriaRelId = rel.CategoriaId;
+                            var catProdRel = await _db.CategoriasProductos.Include((pr) => pr.Producto).ThenInclude((p) => p.Fotos).Where((pr) => pr.ProductoId == categoriaRelId).OrderBy(o => Guid.NewGuid()).ToListAsync();
+                            var randomProdsOrder = catProdRel.OrderBy(x => random.Next()).Take(2).ToList();
+
+                            foreach (var prodRel in randomProdsOrder)
+                            {
+                                var prod = prodRel.Producto;
+
+                                var exists = lista.Find((item) => item.Id == prod.Id);
+                                if (exists == null)
+                                {
+                                    // add to list
+                                    ProductoLista prodToAdd = new ProductoLista();
+                                    prodToAdd.Activo = prod.Activo;
+                                    prodToAdd.DocumentoPdf = prod.DocumentoPdf;
+                                    prodToAdd.Id = prod.Id;
+                                    prodToAdd.Descripcion = prod.Descripcion;
+                                    prodToAdd.Nombre = prod.Titulo;
+                                    prodToAdd.Precio = prod.Precio;
+                                    prodToAdd.CreatedAt = prod.CreatedAt;
+                                    prodToAdd.Imagenes = prod.Fotos.Select((imagen) => new ImagenList
+                                    {
+                                        Id = imagen.Id,
+                                        Url = imagen.Url,
+                                    }).ToArray();
+
+                                    lista.Add(prodToAdd);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            return lista;
+        }
     }
 }

@@ -4,6 +4,6 @@
     {
         MercadoPago,
         Tarjeta,
-        Ethereum
+        Wallet
     }
 }

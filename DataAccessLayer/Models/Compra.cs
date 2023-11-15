@@ -32,19 +32,16 @@ namespace DataAccessLayer.Models
 
 
 
-        public Usuario Usuario { get; set; }    
-
+        public Usuario Usuario { get; set; }
 
 
         public List<EstadoCompra> Estados { get; } = new();
 
-        [JsonIgnore]
-        public List<CompraEstado> ComprasEstados{ get; set; } = new();
-
+        public List<CompraEstado> ComprasEstados { get; } = new();
 
         public List<Reclamo> Reclamos { get; set; } = new();
 
-
+        public EnvioPaquete? EnvioPaquete { get; set; } = null;
 
         public List<CompraProducto> ComprasProductos { get; set; } = new();
 

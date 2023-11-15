@@ -56,6 +56,39 @@ namespace acme_backend.Controllers
             }
         }
 
+        [HttpPost, Route("comprar")]
+        public async Task<IActionResult> finalizarCarrito(FInalizarCarritoDTO data)
+        {
+            try
+            {
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier);
+                if (userId != null)
+                {
+                    var dataResp = await _carritoService.finalizarCarrito(data, userId.Value);
+                    if (dataResp.Ok == true)
+                    {
+                        return Ok(dataResp);
+                    } else
+                    {
+                        return BadRequest(dataResp);
+                    }
+                }
+                else
+                {
+                    throw new Exception("Usuario invalido");
+                }
+            }
+            catch (Exception ex)
+            {
+                var innerException = ex.InnerException;
+                return BadRequest(new CompraOKDTO
+                {
+                    Ok = false,
+                    Mensaje = ex.Message ?? "Error al comprar productos",
+                });
+            }
+        }
+
         [HttpGet, Route("obtenerCarrito")]
         public async Task<IActionResult> obtenerCarrito(int EmpresaId)
         {

@@ -10,7 +10,7 @@ namespace PAYMENTS.Controllers
     public class PaymentsController : Controller
     {
         [HttpPost("processPayment")]
-        public IActionResult ProcessPayment([FromBody] PaymentRequestDto paymentRequest)
+        public IActionResult ProcessPayment(PaymentRequestDto paymentRequest)
         {
             try
             {

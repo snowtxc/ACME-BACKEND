@@ -15,5 +15,7 @@ namespace DataAccessLayer.IDALs
         Task<List<LineaCarritoDTO>> obtenerCarrito(int empresaId, string userId);
         Task<bool> borrarCarritoLinea(int carritoLinea, string userId);
 
+        Task<CompraOKDTO> finalizarCarrito(FInalizarCarritoDTO data, string userId);
+
     }
 }

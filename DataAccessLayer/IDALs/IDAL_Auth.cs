@@ -13,6 +13,6 @@ namespace DataAccessLayer.IDALs
         Task addRoleToUser(string id, string role);
         Task<UsuarioDto?> FindByEmail(string email);
         Task<UserInfoDTO> getUserInfoById(string userId);
-        Task<string> createUserWithExternalService(LoginWithCredentialsDTO userInfo);
+        Task<string> createUserWithExternalService(FirebaseUser userInfo);
     }
 }

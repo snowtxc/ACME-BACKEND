@@ -2,13 +2,8 @@
 {
     public class LoginWithCredentialsDTO
     {
-        public string? Email { get; set; } = "";
-        public string? Imagen { get; set; } = "";
-
-        public string Name { get; set; } = "";
-        public string Uid { get; set; } = "";
-
-        public string SecretWord { get; set; } = "";
+        public string? Token { get; set; } = "";
+        public string? Service { get; set; } = "";
 
     }
 }

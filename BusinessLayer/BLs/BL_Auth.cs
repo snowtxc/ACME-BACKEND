@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessLayer.IBLs;
+using FirebaseAdmin.Auth;
+using FirebaseAdmin;
 
 namespace BusinessLayer.BLs
 {
@@ -59,9 +61,27 @@ namespace BusinessLayer.BLs
             return _auth.getUserInfoById(userId);
         }
 
-        public Task<string> createUserWithExternalService(LoginWithCredentialsDTO userInfo)
+        public async Task<string> createUserWithExternalService(LoginWithCredentialsDTO userInfo)
         {
-            return _auth.createUserWithExternalService(userInfo);
+            var app = FirebaseAppSingleton.GetFirebaseApp();
+            var auth = FirebaseAuth.GetAuth(app);
+
+            var decodedToken = await auth.VerifyIdTokenAsync(userInfo.Token);
+
+            // Obtener información del usuario
+            string uid = decodedToken.Uid;
+            string email = decodedToken.Claims["email"]?.ToString();
+            string displayName = decodedToken.Claims["name"]?.ToString();
+            string imagen = decodedToken.Claims["picture"]?.ToString();
+
+
+            var userData = new FirebaseUser();
+            userData.Uid = uid;
+            userData.Email = email;
+            userData.Name = displayName;
+            userData.Imagen = imagen;
+
+            return await _auth.createUserWithExternalService(userData);
         }
 
     }

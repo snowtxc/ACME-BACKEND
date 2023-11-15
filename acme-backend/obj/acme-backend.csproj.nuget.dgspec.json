@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\acme-backend\\acme-backend.csproj": {}
+    "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\acme-backend\\acme-backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\acme-backend\\acme-backend.csproj": {
+    "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\acme-backend\\acme-backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\acme-backend\\acme-backend.csproj",
+        "projectUniqueName": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\acme-backend\\acme-backend.csproj",
         "projectName": "acme-backend",
-        "projectPath": "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\acme-backend\\acme-backend.csproj",
-        "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\acme-backend\\obj\\",
+        "projectPath": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\acme-backend\\acme-backend.csproj",
+        "packagesPath": "C:\\Users\\Maximiliano\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\acme-backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Maximiliano\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,18 +22,17 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\BusinessLayer\\BusinessLayer.csproj": {
-                "projectPath": "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\BusinessLayer\\BusinessLayer.csproj"
+              "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\BusinessLayer\\BusinessLayer.csproj": {
+                "projectPath": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\BusinessLayer\\BusinessLayer.csproj"
               },
-              "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\DataAccessLayer\\DataAccessLayer.csproj": {
-                "projectPath": "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\DataAccessLayer\\DataAccessLayer.csproj"
+              "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\DataAccessLayer\\DataAccessLayer.csproj": {
+                "projectPath": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\DataAccessLayer\\DataAccessLayer.csproj"
               }
             }
           }
@@ -120,21 +119,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\BusinessLayer\\BusinessLayer.csproj": {
+    "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\BusinessLayer\\BusinessLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\BusinessLayer\\BusinessLayer.csproj",
+        "projectUniqueName": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\BusinessLayer\\BusinessLayer.csproj",
         "projectName": "BusinessLayer",
-        "projectPath": "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\BusinessLayer\\BusinessLayer.csproj",
-        "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\BusinessLayer\\obj\\",
+        "projectPath": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\BusinessLayer\\BusinessLayer.csproj",
+        "packagesPath": "C:\\Users\\Maximiliano\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\BusinessLayer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Maximiliano\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -148,8 +147,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\DataAccessLayer\\DataAccessLayer.csproj": {
-                "projectPath": "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\DataAccessLayer\\DataAccessLayer.csproj"
+              "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\DataAccessLayer\\DataAccessLayer.csproj": {
+                "projectPath": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\DataAccessLayer\\DataAccessLayer.csproj"
               }
             }
           }
@@ -179,21 +178,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\DataAccessLayer\\DataAccessLayer.csproj": {
+    "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\DataAccessLayer\\DataAccessLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\DataAccessLayer\\DataAccessLayer.csproj",
+        "projectUniqueName": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\DataAccessLayer\\DataAccessLayer.csproj",
         "projectName": "DataAccessLayer",
-        "projectPath": "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\DataAccessLayer\\DataAccessLayer.csproj",
-        "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\DataAccessLayer\\obj\\",
+        "projectPath": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\DataAccessLayer\\DataAccessLayer.csproj",
+        "packagesPath": "C:\\Users\\Maximiliano\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\DataAccessLayer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Maximiliano\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -226,6 +225,10 @@
             "BCrypt.Net-Next": {
               "target": "Package",
               "version": "[4.0.3, )"
+            },
+            "FirebaseAdmin": {
+              "target": "Package",
+              "version": "[2.4.0, )"
             },
             "Microsoft.AspNetCore.Authentication.Facebook": {
               "target": "Package",
@@ -275,6 +278,10 @@
               "target": "Package",
               "version": "[7.0.10, )"
             },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
@@ -296,7 +303,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

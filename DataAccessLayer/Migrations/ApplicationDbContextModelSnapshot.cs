@@ -396,7 +396,8 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CompraId");
+                    b.HasIndex("CompraId")
+                        .IsUnique();
 
                     b.HasIndex("DireccionId");
 
@@ -670,7 +671,23 @@ namespace DataAccessLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("CompraId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Entregado")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime>("FechaLlegada")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("PickupId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CompraId");
+
+                    b.HasIndex("PickupId");
 
                     b.ToTable("RetirosPickup");
                 });
@@ -1075,8 +1092,8 @@ namespace DataAccessLayer.Migrations
             modelBuilder.Entity("DataAccessLayer.Models.EnvioPaquete", b =>
                 {
                     b.HasOne("DataAccessLayer.Models.Compra", "Compra")
-                        .WithMany()
-                        .HasForeignKey("CompraId")
+                        .WithOne("EnvioPaquete")
+                        .HasForeignKey("DataAccessLayer.Models.EnvioPaquete", "CompraId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1205,6 +1222,25 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Compra");
                 });
 
+            modelBuilder.Entity("DataAccessLayer.Models.RetiroPickup", b =>
+                {
+                    b.HasOne("DataAccessLayer.Models.Compra", "Compra")
+                        .WithMany()
+                        .HasForeignKey("CompraId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DataAccessLayer.Models.PickUp", "Pickup")
+                        .WithMany("RetiroPickups")
+                        .HasForeignKey("PickupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Compra");
+
+                    b.Navigation("Pickup");
+                });
+
             modelBuilder.Entity("DataAccessLayer.Models.Usuario", b =>
                 {
                     b.HasOne("DataAccessLayer.Models.Empresa", "Empresa")
@@ -1277,6 +1313,8 @@ namespace DataAccessLayer.Migrations
 
                     b.Navigation("ComprasProductos");
 
+                    b.Navigation("EnvioPaquete");
+
                     b.Navigation("Estados");
 
                     b.Navigation("Reclamos");
@@ -1310,6 +1348,11 @@ namespace DataAccessLayer.Migrations
             modelBuilder.Entity("DataAccessLayer.Models.LookAndFeel", b =>
                 {
                     b.Navigation("CategoriaDestacada");
+                });
+
+            modelBuilder.Entity("DataAccessLayer.Models.PickUp", b =>
+                {
+                    b.Navigation("RetiroPickups");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Models.Producto", b =>

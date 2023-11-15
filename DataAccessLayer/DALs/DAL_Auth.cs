@@ -3,6 +3,9 @@ using DataAccessLayer.Db;
 using DataAccessLayer.IDALs;
 using DataAccessLayer.Models;
 using DataAccessLayer.Models.Dtos;
+using FirebaseAdmin.Auth;
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -12,6 +15,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Reflection;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.CodeAnalysis;
 
 namespace DataAccessLayer.IDALs
 {
@@ -250,14 +254,10 @@ namespace DataAccessLayer.IDALs
             }
         }
 
-        public async Task<string> createUserWithExternalService(LoginWithCredentialsDTO userInfo)
+        public async Task<string> createUserWithExternalService(FirebaseUser userInfo)
         {
             try
             {
-                if (_configuration["LoginExternalSerciveSecret"] != userInfo.SecretWord)
-                {
-                    throw new Exception("Invalid secret");
-                }
                 var existsUser = await _userManager.FindByIdAsync(userInfo.Uid);
                 if (existsUser != null)
                 {

@@ -38,5 +38,8 @@ namespace DataAccessLayer.Models
         public int DireccionId { get; set; }
         public Direccion Direccion { get; set; } = null!;
 
+        public List<RetiroPickup> RetiroPickups { get; set; } = new List<RetiroPickup> { };
+
+
     }
 }

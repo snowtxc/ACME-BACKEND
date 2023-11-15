@@ -38,6 +38,11 @@ namespace BusinessLayer.BLs
         {
             return _producto.obtenerProductoById(userId, productoId);
         }
+
+        public Task<List<ProductoLista>> obtenerProductosRelacionados(string userId, int[] productosIds)
+        {
+            return _producto.obtenerProductosRelacionados(userId, productosIds);
+        }
         public Task<bool> deshabilitarProducto(string userId, int productoId)
         {
             return _producto.deshabilitarProducto(userId, productoId);

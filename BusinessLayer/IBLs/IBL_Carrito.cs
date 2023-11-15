@@ -11,6 +11,7 @@ namespace BusinessLayer.IBLs
     {
 
         Task<bool> agregarProductoCarrito(AgregarProductoCarritoDTO data, string userId);
+        Task<CompraOKDTO> finalizarCarrito(FInalizarCarritoDTO data, string userId);
 
         Task<List<LineaCarritoDTO>> obtenerCarrito(int empresaId, string userId);
 

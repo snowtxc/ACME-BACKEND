@@ -84,6 +84,29 @@ namespace acme_backend.Controllers
             }
         }
 
+
+        [HttpPost, Route("relacionados")]
+        public async Task<IActionResult> obtenerProductosRelacionados(int[] productosIds)
+        {
+            try
+            {
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier);
+                if (userId != null)
+                {
+                    var productos = await _productService.obtenerProductosRelacionados(userId.Value, productosIds);
+                    return Ok(productos);
+                }
+                else
+                {
+                    throw new Exception("Error al crear producto");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpDelete, Route("{productoId}")]
         public async Task<IActionResult> eliminarProducto(int productoId)
         {

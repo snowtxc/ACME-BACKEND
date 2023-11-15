@@ -7,7 +7,6 @@ namespace DataAccessLayer.Models.Dtos.Payment
     {
 
         [Required]
-        [CreditCard]
         public string CardNumber { get; set; }
 
         [DataType(DataType.Date)]
@@ -20,6 +19,6 @@ namespace DataAccessLayer.Models.Dtos.Payment
 
         [Required(ErrorMessage = "El monto es obligatorio.")]
         [Range(0.01, double.MaxValue, ErrorMessage = "El monto debe ser mayor que cero.")]
-        public decimal Amount { get; set; }
+        public double Amount { get; set; } = 0;
     }
 }
