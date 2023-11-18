@@ -7,7 +7,7 @@ namespace BusinessLayer.IBLs
         public Task<bool> createProduct(CrearProductoDTO data, string userId);
         public Task<bool> editProducto(EditProductoDTO data, string userId);
         public Task<List<ProductoLista>> listarProductosDeMiEmpresa(string userId);
-        public Task<List<ProductoLista>> listarProductos(int empresaId);
+        public Task<List<ProductoLista>> listarProductos(int empresaId, string query);
         public Task<ProductoLista> obtenerProductoById(string userId, int productoId);
         public Task<bool> deshabilitarProducto(string userId, int productoId);
         public Task calificarProducto(string userId, CreateCalificacionDTO calificacionDto);

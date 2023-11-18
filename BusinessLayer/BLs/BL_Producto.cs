@@ -30,9 +30,9 @@ namespace BusinessLayer.BLs
         {
             return _producto.listarProductosDeMiEmpresa(userId);
         }
-        public Task<List<ProductoLista>> listarProductos(int empresaId)
+        public Task<List<ProductoLista>> listarProductos(int empresaId, string query)
         {
-            return _producto.listarProductos(empresaId);
+            return _producto.listarProductos(empresaId, query);
         }
         public Task<ProductoLista> obtenerProductoById(string userId, int productoId)
         {

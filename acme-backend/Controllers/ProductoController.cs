@@ -40,6 +40,27 @@ namespace acme_backend.Controllers
             }
         }
 
+        [HttpGet, Route("buscar-productos")]
+        public async Task<IActionResult> buscarProductos([FromQuery] string query, [FromQuery] int empresaId)
+        {
+            try
+            {
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier);
+                if (userId != null) {
+                    var productos = await _productService.listarProductos(empresaId, query);
+                    return Ok(productos);
+                }
+                else
+                {
+                    throw new Exception("Error al cargar producto");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet, Route("productos-empresa")]
         public async Task<IActionResult> listarProductosByEmpresa(int empresaId)
         {
@@ -48,7 +69,7 @@ namespace acme_backend.Controllers
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 if (userId != null)
                 {
-                    var productos = await _productService.listarProductos(empresaId);
+                    var productos = await _productService.listarProductos(empresaId, "");
                     return Ok(productos);
                 }
                 else

@@ -12143,37 +12143,19 @@
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
-    "C:\\Users\\mdiu\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
-=======
-    "C:\\Users\\Lenovo\\.nuget\\packages\\": {}
->>>>>>> 6e2b2d4 (listado de ordenes)
+    "C:\\Users\\Maximiliano\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
-      "projectUniqueName": "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\acme-backend\\acme-backend.csproj",
+      "projectUniqueName": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\acme-backend\\acme-backend.csproj",
       "projectName": "acme-backend",
-      "projectPath": "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\acme-backend\\acme-backend.csproj",
-      "packagesPath": "C:\\Users\\mdiu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\acme-backend\\obj\\",
-=======
-      "projectUniqueName": "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\acme-backend\\acme-backend.csproj",
-      "projectName": "acme-backend",
-      "projectPath": "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\acme-backend\\acme-backend.csproj",
-      "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\acme-backend\\obj\\",
->>>>>>> 6e2b2d4 (listado de ordenes)
+      "projectPath": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\acme-backend\\acme-backend.csproj",
+      "packagesPath": "C:\\Users\\Maximiliano\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\acme-backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-<<<<<<< HEAD
-        "C:\\Users\\mdiu\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-=======
-        "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> 6e2b2d4 (listado de ordenes)
+        "C:\\Users\\Maximiliano\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -12187,19 +12169,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-<<<<<<< HEAD
-            "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\BusinessLayer\\BusinessLayer.csproj": {
-              "projectPath": "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\BusinessLayer\\BusinessLayer.csproj"
+            "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\BusinessLayer\\BusinessLayer.csproj": {
+              "projectPath": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\BusinessLayer\\BusinessLayer.csproj"
             },
-            "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\DataAccessLayer\\DataAccessLayer.csproj": {
-              "projectPath": "C:\\Users\\mdiu\\Documents\\GitHub\\ACME-BACKEND\\DataAccessLayer\\DataAccessLayer.csproj"
-=======
-            "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\BusinessLayer\\BusinessLayer.csproj": {
-              "projectPath": "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\BusinessLayer\\BusinessLayer.csproj"
-            },
-            "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\DataAccessLayer\\DataAccessLayer.csproj": {
-              "projectPath": "C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\DataAccessLayer\\DataAccessLayer.csproj"
->>>>>>> 6e2b2d4 (listado de ordenes)
+            "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\DataAccessLayer\\DataAccessLayer.csproj": {
+              "projectPath": "C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\DataAccessLayer\\DataAccessLayer.csproj"
             }
           }
         }
@@ -12295,13 +12269,13 @@
       "code": "Undefined",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\Lenovo\\Desktop\\utec\\acme-backend\\acme-backend\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+      "message": "Problema al leer el archivo de caché C:\\Users\\Maximiliano\\Documents\\Proyecto Final UTEC\\ACME-BACKEND\\acme-backend\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
     },
     {
       "code": "NU1603",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "MySql.EntityFrameworkCore 7.0.10 depends on MySql.Data (>= 7.0.10) but MySql.Data 7.0.10 was not found. An approximate best match of MySql.Data 8.0.11 was resolved.",
+      "message": "MySql.EntityFrameworkCore 7.0.10 depende de MySql.Data (>= 7.0.10), pero no se encontró MySql.Data 7.0.10. Se resolvió una mejor coincidencia aproximada de MySql.Data 8.0.11.",
       "libraryId": "MySql.Data",
       "targetGraphs": [
         "net7.0"

@@ -276,7 +276,7 @@ namespace DataAccessLayer.IDALs
             return lista;
         }
 
-        public async Task<List<ProductoLista>> listarProductos(int empresaId)
+        public async Task<List<ProductoLista>> listarProductos(int empresaId, string query)
         {
             var lista = new List<ProductoLista>();
             var empresa = await _db.Empresas.FindAsync(empresaId);
@@ -285,7 +285,15 @@ namespace DataAccessLayer.IDALs
                 throw new Exception("Empresa invalida");
             }
 
-            var productos = _db.Productos.Include((p) => p.CategoriasProductos).ThenInclude((p) => p.Categoria).Include((p) => p.TipoIva).Include((p) => p.Fotos).Where((p) => p.Empresa.Id == empresaId).ToList();
+            var productos = new List<Producto>();
+
+            if (query != null && query != "")
+            {
+                productos = _db.Productos.Include((p) => p.CategoriasProductos).ThenInclude((p) => p.Categoria).Include((p) => p.TipoIva).Include((p) => p.Fotos).Where((p) => p.Empresa.Id == empresaId && p.Titulo.ToLower().Contains(query.ToLower())).ToList();
+            } else
+            {
+                productos = _db.Productos.Include((p) => p.CategoriasProductos).ThenInclude((p) => p.Categoria).Include((p) => p.TipoIva).Include((p) => p.Fotos).Where((p) => p.Empresa.Id == empresaId).ToList();
+            }
 
 
             productos.ForEach(p =>
