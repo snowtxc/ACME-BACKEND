@@ -1,7 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using DataAccessLayer.Enums;
 using System.Text.Json.Serialization;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Models
 {

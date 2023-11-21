@@ -15,15 +15,6 @@ namespace FACTURACION.Controllers
     public class FacturacionController : Controller
     {
 
-        private readonly IBL_Compra _blCompra;
-
-        public FacturacionController(IBL_Compra blCompra)
-        {
-            _blCompra = blCompra;
-
-
-        }
-
         private static byte[] urlImageToBytes(string url)
         {
             byte[] imageData;
@@ -121,7 +112,7 @@ namespace FACTURACION.Controllers
 
                                     foreach(var item in facturaData.lineas)
                                     {
-                                        tabla.Cell().Border(0.5f).BorderColor("#D9D9D9").Padding(2).Width(50).Image(FacturacionController.urlImageToBytes(item.fotoProducto)).FitWidth();
+                                        tabla.Cell().Border(0.5f).BorderColor("#D9D9D9").Padding(2).Width(50).Image(FacturacionController.urlImageToBytes(item.fotoProducto));
                                         tabla.Cell().Border(0.5f).BorderColor("#D9D9D9").Padding(2).AlignCenter().Placeholder(item.nombreProducto);
                                         tabla.Cell().Border(0.5f).BorderColor("#D9D9D9").Padding(2).AlignCenter().Placeholder(item.precioUnitario.ToString());
                                         tabla.Cell().Border(0.5f).BorderColor("#D9D9D9").Padding(2).AlignCenter().Placeholder(item.cantidad.ToString());

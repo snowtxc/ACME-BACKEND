@@ -9,16 +9,19 @@ using System.Threading.Tasks;
 using BusinessLayer.IBLs;
 using FirebaseAdmin.Auth;
 using FirebaseAdmin;
+using Microsoft.AspNetCore.Hosting;
 
 namespace BusinessLayer.BLs
 {
     public class BL_Auth: IBL_Auth
     {
         private IDAL_Auth _auth;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public BL_Auth(IDAL_Auth auth)
+        public BL_Auth(IDAL_Auth auth, IWebHostEnvironment webHostEnvironment)
         {
             _auth = auth;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public Task<string> generateTokenByUser(Usuario user)
@@ -63,7 +66,8 @@ namespace BusinessLayer.BLs
 
         public async Task<string> createUserWithExternalService(LoginWithCredentialsDTO userInfo)
         {
-            var app = FirebaseAppSingleton.GetFirebaseApp();
+
+            var app = FirebaseAppSingleton.GetFirebaseApp(_webHostEnvironment.ContentRootPath);
             var auth = FirebaseAuth.GetAuth(app);
 
             var decodedToken = await auth.VerifyIdTokenAsync(userInfo.Token);

@@ -3,17 +3,10 @@ using BusinessLayer.IBLs;
 using DataAccessLayer.IDALs;
 using DataAccessLayer.Models;
 using DataAccessLayer.Models.Dtos.Compra;
-using DataAccessLayer.Models.Dtos.Usuario;
 using DataAccessLayer.Models.Dtos.Factura;
-using Microsoft.AspNetCore.Http.HttpResults;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DataAccessLayer.Models.Dtos;
+using DataAccessLayer.Models.Dtos.Usuario;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLayer.BLs
 {

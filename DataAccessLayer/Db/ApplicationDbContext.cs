@@ -73,27 +73,57 @@ namespace DataAccessLayer.Db
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<CategoriaProducto>().HasOne(cp => cp.Categoria).WithMany(c => c.CategoriasProductos).HasForeignKey(cp => cp.ProductoId);
-            modelBuilder.Entity<CategoriaProducto>().HasOne(cp => cp.Producto).WithMany(p => p.CategoriasProductos).HasForeignKey(cp => cp.CategoriaId);
+            modelBuilder.Entity<CategoriaProducto>().HasOne(cp => cp.Categoria).WithMany(c => c.CategoriasProductos).HasForeignKey(cp => cp.ProductoId).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<CategoriaProducto>().HasOne(cp => cp.Producto).WithMany(p => p.CategoriasProductos).HasForeignKey(cp => cp.CategoriaId).OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<CompraEstado>().HasOne(ce => ce.EstadoCompra).WithMany(e => e.ComprasEstados).HasForeignKey(ce => ce.EstadoCompraId);
+            modelBuilder.Entity<CompraEstado>().HasOne(ce => ce.EstadoCompra).WithMany(e => e.ComprasEstados).HasForeignKey(ce => ce.EstadoCompraId).OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<CompraProducto>().HasOne(cp => cp.Compra).WithMany(c => c.ComprasProductos).HasForeignKey(cp => cp.CompraId);
-            modelBuilder.Entity<CompraProducto>().HasOne(cp => cp.Producto).WithMany(p => p.ComprasProductos).HasForeignKey(cp => cp.ProductoId);
+            modelBuilder.Entity<CompraProducto>().HasOne(cp => cp.Compra).WithMany(c => c.ComprasProductos).HasForeignKey(cp => cp.CompraId).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<CompraProducto>().HasOne(cp => cp.Producto).WithMany(p => p.ComprasProductos).HasForeignKey(cp => cp.ProductoId).OnDelete(DeleteBehavior.NoAction);
 
 
 
-            modelBuilder.Entity<LineaCarrito>().HasOne(lc => lc.Usuario).WithMany(u => u.LineasCarrito).HasForeignKey(cp => cp.UsuarioId).HasPrincipalKey(u => u.Id);
+            modelBuilder.Entity<LineaCarrito>().HasOne(lc => lc.Usuario).WithMany(u => u.LineasCarrito).HasForeignKey(cp => cp.UsuarioId).HasPrincipalKey(u => u.Id).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Compra>().HasOne(cp => cp.Empresa).WithMany(p => p.Compras).HasForeignKey(cp => cp.EmpresaId).OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Empresa>()
               .HasMany(e => e.Usuarios)
               .WithOne(u => u.Empresa)
               .HasForeignKey(u => u.EmpresaId)
-              .OnDelete(DeleteBehavior.Cascade);
-;
+              .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Compra>()
+            .HasMany(cp => cp.ComprasEstados)
+            .WithOne(e => e.compra)
+            .HasForeignKey(e => e.CompraId)
+            .OnDelete(DeleteBehavior.NoAction)
+            ;
 
 
 
+            modelBuilder.Entity<CategoriaRelacionada>()
+            .HasOne(cr => cr.Categoria)
+            .WithMany()
+            .HasForeignKey(cr => cr.CategoriaId)
+            .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<CategoriaRelacionada>()
+                .HasOne(cr => cr.CategoriaRel)
+                .WithMany()
+                .HasForeignKey(cr => cr.CategoriaRelId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ProductosRelacionados>()
+            .HasOne(cr => cr.producto)
+            .WithMany()
+            .HasForeignKey(cr => cr.productoId)
+            .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ProductosRelacionados>()
+                .HasOne(cr => cr.productoRel)
+                .WithMany()
+                .HasForeignKey(cr => cr.productoRelId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
 

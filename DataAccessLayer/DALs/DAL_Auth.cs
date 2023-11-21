@@ -16,6 +16,7 @@ using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.CodeAnalysis;
+using Microsoft.AspNetCore.Hosting;
 
 namespace DataAccessLayer.IDALs
 {
@@ -28,12 +29,15 @@ namespace DataAccessLayer.IDALs
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
 
-        public DAL_Auth(UserManager<Usuario> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, ApplicationDbContext db, IMapper mapper)
+        public DAL_Auth(UserManager<Usuario> userManager, IWebHostEnvironment webHostEnvironment,  RoleManager<IdentityRole> roleManager, IConfiguration configuration, ApplicationDbContext db, IMapper mapper)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _webHostEnvironment = webHostEnvironment;
+
             _configuration = configuration;
             _db = db;
             _mapper = mapper;

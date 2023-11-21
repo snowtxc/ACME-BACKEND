@@ -21,6 +21,9 @@ namespace DataAccessLayer.Models
 
         public List<CategoriaProducto> CategoriasProductos { get; set; }
 
+
+        public List<CategoriaRelacionada> CategoriasRelacionadas { get; set; }
+
     }
 
 }
