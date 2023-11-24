@@ -8,7 +8,10 @@ services:
       dockerfile: PAYMENTS/Dockerfile
     ports:
       - "5001:443"
-      - "5011:80"
+      - "5001:80"
+    networks:
+        - local
+
   acme-backend:
     image: ${DOCKER_REGISTRY-}acmebackend
     build:
@@ -16,7 +19,9 @@ services:
       dockerfile: acme-backend/Dockerfile
     ports:
       - "5000:443"
-      - "5013:80"
+      - "5000:80"
+    networks:
+        - local
 
   shipping:
     image: ${DOCKER_REGISTRY-}shipping
@@ -24,8 +29,10 @@ services:
       context: .
       dockerfile: SHIPPING/Dockerfile
     ports:
-      - "5002:443"
-      - "5022:80"
+      - "5022:443"
+      - "5002:80"
+    networks:
+        - local
 
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
@@ -37,6 +44,8 @@ services:
       - ACCEPT_EULA=Y
     volumes:
       - sqlserver-data:/var/opt/mssql
+    networks:
+        - local
 
   facturacion:
     image: ${DOCKER_REGISTRY-}facturacion
@@ -44,10 +53,12 @@ services:
       context: .
       dockerfile: FACTURACION/Dockerfile
     ports:
-        - "5004:443"
-        - "5034:80"
-
+        - "5033:443"
+        - "5003:80"
+    networks:
+        - local
 volumes:
   sqlserver-data:
-
-
+networks:
+  local:
+    driver: bridge

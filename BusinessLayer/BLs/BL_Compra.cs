@@ -13,18 +13,15 @@ namespace BusinessLayer.BLs
     public class BL_Compra : IBL_Compra
     {
         private IDAL_Compra _compraIdal;
-        private IDAL_CompraEstado  _compraEstadoIdal;
         private IDAL_EstadoCompra _estadoCompra;
         private IDAL_EnvioPaquete _envioPaquete;
-        private readonly UserManager<Usuario> _userManager;
 
         private readonly IMapper _mapper;
 
 
-        public BL_Compra(IDAL_Compra compraDal, IDAL_CompraEstado compraEstadoIdal, IDAL_EstadoCompra estadoCompra, IDAL_EnvioPaquete envioPaquete, IMapper mapper, UserManager<Usuario> _userManage)
+        public BL_Compra(IDAL_Compra compraDal, IDAL_EstadoCompra estadoCompra, IDAL_EnvioPaquete envioPaquete, IMapper mapper, UserManager<Usuario> _userManage)
         {
             _compraIdal = compraDal;
-            _compraEstadoIdal = compraEstadoIdal;
             _estadoCompra = estadoCompra;
             _envioPaquete = envioPaquete;
             _mapper = mapper;

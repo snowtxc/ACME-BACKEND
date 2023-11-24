@@ -64,7 +64,7 @@ namespace DataAccessLayer.DALs
             {
                 selectedMetodoPago = MetodoPago.Tarjeta;
                 // tarjeta
-                string mockPaymentsUrl = "https://localhost:5001/api/Payments/processPayment";
+                string mockPaymentsUrl = "http://payments/api/Payments/processPayment";
 
                     if (data.PaymentInfo != null)
                     {
@@ -155,7 +155,18 @@ namespace DataAccessLayer.DALs
                 compra.Fecha = DateTime.Now;
                 compra.CostoTotal = subtotal;
                 compra.Empresa = empresaInfo;
+
+                var estadoCompra = await _db.EstadosCompras.Where((d) => d.Nombre == EstadoCompraEnum.PendientePreparacion.ToString()).FirstOrDefaultAsync();
+                if (estadoCompra == null)
+                {
+                    throw new Exception("Estado de compra invalido");
+                }
+                var compraEstado = new CompraEstado();
+                compraEstado.compra = compra;
+                compraEstado.EstadoCompra = estadoCompra;
+                compraEstado.EstadoActual = true;
                 await _db.Compras.AddAsync(compra);
+                await _db.ComprasEstados.AddAsync(compraEstado);
 
 
                 foreach (var item in lineasCarrito)
@@ -190,7 +201,7 @@ namespace DataAccessLayer.DALs
                          string jsonInfo = JsonConvert.SerializeObject(direccionData);
                          var contenido = new StringContent(jsonInfo, Encoding.UTF8, "application/json");
 
-                         HttpResponseMessage response = await httpClient.PostAsync("http://localhost:5002/api/Shipping/createPackage", contenido);
+                         HttpResponseMessage response = await httpClient.PostAsync("http://shipping/api/Shipping/createPackage", contenido);
                          if (response.IsSuccessStatusCode)
                          {
                             string responseData = await response.Content.ReadAsStringAsync();
@@ -208,6 +219,8 @@ namespace DataAccessLayer.DALs
                          }
                          else
                          {
+                        Console.WriteLine("Error aca");
+                        Console.WriteLine(response.StatusCode);
                              throw new Exception("Error al comunicarse con la api de envios");
                          }
                 }

@@ -24,7 +24,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+builder.WebHost.UseUrls("http://*:80");
+
+// app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
