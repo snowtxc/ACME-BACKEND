@@ -7,6 +7,7 @@ using DataAccessLayer.Models.Dtos;
 using DataAccessLayer.Models.Dtos.Envio;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System.Text;
 
@@ -17,12 +18,14 @@ namespace DataAccessLayer.DALs
         private ApplicationDbContext _db;
         private readonly UserManager<Usuario> _userManager;
         private readonly IMapper _mapper;
+        private readonly IConfiguration _configuration;
 
-        public DAL_Carrito(ApplicationDbContext db, UserManager<Usuario> userManager, IMapper mapper)
+        public DAL_Carrito(ApplicationDbContext db, UserManager<Usuario> userManager, IMapper mapper, IConfiguration config)
         {
             _db = db;
             _userManager = userManager;
             _mapper = mapper;
+            _configuration = config;
         }
 
         public async Task<CompraOKDTO> finalizarCarrito(FInalizarCarritoDTO data, string userId)
@@ -30,6 +33,7 @@ namespace DataAccessLayer.DALs
             var dataToReturn = new CompraOKDTO();
             MetodoEnvio selectedMetodoEnvio = MetodoEnvio.RetiroPickup;
             MetodoPago selectedMetodoPago = MetodoPago.Tarjeta;
+            var productosLineaNombres = "";
 
             //            List<CompraProducto> comprasProductos = new List<CompraProducto>();
             HttpClient httpClient = new HttpClient();
@@ -52,6 +56,7 @@ namespace DataAccessLayer.DALs
                 if (item != null)
                 {
                     subtotal = subtotal + ((item.Producto.Precio + ((item.Producto.Precio) * item.Producto.TipoIva.Porcentaje) / 100) * item.Cantidad);
+                    productosLineaNombres += item.Producto.Titulo + " ,";
                 }
             }
             if (data.MetodoEnvio == 1)
@@ -238,7 +243,7 @@ namespace DataAccessLayer.DALs
                     }
                     var retiroPickup = new RetiroPickup();
                     retiroPickup.Entregado = false;
-                    double minutesToSum = new Random().Next(1440, 4320);    //minutos a sumar , entre 1440 minutos equivalente a 1 dia y 4320 equivalente a 3 dias
+                    double minutesToSum = new Random().Next(1440, 4320); 
                     DateTime fechaDisponibileRetiro = DateTime.Now.AddMinutes(minutesToSum);
                     retiroPickup.FechaLlegada = fechaDisponibileRetiro;
                     retiroPickup.Compra = compra;
@@ -264,6 +269,19 @@ namespace DataAccessLayer.DALs
             if (compra != null)
             {
                 dataToReturn.compraId = compra.Id.ToString();
+
+                DAL_Mail mailService = new DAL_Mail();
+
+                string path = @"./Templates/CompraExitosa.html";
+                string content = File.ReadAllText(path);
+                string withUserName = content.Replace("{{ userName }}", loggedUserInfo.Nombre);
+                var frontLink = _configuration["FrontendURL"] + "/login";
+                string newContent = withUserName.Replace("{{ activateAccountLink }}", frontLink);
+                string finalContent = newContent.Replace("{{ productosLineaNombres }}", productosLineaNombres);
+                string allContent = finalContent.Replace("{{ empresaNombre }}", empresaInfo.Nombre);
+
+
+                mailService.sendMail(loggedUserInfo.Email, "Compra realizada correctamente", allContent);
             }
             return dataToReturn;
         }
