@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.Models.Dtos.Usuario;
+﻿using DataAccessLayer.Models.Dtos.CompraEstado;
+using DataAccessLayer.Models.Dtos.Usuario;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Models.Dtos.Compra
 {
-    public  class CompraDto
+    public class CompraDto
     {
         public int Id { get; set; }
 
@@ -22,8 +23,15 @@ namespace DataAccessLayer.Models.Dtos.Compra
 
         public String Estado { get; set; } = "";
 
+        public int EstadoId { get; set; } = 0;
+
         public int CantidadDeProductos { get; set; } = 0;
 
         public List<CompraLineaDto> Lineas { get; set; }
+
+        public EmpresaDto Empresa { get; set; }
+
+
+        public List<CompraEstadoDto> HistorialEstados {  get;set;}
     }
 }

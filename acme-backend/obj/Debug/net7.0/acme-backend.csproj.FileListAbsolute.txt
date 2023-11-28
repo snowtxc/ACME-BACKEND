@@ -825,3 +825,10 @@ C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\obj\Debug\net7.0\refint
 C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\obj\Debug\net7.0\acme-backend.pdb
 C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\obj\Debug\net7.0\acme-backend.genruntimeconfig.cache
 C:\Users\mdiu\Documents\GitHub\ACME-BACKEND\acme-backend\obj\Debug\net7.0\ref\acme-backend.dll
+C:\Users\Lenovo\Desktop\utec\acme-backend\acme-backend\bin\Debug\net7.0\FirebaseAdmin.dll
+C:\Users\Lenovo\Desktop\utec\acme-backend\acme-backend\bin\Debug\net7.0\Google.Api.Gax.dll
+C:\Users\Lenovo\Desktop\utec\acme-backend\acme-backend\bin\Debug\net7.0\Google.Api.Gax.Rest.dll
+C:\Users\Lenovo\Desktop\utec\acme-backend\acme-backend\bin\Debug\net7.0\Google.Apis.dll
+C:\Users\Lenovo\Desktop\utec\acme-backend\acme-backend\bin\Debug\net7.0\Google.Apis.Auth.PlatformServices.dll
+C:\Users\Lenovo\Desktop\utec\acme-backend\acme-backend\bin\Debug\net7.0\Google.Apis.Auth.dll
+C:\Users\Lenovo\Desktop\utec\acme-backend\acme-backend\bin\Debug\net7.0\Google.Apis.Core.dll

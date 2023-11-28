@@ -28,5 +28,11 @@ namespace DataAccessLayer.DALs
             return estadoCompra;
               
         }
+
+        public async Task<List<EstadoCompra>> list()
+        {
+            List<EstadoCompra> estados = await _db.EstadosCompras.ToListAsync();
+            return estados;
+        }
     }
 }

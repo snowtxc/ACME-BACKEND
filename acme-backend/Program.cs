@@ -107,7 +107,7 @@ var app = builder.Build();
 var scope = app.Services.CreateScope();
 
 var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-db.Database.Migrate(); 
+//db.Database.Migrate(); 
 
 async Task CreateDefaultRoles(IServiceScope scopeContext)
 {

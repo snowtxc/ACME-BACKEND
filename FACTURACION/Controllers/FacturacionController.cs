@@ -1,5 +1,5 @@
-﻿using BusinessLayer.IBLs;
-using DataAccessLayer.Models;
+﻿
+using BusinessLayer.IBLs;
 using DataAccessLayer.Models.Dtos.Factura;
 using Microsoft.AspNetCore.Mvc;
 using QuestPDF.Fluent;
@@ -34,7 +34,6 @@ namespace FACTURACION.Controllers
             return imageData;
 
         }
-
 
 
         [HttpPost]
