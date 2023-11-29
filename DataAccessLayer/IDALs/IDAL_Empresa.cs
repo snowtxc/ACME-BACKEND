@@ -12,5 +12,7 @@ namespace DataAccessLayer.IDALs
         Task<EmpresaDto> getById(int id);
         Task<List<EmpresaDto>> List();
         Task<LookAndFeelDTO> editLookAndFeel(string userLoggedId, LookAndFeelDTO laf);
+
+
     }
 }

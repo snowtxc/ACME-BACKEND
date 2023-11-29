@@ -7,6 +7,10 @@ using DataAccessLayer.Models.Dtos.Factura;
 using DataAccessLayer.Models.Dtos;
 using DataAccessLayer.Models.Dtos.Usuario;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using DataAccessLayer.DALs;
+using DataAccessLayer.Models.Dtos.Estado;
+using DataAccessLayer.Models.Dtos.CompraEstado;
 
 namespace BusinessLayer.BLs
 {
@@ -25,6 +29,7 @@ namespace BusinessLayer.BLs
             _estadoCompra = estadoCompra;
             _envioPaquete = envioPaquete;
             _mapper = mapper;
+            _mail = mail;
         }
 
 
@@ -106,6 +111,7 @@ namespace BusinessLayer.BLs
             List<SortCompra> result = new List<SortCompra>();
             foreach(Compra compra in compras)
             {
+                EstadoCompra estado = compra.ComprasEstados.Where(ce => ce.EstadoActual).FirstOrDefault().EstadoCompra;
                 result.Add(new SortCompra
                 {
                     Id = compra.Id,
@@ -114,8 +120,9 @@ namespace BusinessLayer.BLs
                     metodoEnvio = compra.MetodoEnvio.ToString(),
                     metodoPago = compra.MetodoPago.ToString(),
                     fecha = compra.Fecha,
-                    estado = compra.ComprasEstados.Where(ce => ce.EstadoActual).FirstOrDefault().EstadoCompra.Nombre,
-                    cantidadDeProductos = compra.ComprasProductos.Count
+                    estado = estado.Nombre,
+                    cantidadDeProductos = compra.ComprasProductos.Count,
+                    estadoId = estado.Id
                 }) ;
             }
             return result;
@@ -129,6 +136,7 @@ namespace BusinessLayer.BLs
                 throw new Exception("Compra no existe");
             }
             Usuario comprador = compra.Usuario;
+            Empresa empresa = compra.Empresa;
             List<CompraLineaDto> lineas = new List<CompraLineaDto>();
             foreach(CompraProducto compraProducto  in compra.ComprasProductos) {
                    Producto producto = compraProducto.Producto;
@@ -156,18 +164,37 @@ namespace BusinessLayer.BLs
                             ProductoLista = productoDto , 
                             SubTotal = (compraProducto.Cantidad * compraProducto.PrecioUnitario)});
             }
+
+            List<CompraEstadoDto> estadosDto = new List<CompraEstadoDto>();
+            List<EstadoCompra>  estados  = await this._estadoCompra.list();
+            foreach (EstadoCompra estado in estados)
+            {
+                var completado = false;
+                DateTime? fecha = null;
+                CompraEstado? compraEstado  =  compra.ComprasEstados.Find(ce => ce.EstadoCompraId == estado.Id);
+                if(compraEstado != null){
+                    completado = true;
+                    fecha = compraEstado.Fecha;
+                }
+                estadosDto.Add(new CompraEstadoDto {Fecha = fecha, Estado = estado.Nombre, EstadoId = estado.Id, Completado = completado });
+            }
+
+            EstadoCompra? estadoActual = compra.ComprasEstados.Where(ce => ce.EstadoActual).FirstOrDefault().EstadoCompra;
             CompraDto compraInfo = new CompraDto
             {
                 Id = compra.Id,
                 CantidadDeProductos = compra.ComprasProductos.Count,
-                Estado = compra.ComprasEstados.Where(ce => ce.EstadoActual).FirstOrDefault().EstadoCompra.Nombre,
+                Estado = estadoActual.Nombre,
+                EstadoId = estadoActual.Id,
                 MetodoEnvio = compra.MetodoEnvio.ToString(),
                 MetodoPago = compra.MetodoPago.ToString(),
                 Fecha = compra.Fecha,
                 Comprador = new UsuarioDto { Id = comprador.Id, Celular = comprador.Celular, Email = comprador.Email, Imagen = comprador.Imagen, Nombre = comprador.Nombre },
                 CostoTotal = compra.CostoTotal,
                 Lineas = lineas,
-    
+                Empresa = new EmpresaDto {  Id = empresa.Id, Correo = empresa.Correo, CostoEnvio = empresa.CostoEnvio, Direccion = empresa.Direccion, Imagen = empresa.Imagen, Nombre = empresa.Nombre, Telefono = empresa.Telefono, Wallet = empresa.Wallet  },
+                HistorialEstados = estadosDto,
+
             };
             return compraInfo;
         }
@@ -224,6 +251,32 @@ namespace BusinessLayer.BLs
 
             }
             return result;
+        }
+
+        public async Task<EstadoCompraDto> pasarAlSiguienteEstado(int compraId)
+        {
+          Compra compra =  await _compraIdal.getById(compraId);
+          CompraEstado lastEstado = compra.ComprasEstados.Where(ce => ce.EstadoActual).FirstOrDefault();
+          if(lastEstado.EstadoCompraId == 5)
+          {
+                throw new Exception("No puedes pasar al siguiente ya que es el ultimo");
+
+          }
+          EstadoCompra nuevoEstado  =  await  _estadoCompra.getById(lastEstado.EstadoCompraId + 1);
+            Usuario cliente = compra.Usuario;
+          await _compraIdal.agregarEstado(compra.Id, nuevoEstado);
+           string path = @"Templates/CompraEstadoNotificacionClient.html";
+            string content = File.ReadAllText(path);
+
+            string finalContent = content.Replace("{{clienteNombre}}", cliente.Nombre)
+             .Replace("{{codigoCompra}}", compra.Id.ToString())
+             .Replace("{{nuevoEstado}}", nuevoEstado.Nombre.ToString())
+             .Replace("{{fecha}}", DateTime.Now.ToString("dd-MM-yyyy hh:mm tt"));
+
+            _mail.sendMail(cliente.Email, "SU COMPRA #"+compra.Id + "HA CAMBIADO AL SIGUIENTE ESTADO", finalContent);
+
+            return new EstadoCompraDto { Id = nuevoEstado.Id, Nombre = nuevoEstado.Nombre };
+
         }
     }
 }

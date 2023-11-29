@@ -19,6 +19,8 @@ namespace DataAccessLayer.Models.Dtos.Compra
         public String estado { get; set; } = "";
 
         public int cantidadDeProductos { get; set; } = 0;
+
+        public int estadoId { get; set; } = 0;
       
     }
 }

@@ -31,8 +31,6 @@ builder.Services.AddTransient<IBL_Producto, BL_Producto>();
 builder.Services.AddTransient<IBL_Reclamo, BL_Reclamo>();
 
 
-builder.Services.AddTransient<IBL_Shipping, BL_Shipping>();
-
 builder.Services.AddTransient<IBL_TipoIVA, BL_TipoIVA>();
 
 builder.Services.AddTransient<IBL_Users, BL_Users>();

@@ -37,7 +37,7 @@ namespace DataAccessLayer.DALs
             {
                 throw new Exception("No existe la compra");
             }
-            CompraEstado? lastEstado = _db.ComprasEstados.Where(ce => ce.CompraId == compra.Id).OrderByDescending(e => e.CompraId).FirstOrDefault();
+            CompraEstado? lastEstado = _db.ComprasEstados.Where(ce => ce.CompraId == compra.Id).Where(ce => ce.EstadoActual).OrderByDescending(e => e.CompraId).FirstOrDefault();
             if(lastEstado != null)
             {
                 lastEstado.EstadoActual = false;

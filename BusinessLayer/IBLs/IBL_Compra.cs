@@ -1,6 +1,7 @@
 ﻿
 using DataAccessLayer.Models;
 using DataAccessLayer.Models.Dtos.Compra;
+using DataAccessLayer.Models.Dtos.Estado;
 using DataAccessLayer.Models.Dtos.Factura;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,10 @@ namespace BusinessLayer.IBLs
         public Task<CompraDto> getById(int id);
 
         public Task<List<CompraDto>> listByCliente(string clienteId);
+
+        public Task<EstadoCompraDto> pasarAlSiguienteEstado(int compraId);
+
+
 
     }
 }

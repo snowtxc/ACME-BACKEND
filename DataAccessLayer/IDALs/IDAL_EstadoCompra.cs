@@ -9,6 +9,8 @@ namespace DataAccessLayer.IDALs
 {
     public interface IDAL_EstadoCompra
     {
+
+        public Task<List<EstadoCompra>> list();
         public Task<EstadoCompra> getById(int id);
     }
 }
