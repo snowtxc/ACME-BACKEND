@@ -15,7 +15,7 @@ IHost host = Host.CreateDefaultBuilder(args)
         .AddSingleton<ITasks, Tasks>()
         .AddSingleton<IDAL_Mail, DAL_Mail>();
 
-        services.AddDbContext<ApplicationDbContext>(o => o.UseMySQL(hostContext.Configuration.GetConnectionString("DbConnection")), ServiceLifetime.Singleton);
+        services.AddDbContext<ApplicationDbContext>(o => o.UseSqlServer(hostContext.Configuration.GetConnectionString("DbConnection")), ServiceLifetime.Singleton);
 
 
 
