@@ -6,22 +6,15 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccessLayer.Migrations
 {
     /// <inheritdoc />
-    public partial class firsmigrations3 : Migration
+    public partial class addcorreoEnviadoandcreatedAttolineacarrito : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<bool>(
-                name: "Entregado",
-                table: "RetirosPickup",
-                type: "tinyint(1)",
-                nullable: false,
-                defaultValue: false);
-
             migrationBuilder.AddColumn<DateTime>(
-                name: "FechaLlegada",
-                table: "RetirosPickup",
-                type: "datetime(6)",
+                name: "CreatedAt",
+                table: "LineasCarrito",
+                type: "datetime2",
                 nullable: false,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
         }
@@ -30,12 +23,8 @@ namespace DataAccessLayer.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Entregado",
-                table: "RetirosPickup");
-
-            migrationBuilder.DropColumn(
-                name: "FechaLlegada",
-                table: "RetirosPickup");
+                name: "CreatedAt",
+                table: "LineasCarrito");
         }
     }
 }

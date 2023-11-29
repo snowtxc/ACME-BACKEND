@@ -3,15 +3,9 @@ using BusinessLayer.IBLs;
 using DataAccessLayer.IDALs;
 using DataAccessLayer.Models;
 using DataAccessLayer.Models.Dtos.Compra;
-using DataAccessLayer.Models.Dtos.Usuario;
 using DataAccessLayer.Models.Dtos.Factura;
-using Microsoft.AspNetCore.Http.HttpResults;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DataAccessLayer.Models.Dtos;
+using DataAccessLayer.Models.Dtos.Usuario;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using DataAccessLayer.DALs;
@@ -23,19 +17,15 @@ namespace BusinessLayer.BLs
     public class BL_Compra : IBL_Compra
     {
         private IDAL_Compra _compraIdal;
-        private IDAL_CompraEstado  _compraEstadoIdal;
         private IDAL_EstadoCompra _estadoCompra;
         private IDAL_EnvioPaquete _envioPaquete;
-        private readonly UserManager<Usuario> _userManager;
-        private IDAL_Mail _mail;
 
         private readonly IMapper _mapper;
 
 
-        public BL_Compra(IDAL_Compra compraDal, IDAL_CompraEstado compraEstadoIdal, IDAL_EstadoCompra estadoCompra, IDAL_EnvioPaquete envioPaquete, IMapper mapper, UserManager<Usuario> _userManage, IDAL_Mail mail)
+        public BL_Compra(IDAL_Compra compraDal, IDAL_EstadoCompra estadoCompra, IDAL_EnvioPaquete envioPaquete, IMapper mapper, UserManager<Usuario> _userManage)
         {
             _compraIdal = compraDal;
-            _compraEstadoIdal = compraEstadoIdal;
             _estadoCompra = estadoCompra;
             _envioPaquete = envioPaquete;
             _mapper = mapper;

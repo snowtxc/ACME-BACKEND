@@ -15,11 +15,11 @@ namespace BusinessLayer
         public static FirebaseAuth authentication;
 
 
-        public static FirebaseApp GetFirebaseApp()
+        public static FirebaseApp GetFirebaseApp(string url)
         {
             if (app == null || authentication == null)
             {
-                string jsonKey = File.ReadAllText("../DataAccessLayer/googlePrivateKey.json");
+                string jsonKey = File.ReadAllText(url + "/googlePrivateKey.json");
 
                 var credential = GoogleCredential.FromJson(jsonKey)
                 .CreateScoped("https://www.googleapis.com/auth/firebase");

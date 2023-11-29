@@ -8,7 +8,7 @@ namespace DataAccessLayer.IDALs
         Task<bool> createProduct(CrearProductoDTO data, string userId);
         Task<bool> editProducto(EditProductoDTO data, string userId);
         Task<List<ProductoLista>> listarProductosDeMiEmpresa(string userId);
-        Task<List<ProductoLista>> listarProductos(int empresaId);
+        Task<List<ProductoLista>> listarProductos(int empresaId, string query);
         Task<ProductoLista> obtenerProductoById(string userId, int productoId);
         Task<bool> deshabilitarProducto(string userId, int productoId);
         Task calificarProducto(string userId, CreateCalificacionDTO calificacionDto);

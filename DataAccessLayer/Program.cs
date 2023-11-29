@@ -19,7 +19,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddDbContext<ApplicationDbContext>(o => o.UseMySQL("Server=localhost;Database=acme;User=root;Password=;"));
+builder.Services.AddDbContext<ApplicationDbContext>(o => o.UseSqlServer("Server=sql_serveracme,1433;Database=acme;User Id=sa;Password=Abc*123!;Encrypt=False;"));
 
 builder.Services.AddAutoMapper(typeof(Program));
 

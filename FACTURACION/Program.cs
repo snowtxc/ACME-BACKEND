@@ -1,5 +1,11 @@
 
 using QuestPDF.Infrastructure;
+using BusinessLayer.BLs;
+using BusinessLayer.IBLs;
+using DataAccessLayer.DALs;
+using DataAccessLayer.Db;
+using DataAccessLayer.IDALs;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +16,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
-
+builder.Services.AddAutoMapper(typeof(Program));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -21,12 +26,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+builder.WebHost.UseUrls("http://*:80");
+
+// app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
-
-QuestPDF.Settings.License = LicenseType.Community;
 
 app.Run();

@@ -5,7 +5,7 @@
 namespace DataAccessLayer.Migrations
 {
     /// <inheritdoc />
-    public partial class firsmigrations2 : Migration
+    public partial class addcorreoEnviadoandcreatedAttolineacarrifsdfasto : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

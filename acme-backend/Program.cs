@@ -9,13 +9,14 @@ using DataAccessLayer.IDALs;
 using BusinessLayer.IBLs;
 using BusinessLayer.BLs;
 using DataAccessLayer.DALs;
+using acme_backend.Seeders;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddDbContext<ApplicationDbContext>(o => o.UseMySQL(builder.Configuration.GetConnectionString("DbConnection")));
+builder.Services.AddDbContext<ApplicationDbContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection")));
 
 builder.Services.AddAutoMapper(typeof(Program));
 
@@ -107,7 +108,9 @@ var app = builder.Build();
 var scope = app.Services.CreateScope();
 
 var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-//db.Database.Migrate(); 
+db.Database.Migrate();
+EstadoCompraSeed.SeedData(db);
+
 
 async Task CreateDefaultRoles(IServiceScope scopeContext)
 {

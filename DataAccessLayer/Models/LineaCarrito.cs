@@ -21,6 +21,12 @@ namespace DataAccessLayer.Models
         [Required]
         public string UsuarioId { get; set; }
 
+        [Column]
+        public bool correoEnviado { get; set; } = false;
+
+        [Column]
+        public DateTime CreatedAt { get; set; } = DateTime.Now.Date;
+
         public Producto Producto { get; set; } = null!;
         public Usuario Usuario { get; set; } = null!;
 

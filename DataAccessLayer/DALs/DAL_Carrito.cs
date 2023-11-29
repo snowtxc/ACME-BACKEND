@@ -7,6 +7,7 @@ using DataAccessLayer.Models.Dtos;
 using DataAccessLayer.Models.Dtos.Envio;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System.Text;
 
@@ -17,12 +18,14 @@ namespace DataAccessLayer.DALs
         private ApplicationDbContext _db;
         private readonly UserManager<Usuario> _userManager;
         private readonly IMapper _mapper;
+        private readonly IConfiguration _configuration;
 
-        public DAL_Carrito(ApplicationDbContext db, UserManager<Usuario> userManager, IMapper mapper)
+        public DAL_Carrito(ApplicationDbContext db, UserManager<Usuario> userManager, IMapper mapper, IConfiguration config)
         {
             _db = db;
             _userManager = userManager;
             _mapper = mapper;
+            _configuration = config;
         }
 
         public async Task<CompraOKDTO> finalizarCarrito(FInalizarCarritoDTO data, string userId)
@@ -30,6 +33,7 @@ namespace DataAccessLayer.DALs
             var dataToReturn = new CompraOKDTO();
             MetodoEnvio selectedMetodoEnvio = MetodoEnvio.RetiroPickup;
             MetodoPago selectedMetodoPago = MetodoPago.Tarjeta;
+            var productosLineaNombres = "";
 
             //            List<CompraProducto> comprasProductos = new List<CompraProducto>();
             HttpClient httpClient = new HttpClient();
@@ -52,6 +56,7 @@ namespace DataAccessLayer.DALs
                 if (item != null)
                 {
                     subtotal = subtotal + ((item.Producto.Precio + ((item.Producto.Precio) * item.Producto.TipoIva.Porcentaje) / 100) * item.Cantidad);
+                    productosLineaNombres += item.Producto.Titulo + " ,";
                 }
             }
             if (data.MetodoEnvio == 1)
@@ -64,7 +69,7 @@ namespace DataAccessLayer.DALs
             {
                 selectedMetodoPago = MetodoPago.Tarjeta;
                 // tarjeta
-                string mockPaymentsUrl = "https://localhost:5001/api/Payments/processPayment";
+                string mockPaymentsUrl = "http://payments/api/Payments/processPayment";
 
                     if (data.PaymentInfo != null)
                     {
@@ -155,7 +160,18 @@ namespace DataAccessLayer.DALs
                 compra.Fecha = DateTime.Now;
                 compra.CostoTotal = subtotal;
                 compra.Empresa = empresaInfo;
+
+                var estadoCompra = await _db.EstadosCompras.Where((d) => d.Nombre == EstadoCompraEnum.PendientePreparacion.ToString()).FirstOrDefaultAsync();
+                if (estadoCompra == null)
+                {
+                    throw new Exception("Estado de compra invalido");
+                }
+                var compraEstado = new CompraEstado();
+                compraEstado.compra = compra;
+                compraEstado.EstadoCompra = estadoCompra;
+                compraEstado.EstadoActual = true;
                 await _db.Compras.AddAsync(compra);
+                await _db.ComprasEstados.AddAsync(compraEstado);
 
 
                 foreach (var item in lineasCarrito)
@@ -190,7 +206,7 @@ namespace DataAccessLayer.DALs
                          string jsonInfo = JsonConvert.SerializeObject(direccionData);
                          var contenido = new StringContent(jsonInfo, Encoding.UTF8, "application/json");
 
-                         HttpResponseMessage response = await httpClient.PostAsync("http://localhost:5002/api/Shipping/createPackage", contenido);
+                         HttpResponseMessage response = await httpClient.PostAsync("http://shipping/api/Shipping/createPackage", contenido);
                          if (response.IsSuccessStatusCode)
                          {
                             string responseData = await response.Content.ReadAsStringAsync();
@@ -208,6 +224,8 @@ namespace DataAccessLayer.DALs
                          }
                          else
                          {
+                        Console.WriteLine("Error aca");
+                        Console.WriteLine(response.StatusCode);
                              throw new Exception("Error al comunicarse con la api de envios");
                          }
                 }
@@ -225,7 +243,7 @@ namespace DataAccessLayer.DALs
                     }
                     var retiroPickup = new RetiroPickup();
                     retiroPickup.Entregado = false;
-                    double minutesToSum = new Random().Next(1440, 4320);    //minutos a sumar , entre 1440 minutos equivalente a 1 dia y 4320 equivalente a 3 dias
+                    double minutesToSum = new Random().Next(1440, 4320); 
                     DateTime fechaDisponibileRetiro = DateTime.Now.AddMinutes(minutesToSum);
                     retiroPickup.FechaLlegada = fechaDisponibileRetiro;
                     retiroPickup.Compra = compra;
@@ -251,6 +269,19 @@ namespace DataAccessLayer.DALs
             if (compra != null)
             {
                 dataToReturn.compraId = compra.Id.ToString();
+
+                DAL_Mail mailService = new DAL_Mail();
+
+                string path = @"./Templates/CompraExitosa.html";
+                string content = File.ReadAllText(path);
+                string withUserName = content.Replace("{{ userName }}", loggedUserInfo.Nombre);
+                var frontLink = _configuration["FrontendURL"] + "/login";
+                string newContent = withUserName.Replace("{{ activateAccountLink }}", frontLink);
+                string finalContent = newContent.Replace("{{ productosLineaNombres }}", productosLineaNombres);
+                string allContent = finalContent.Replace("{{ empresaNombre }}", empresaInfo.Nombre);
+
+
+                mailService.sendMail(loggedUserInfo.Email, "Compra realizada correctamente", allContent);
             }
             return dataToReturn;
         }
@@ -278,6 +309,7 @@ namespace DataAccessLayer.DALs
                 if (existsOnCarrito != null)
                 {
                     existsOnCarrito.Cantidad = data.Cantidad;
+                    existsOnCarrito.CreatedAt = DateTime.Now.Date;
                     _db.LineasCarrito.Update(existsOnCarrito);
                     await _db.SaveChangesAsync();
                 }
@@ -287,6 +319,7 @@ namespace DataAccessLayer.DALs
                     lineaCarrito.Usuario = userInfo;
                     lineaCarrito.Producto = producto;
                     lineaCarrito.Cantidad = data.Cantidad;
+                    lineaCarrito.CreatedAt = DateTime.Now.Date;
                     _db.LineasCarrito.Add(lineaCarrito);
                     await _db.SaveChangesAsync();
                 }

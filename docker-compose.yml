@@ -1,0 +1,64 @@
+version: '3.4'
+
+services:
+  payments:
+    image: ${DOCKER_REGISTRY-}payments
+    build:
+      context: .
+      dockerfile: PAYMENTS/Dockerfile
+    ports:
+      - "5001:443"
+      - "5001:80"
+    networks:
+        - local
+
+  acme-backend:
+    image: ${DOCKER_REGISTRY-}acmebackend
+    build:
+      context: .
+      dockerfile: acme-backend/Dockerfile
+    ports:
+      - "5000:443"
+      - "5000:80"
+    networks:
+        - local
+
+  shipping:
+    image: ${DOCKER_REGISTRY-}shipping
+    build:
+      context: .
+      dockerfile: SHIPPING/Dockerfile
+    ports:
+      - "5022:443"
+      - "5002:80"
+    networks:
+        - local
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sql_serveracme
+    ports:
+      - "1433:1433"
+    environment:
+      - SA_PASSWORD=Abc*123!
+      - ACCEPT_EULA=Y
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+    networks:
+        - local
+
+  facturacion:
+    image: ${DOCKER_REGISTRY-}facturacion
+    build:
+      context: .
+      dockerfile: FACTURACION/Dockerfile
+    ports:
+        - "5033:443"
+        - "5003:80"
+    networks:
+        - local
+volumes:
+  sqlserver-data:
+networks:
+  local:
+    driver: bridge

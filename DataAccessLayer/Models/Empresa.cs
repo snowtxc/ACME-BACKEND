@@ -30,6 +30,8 @@ namespace DataAccessLayer.Models
 
         public double CostoEnvio { get; set; } = 0;
 
+        public int DiasEnvioEmail { get; set; } = 1;
+
         public string Wallet { get; set; } = "";
         
         public LookAndFeel? LookAndFeel { get; set; } = null!;
