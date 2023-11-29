@@ -22,6 +22,13 @@ namespace BusinessLayer.BLs
         {
             return _estadisticas.listarEstadisticas();
         }
-
+        public Task<AdminEstadisticasDTO> listarEstadisticasAdmin()
+        {
+            return _estadisticas.listarEstadisticasAdmin();
+        }
+        public Task<EmpresaEstadisticasDTO> listarEstadisticasEmpresa(int empresaId)
+        {
+            return _estadisticas.listarEstadisticasEmpresa(empresaId);
+        }
     }
 }

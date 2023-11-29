@@ -12,6 +12,7 @@ namespace BusinessLayer.IBLs
     {
 
         public Task<SortEstadisticasDTO> listarEstadisticas();
-
+        public Task<AdminEstadisticasDTO> listarEstadisticasAdmin();
+        public Task<EmpresaEstadisticasDTO> listarEstadisticasEmpresa(int empresaId);
     }
 }
