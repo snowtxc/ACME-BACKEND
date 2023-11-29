@@ -35,6 +35,9 @@ builder.Services.AddTransient<IDAL_CompraEstado, DAL_CompraEstado>();
 builder.Services.AddTransient<IDAL_EstadoCompra, DAL_EstadoCompra>();
 builder.Services.AddTransient<IDAL_EnvioPaquete, DAL_EnvioPaquete>();
 builder.Services.AddTransient<IBL_CompraExternal, Bl_CompraExternal>();
+builder.Services.AddTransient<IBL_Mail, BL_Mail>();
+builder.Services.AddTransient<IDAL_Mail, DAL_Mail>();
+
 
 var app = builder.Build();
 
