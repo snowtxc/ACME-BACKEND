@@ -309,6 +309,7 @@ namespace DataAccessLayer.DALs
                 if (existsOnCarrito != null)
                 {
                     existsOnCarrito.Cantidad = data.Cantidad;
+                    existsOnCarrito.CreatedAt = DateTime.Now.Date;
                     _db.LineasCarrito.Update(existsOnCarrito);
                     await _db.SaveChangesAsync();
                 }
@@ -318,6 +319,7 @@ namespace DataAccessLayer.DALs
                     lineaCarrito.Usuario = userInfo;
                     lineaCarrito.Producto = producto;
                     lineaCarrito.Cantidad = data.Cantidad;
+                    lineaCarrito.CreatedAt = DateTime.Now.Date;
                     _db.LineasCarrito.Add(lineaCarrito);
                     await _db.SaveChangesAsync();
                 }

@@ -16,6 +16,9 @@
 
         public double CostoEnvio { get; set; } = 0;
 
+        public int DiasEmail { get; set; } = 0;
+
+
         public string Wallet { get; set; } = "";
 
         public LookAndFeelDTO? LookAndFeel { get; set; } = null;

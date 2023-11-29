@@ -133,6 +133,7 @@ namespace DataAccessLayer.IDALs
                 Telefono = empresa.Telefono,
                 Nombre = empresa.Nombre,
                 Imagen = empresa.Imagen,
+                DiasEmail = empresa.DiasEnvioEmail,
                 Wallet = empresa.Wallet,
                 LookAndFeel = _mapper.Map<LookAndFeelDTO>(empresa.LookAndFeel)
             };
@@ -201,6 +202,7 @@ namespace DataAccessLayer.IDALs
                 {
                     empresa.LookAndFeel.NombreSitio = laf.NombreSitio.Trim();
                 }
+                empresa.DiasEnvioEmail = laf.PlazoDias;
                 empresa.LookAndFeel.LogoUrl = laf.LogoUrl;
 
                 // si el lookandfeel ya tiene categoría destacada, solo modifico.

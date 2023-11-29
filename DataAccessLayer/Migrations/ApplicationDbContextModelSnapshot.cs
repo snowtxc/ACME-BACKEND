@@ -385,6 +385,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<double>("CostoEnvio")
                         .HasColumnType("float");
 
+                    b.Property<int>("DiasEnvioEmail")
+                        .HasColumnType("int");
+
                     b.Property<string>("Direccion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -480,12 +483,18 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("ProductoId")
                         .HasColumnType("int");
 
                     b.Property<string>("UsuarioId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("correoEnviado")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 

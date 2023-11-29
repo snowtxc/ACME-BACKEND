@@ -12,6 +12,9 @@
 
         public string ColorFondo { get; set; } = "";
 
+        public int PlazoDias { get; set; } = 1;
+
+
         public CategoriaDestacadaListDTO? CategoriaDestacada { get; set; } = null;
     }
 }
