@@ -14,7 +14,10 @@ namespace SHIPPING.Controllers
     public class ShippingController : Controller
     {
 
-        public ShippingController() {
+        private IBL_Compra _compraService;
+
+        public ShippingController(IBL_Compra compr) {
+            _compraService = compr;
         }
 
         [HttpPost("createPackage")]

@@ -21,9 +21,9 @@ namespace BusinessLayer.BLs
         private IDAL_EnvioPaquete _envioPaquete;
 
         private readonly IMapper _mapper;
+        private IBL_Mail _mail;
 
-
-        public BL_Compra(IDAL_Compra compraDal, IDAL_EstadoCompra estadoCompra, IDAL_EnvioPaquete envioPaquete, IMapper mapper, UserManager<Usuario> _userManage)
+        public BL_Compra(IDAL_Compra compraDal, IDAL_EstadoCompra estadoCompra, IDAL_EnvioPaquete envioPaquete, IMapper mapper, UserManager<Usuario> _userManage, IBL_Mail mail)
         {
             _compraIdal = compraDal;
             _estadoCompra = estadoCompra;
