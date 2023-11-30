@@ -242,6 +242,15 @@
                                                             <td class="pad" style="padding-bottom:10px;padding-left:40px;padding-right:40px;padding-top:10px;">
                                                                 <div style="color:#555555;font-family:Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;font-size:14px;line-height:150%;text-align:center;mso-line-height-alt:21px;">
                                                                     <p style="margin: 0; word-break: break-word;">Querido {{ userName }}, este email es para notificarle la correcta compra de los productos "{{ productosLineaNombres }}" en la tienda {{ empresaNombre }}, ingresa a acme para ver el detalle de la compra</p>
+
+                                                                    <div style="margin: 30px;"></div>
+
+                                                                    <div>Metodo envio: {{ METODOENVIO }}</div>
+                                                                    <div>Forma de pago: {{ METODOPAGO }}</div>
+                                                                    <div>Fecha estimada: {{ FECHAESTIMADA }}</div>
+                                                                    <div>Productos: {{ PRODUCTOS }}</div>
+
+
                                                                 </div>
                                                             </td>
                                                         </tr>

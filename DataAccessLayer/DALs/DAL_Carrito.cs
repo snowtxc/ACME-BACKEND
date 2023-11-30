@@ -272,13 +272,29 @@ namespace DataAccessLayer.DALs
 
                 DAL_Mail mailService = new DAL_Mail();
 
+                string prodList = "";
+
+                foreach (var item in lineasCarrito)
+                {
+                    prodList += @"
+
+<div style=""display: flex; flex-direction: column; align-items:center; justify-content: center; padding: 6px 10px; gap: 4px; border: 1px solid gray; border-radius: 10px;"">
+          <div>      <span>" + item.Producto.Titulo + @"(" + item.Cantidad + @")</span>                  -
+                 <span>$" + item.Producto.Precio + @"c/u</span></div>
+                 <span>Total: $" + item.Producto.Precio * item.Cantidad + "</span> </div>";
+                }
+
                 string path = @"./Templates/CompraExitosa.html";
                 string content = File.ReadAllText(path);
                 string withUserName = content.Replace("{{ userName }}", loggedUserInfo.Nombre);
                 var frontLink = _configuration["FrontendURL"] + "/login";
                 string newContent = withUserName.Replace("{{ activateAccountLink }}", frontLink);
                 string finalContent = newContent.Replace("{{ productosLineaNombres }}", productosLineaNombres);
-                string allContent = finalContent.Replace("{{ empresaNombre }}", empresaInfo.Nombre);
+                string allContent = finalContent.Replace("{{ empresaNombre }}", empresaInfo.Nombre).
+                    Replace("{{ METODOENVIO }}", compra.MetodoEnvio.ToString()).
+                    Replace("{{ METODOPAGO }}", compra.MetodoPago.ToString()).
+                    Replace("{{ FECHAESTIMADA }}", compra.EnvioPaquete != null ? compra.EnvioPaquete.FechaEstimadaEntrega.ToString() : "No tiene").
+                    Replace("{{ PRODUCTOS }}", prodList);
 
 
                 mailService.sendMail(loggedUserInfo.Email, "Compra realizada correctamente", allContent);
