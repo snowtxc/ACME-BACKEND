@@ -12,5 +12,9 @@ namespace BusinessLayer.IBLs
     {
 
         public Task<List<ReclamoDto>> list();
+
+        public Task crearReclamo(ReclamoCreateDTO data);
+
+        public Task cerrarReclamo(int reclamoId);
     }
 }

@@ -22,5 +22,16 @@ namespace BusinessLayer.BLs
         {
             return _reclamo.list();
         }
+
+        public Task crearReclamo(ReclamoCreateDTO data)
+        {
+            return _reclamo.crear(data);
+        }
+
+        public Task cerrarReclamo(int reclamoId)
+        {
+            return _reclamo.cerrarReclamo(reclamoId);
+        }
+
     }
 }

@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using DataAccessLayer.DALs;
 using DataAccessLayer.Models.Dtos.Estado;
 using DataAccessLayer.Models.Dtos.CompraEstado;
+using DataAccessLayer.Models.Dtos.Reclamo;
 
 namespace BusinessLayer.BLs
 {
@@ -135,6 +136,26 @@ namespace BusinessLayer.BLs
             {
                 throw new Exception("Compra no existe");
             }
+            var userId = compra.Usuario.Id;
+            var reclamos = await _compraIdal.getReclamosByCompra(compra.Id, userId);
+            List<ReclamoDto> reclamosItems = new List<ReclamoDto>();
+            if (reclamos != null && reclamos.Count() > 0)
+            {
+                foreach (Reclamo reclamo in reclamos)
+                {
+                    Compra comp = reclamo.Compra;
+                    Usuario user = compra.Usuario;
+
+
+                    SortCompra compraSortDto = new SortCompra { Id = compra.Id, costoTotal = compra.CostoTotal, metodoEnvio = compra.MetodoEnvio.ToString(), metodoPago = compra.MetodoPago.ToString() };
+                    SortUserDto userSortDto = new SortUserDto { Id = user.Id, Tel = user.Celular, Email = user.Email, Imagen = user.Imagen, Nombre = user.Nombre };
+
+                    reclamosItems.Add(new ReclamoDto { Id = reclamo.Id, Description = reclamo.Descripcion, Estado = reclamo.EstadoReclamo.ToString(), Fecha = reclamo.CreatedAt, compra = compraSortDto, usuario = userSortDto });
+                }
+            }
+
+           
+
             Usuario comprador = compra.Usuario;
             Empresa empresa = compra.Empresa;
             List<CompraLineaDto> lineas = new List<CompraLineaDto>();
@@ -194,6 +215,7 @@ namespace BusinessLayer.BLs
                 Lineas = lineas,
                 Empresa = new EmpresaDto {  Id = empresa.Id, Correo = empresa.Correo, CostoEnvio = empresa.CostoEnvio, Direccion = empresa.Direccion, Imagen = empresa.Imagen, Nombre = empresa.Nombre, Telefono = empresa.Telefono, Wallet = empresa.Wallet  },
                 HistorialEstados = estadosDto,
+                reclamosUsuario = reclamosItems,
 
             };
             return compraInfo;

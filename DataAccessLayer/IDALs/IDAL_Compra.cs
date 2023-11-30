@@ -12,9 +12,8 @@ namespace DataAccessLayer.IDALs
     {
         Task  agregarEstado(int compraId, EstadoCompra nuevoEstadoCompra);
         Task<Compra> getById(int id);
-
+        Task<List<Reclamo>> getReclamosByCompra(int id, string userId);
         Task<List<Compra>> listByEmpresa(int empresaId);
-
         Task<List<Compra>> listByCliente(string clienteId);
     }
 }

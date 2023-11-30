@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer.Models.Dtos.CompraEstado;
+using DataAccessLayer.Models.Dtos.Reclamo;
 using DataAccessLayer.Models.Dtos.Usuario;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,7 @@ namespace DataAccessLayer.Models.Dtos.Compra
 
         public EmpresaDto Empresa { get; set; }
 
+        public List<ReclamoDto> reclamosUsuario { get; set; } = new List<ReclamoDto>();
 
         public List<CompraEstadoDto> HistorialEstados {  get;set;}
     }

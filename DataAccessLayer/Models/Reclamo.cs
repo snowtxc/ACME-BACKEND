@@ -18,6 +18,8 @@ namespace DataAccessLayer.Models
         public string Descripcion { get; set; } = "";
         public EstadoReclamo EstadoReclamo { get; set; }
 
+        [Column]
+        public DateTime CreatedAt { get; set; } = DateTime.Now.Date;
 
         [Required]
         public int CompraId { get; set; }

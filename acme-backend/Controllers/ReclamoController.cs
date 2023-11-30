@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.IBLs;
+using DataAccessLayer.Models.Dtos;
 using DataAccessLayer.Models.Dtos.Reclamo;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,6 +25,44 @@ namespace acme_backend.Controllers
             {
                 List<ReclamoDto> reclamos  = await _reclamoService.list();
                 return Ok(reclamos);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> crearReclamo(ReclamoCreateDTO data)
+        {
+            try
+            {
+                await _reclamoService.crearReclamo(data);
+                return Ok(new OkDTO
+                {
+                    ok = true,
+                    message = "Reclamo creado correctamente"
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpPut, Route("cerrar-reclamo/{reclamoId}")]
+        public async Task<IActionResult> cerrarReclamo(int reclamoId)
+        {
+            try
+            {
+                await _reclamoService.cerrarReclamo(reclamoId);
+                return Ok(new OkDTO
+                {
+                    ok = true,
+                    message = "Reclamo cerrado correctamente"
+                });
             }
             catch (Exception ex)
             {

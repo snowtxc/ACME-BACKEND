@@ -30,12 +30,40 @@ namespace DataAccessLayer.IDALs
                 SortCompra compraSortDto = new SortCompra {  Id =  compra.Id , costoTotal = compra.CostoTotal, metodoEnvio = compra.MetodoEnvio.ToString(), metodoPago =  compra.MetodoPago.ToString() };
                 SortUserDto userSortDto = new SortUserDto { Id = user.Id, Tel = user.Celular, Email = user.Email, Imagen = user.Imagen, Nombre = user.Nombre };
 
-                result.Add(new ReclamoDto { Id = reclamo.Id, Description = reclamo.Descripcion, Estado = reclamo.EstadoReclamo.ToString(), Fecha = new DateTime(), compra = compraSortDto, usuario = userSortDto });
-
-               
+                result.Add(new ReclamoDto { Id = reclamo.Id, Description = reclamo.Descripcion, Estado = reclamo.EstadoReclamo.ToString(), Fecha = reclamo.CreatedAt, compra = compraSortDto, usuario = userSortDto });
             }
 
             return result;
+        }
+
+        public async Task crear(ReclamoCreateDTO data)
+        {
+            var compra = await _db.Compras.Where((item) => item.Id == data.compraId).FirstOrDefaultAsync();
+            if (compra == null)
+            {
+                throw new Exception("Compra invalida");
+            }
+
+            var reclamo = new Reclamo();
+            reclamo.Descripcion = data.Description;
+            reclamo.Activo = true;
+            reclamo.EstadoReclamo = Enums.EstadoReclamo.ACTIVO;
+            reclamo.Compra = compra;
+            reclamo.CreatedAt = DateTime.Now;
+            await _db.Reclamos.AddAsync(reclamo);
+            await _db.SaveChangesAsync();
+        }
+
+        public async Task cerrarReclamo(int reclamoId)
+        {
+            var reclamo = await _db.Reclamos.Where((item) => item.Id ==reclamoId).FirstOrDefaultAsync();
+            if (reclamo == null)
+            {
+                throw new Exception("Reclamo invalido");
+            }
+            reclamo.EstadoReclamo = Enums.EstadoReclamo.CERRADO;
+            _db.Reclamos.Update(reclamo);
+            await _db.SaveChangesAsync();
         }
     }
 }

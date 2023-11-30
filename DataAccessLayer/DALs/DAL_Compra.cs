@@ -27,7 +27,13 @@ namespace DataAccessLayer.DALs
                 return null;
             }
             return compra;
+        }
 
+        public async Task<List<Reclamo>> getReclamosByCompra(int id, string userId)
+        {
+            var reclamos = await _db.Reclamos.Include((item) => item.Compra).Include((item) => item.Compra.Usuario).Where((item) => item.Compra.Id == id && item.Compra.Usuario.Id == userId).ToListAsync();
+
+            return reclamos;
         }
 
         public async Task agregarEstado(int compraId,  EstadoCompra nuevoEstado)
