@@ -216,6 +216,7 @@ namespace BusinessLayer.BLs
                 Empresa = new EmpresaDto {  Id = empresa.Id, Correo = empresa.Correo, CostoEnvio = empresa.CostoEnvio, Direccion = empresa.Direccion, Imagen = empresa.Imagen, Nombre = empresa.Nombre, Telefono = empresa.Telefono, Wallet = empresa.Wallet  },
                 HistorialEstados = estadosDto,
                 reclamosUsuario = reclamosItems,
+                codigoSeguimiento = compra.EnvioPaquete != null ? compra.EnvioPaquete.CodigoSeguimiento : "",
 
             };
             return compraInfo;

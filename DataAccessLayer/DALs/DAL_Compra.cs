@@ -19,6 +19,7 @@ namespace DataAccessLayer.DALs
         public async Task<Compra?> getById(int id)
         {
             Compra? compra = await _db.Compras.Include(c => c.Empresa)
+                .Include((c) => c.EnvioPaquete)
                 .Include(c => c.Usuario).Include(c => c.ComprasProductos)
                 .ThenInclude(cp => cp.Producto).ThenInclude(p => p.Fotos)
                 .Include(c => c.ComprasEstados).ThenInclude(ce => ce.EstadoCompra).FirstOrDefaultAsync(c => c.Id == id);
