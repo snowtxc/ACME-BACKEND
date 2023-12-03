@@ -45,7 +45,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Usuario,Vendedor")]
         public async Task<IActionResult> listar()
         {
             try
@@ -62,7 +62,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles = "Admin,Vendedor")]
+        [Authorize(Roles = "Admin,Vendedor,Usuario")]
         public async Task<IActionResult> getById(int id)
         {
             try
@@ -117,7 +117,6 @@ namespace acme_backend.Controllers
 
 
         [HttpGet("ventas")]
-        [Authorize(Roles = "Vendedor")]
         [Authorize(Roles = "Admin,Vendedor")]
         public async Task<IActionResult> getVentasByEmpresa()
         {
