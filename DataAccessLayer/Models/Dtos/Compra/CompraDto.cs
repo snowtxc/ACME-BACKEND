@@ -28,6 +28,8 @@ namespace DataAccessLayer.Models.Dtos.Compra
 
         public int CantidadDeProductos { get; set; } = 0;
 
+        public String codigoSeguimiento { get; set; } = "";
+
         public List<CompraLineaDto> Lineas { get; set; }
 
         public EmpresaDto Empresa { get; set; }
