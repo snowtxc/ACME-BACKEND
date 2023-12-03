@@ -3,6 +3,7 @@ using DataAccessLayer.Models.Dtos.Compra;
 using DataAccessLayer.Models.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace acme_backend.Controllers
 {
@@ -20,6 +21,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpGet, Route("sort")]
+        [Authorize(Roles = "Admin,Vendedor,Usuario")]
         public async Task<IActionResult> listarEstadisticas()
         {
             try
@@ -33,6 +35,7 @@ namespace acme_backend.Controllers
             }
         }
         [HttpGet, Route("admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> listarEstadisticasAdmin()
         {
             try
@@ -47,6 +50,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpGet, Route("empresa")]
+        [Authorize(Roles = "Vendedor")]
         public async Task<IActionResult> getVentasByEmpresa()
         {
             try

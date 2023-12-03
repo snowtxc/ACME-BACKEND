@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.IBLs;
 using DataAccessLayer.Models.Dtos.TipoIVA;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -18,6 +19,7 @@ namespace acme_backend.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Vendedor")]
         public async Task<IActionResult> listarTiposIVA()
         {
             try
@@ -32,6 +34,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin,Vendedor")]
         public async Task<IActionResult> getTipoIvaById(int id)
         {
             try
@@ -46,6 +49,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> createTipoIva(TipoIVADTO tipoIva)
         {
             try
@@ -60,6 +64,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> updateTipoIva(TipoIVADTO tipoIva)
         {
             try
@@ -74,6 +79,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> deleteTipoIva(int id)
         {
             try

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using DataAccessLayer.Models.Dtos;
 using DataAccessLayer.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace acme_backend.Controllers
 {
@@ -20,6 +21,7 @@ namespace acme_backend.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Usuario")]
         public async Task<IActionResult> crear(AgregarProductoCarritoDTO data)
         {
             try
@@ -57,6 +59,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpPost, Route("comprar")]
+        [Authorize(Roles = "Usuario")]
         public async Task<IActionResult> finalizarCarrito(FInalizarCarritoDTO data)
         {
             try
@@ -90,6 +93,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpGet, Route("obtenerCarrito")]
+        [Authorize(Roles = "Usuario")]
         public async Task<IActionResult> obtenerCarrito(int EmpresaId)
         {
             try
@@ -116,6 +120,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpDelete, Route("borrarLinea")]
+        [Authorize(Roles = "Usuario")]
         public async Task<IActionResult> eliminarLinea(int LineaId)
         {
             try

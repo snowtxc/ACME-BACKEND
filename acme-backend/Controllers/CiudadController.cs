@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.IBLs;
 using DataAccessLayer.Models.Dtos.Ciudad;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace acme_backend.Controllers
@@ -16,6 +17,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Vendedor,Usuario")]
         public async Task<IActionResult> listarCiudades()
         {
             try
@@ -32,6 +34,7 @@ namespace acme_backend.Controllers
 
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin,Vendedor,Usuario")]
         public async Task<IActionResult> getCiudadById(int id)
         {
             try
@@ -46,6 +49,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> createCiudad(CiudadCreateDTO ciudad)
         {
             try
@@ -60,6 +64,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> updateCiudad(CiudadDTO ciudad)
         {
             try
@@ -74,6 +79,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> deleteCiudad(int id)
         {
             try

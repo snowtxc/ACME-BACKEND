@@ -39,6 +39,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Vendedor")]
         public async Task<ActionResult<UsuarioListDto>> getUserById(string id)
         {
             try
@@ -59,6 +60,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Vendedor")]
         public async Task<ActionResult<UsuarioDto>> createUser(UsuarioCreateDto userDto)
         {
             try
@@ -86,6 +88,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Admin,Vendedor")]
         public async Task<IActionResult> updateUser(UpdateUsuarioDto userDto)
         {
             try
@@ -106,6 +109,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin,Vendedor")]
         public async Task<IActionResult> deleteUser(string id)
         {
             try
@@ -121,6 +125,7 @@ namespace acme_backend.Controllers
 
         [HttpGet]
         [Route("listarDirecciones")]
+        [Authorize(Roles = "Vendedor,Usuario")]
         public async Task<ActionResult<List<DireccionDTO>>> getLoggUsrDirecciones()
         {
             try
@@ -142,6 +147,7 @@ namespace acme_backend.Controllers
 
         [HttpPost]
         [Route("agregarDireccion")]
+        [Authorize(Roles = "Vendedor,Usuario")]
         public async Task<IActionResult> agregarDireccion(DireccionDTO direccion)
         {
             try
@@ -165,6 +171,7 @@ namespace acme_backend.Controllers
 
         [HttpPut]
         [Route("modificarDireccion")]
+        [Authorize(Roles = "Vendedor,Usuario")]
         public async Task<IActionResult> modificarDireccion(DireccionDTO direccion)
         {
             try

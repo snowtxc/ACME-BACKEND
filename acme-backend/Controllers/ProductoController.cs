@@ -19,6 +19,7 @@ namespace acme_backend.Controllers
 
 
         [HttpGet, Route("mis-productos")]
+        [Authorize(Roles = "Vendedor,Usuario")]
         public async Task<IActionResult> listarProductos()
         {
             try
@@ -41,6 +42,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpGet, Route("buscar-productos")]
+        [Authorize(Roles = "Admin,Vendedor,Usuario")]
         public async Task<IActionResult> buscarProductos([FromQuery] string query, [FromQuery] int empresaId)
         {
             try
@@ -62,6 +64,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpGet, Route("productos-empresa")]
+        [Authorize(Roles = "Vendedor,Usuario")]
         public async Task<IActionResult> listarProductosByEmpresa(int empresaId)
         {
             try
@@ -84,6 +87,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpGet, Route("{productoId}")]
+        [Authorize(Roles = "Vendedor,Usuario")]
         public async Task<IActionResult> obtenerProductoById(int productoId)
         {
             try
@@ -107,6 +111,7 @@ namespace acme_backend.Controllers
 
 
         [HttpPost, Route("relacionados")]
+        [Authorize(Roles = "Vendedor,Usuario")]
         public async Task<IActionResult> obtenerProductosRelacionados(int[] productosIds)
         {
             try
@@ -129,6 +134,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpDelete, Route("{productoId}")]
+        [Authorize(Roles = "Vendedor")]
         public async Task<IActionResult> eliminarProducto(int productoId)
         {
             try
@@ -159,6 +165,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpPost, Route("updateProduct")]
+        [Authorize(Roles = "Vendedor")]
         public async Task<IActionResult> editarProducto(EditProductoDTO productoInfo)
         {
             try
@@ -189,6 +196,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Vendedor")]
         public async Task<IActionResult> crearProducto(CrearProductoDTO data)
         {
             try
@@ -226,6 +234,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpPost, Route("calificarProducto")]
+        [Authorize(Roles = "Usuario")]
         public async Task<IActionResult> calificarProducto(CreateCalificacionDTO calificacionDto)
         {
             try

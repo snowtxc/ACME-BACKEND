@@ -3,6 +3,7 @@ using BusinessLayer.IBLs;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using DataAccessLayer.Models.Dtos;
+using Microsoft.AspNetCore.Authorization;
 
 namespace acme_backend.Controllers
 {
@@ -19,6 +20,7 @@ namespace acme_backend.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "Vendedor")]
         public async Task<IActionResult> listarCategorias()
         {
             try
@@ -40,6 +42,7 @@ namespace acme_backend.Controllers
             }
         }
         [HttpGet, Route("categorias-de-empresa")]
+        [Authorize(Roles = "Vendedor,Usuario")]
         public async Task<IActionResult> listarCategoriasByEmpresa(int empresaId)
         {
             try
@@ -63,6 +66,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Vendedor")]
         public async Task<IActionResult> crearCategoria(CreateCategoriaDTO categoria)
         {
             try
@@ -98,6 +102,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Vendedor")]
         public async Task<IActionResult> borrarCategorias(int[] categoriasIds)
         {
             try

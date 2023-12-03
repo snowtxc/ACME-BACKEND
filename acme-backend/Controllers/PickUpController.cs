@@ -24,6 +24,7 @@ namespace acme_backend.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Vendedor,Usuario")]
         public async Task<IActionResult> list()
         {
             try
@@ -40,6 +41,7 @@ namespace acme_backend.Controllers
 
 
         [HttpGet, Route("listarByEmpresa")]
+        [Authorize(Roles = "Admin,Vendedor,Usuario")]
         public async Task<IActionResult> listPickupsByEmpresa([FromQuery] int empresaId)
         {
             try
@@ -62,6 +64,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Vendedor")]
         public async Task<IActionResult> create(PickupCreateDto pickupCreate)
         {
            
@@ -82,6 +85,7 @@ namespace acme_backend.Controllers
 
         [HttpPost]
         [Route("deletesById")]
+        [Authorize(Roles = "Vendedor")]
         public async Task<IActionResult> deletesByIds(PickupsForDelete pickupsForDeletes)
         {
             try

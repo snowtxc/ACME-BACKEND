@@ -29,6 +29,7 @@ namespace acme_backend.Controllers
 
         [HttpPost]
         [Route("create")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> register(EmpresaCreateDto empresaDto)
         {
             try
@@ -44,6 +45,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> listar()
         {
             try
@@ -60,6 +62,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin,Vendedor")]
         public async Task<IActionResult> getById(int id)
         {
             try
@@ -79,6 +82,7 @@ namespace acme_backend.Controllers
 
         [HttpPost]
         [Route("deletesById")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> deletesByIds(EmpresaForDeletes empresaForDeletes)
         {
             try
@@ -96,6 +100,7 @@ namespace acme_backend.Controllers
 
         [HttpPost]
         [Route("editLookAndFeel")]
+        [Authorize(Roles = "Vendedor")]
         public async Task<IActionResult> editLookAndFeel(LookAndFeelDTO laf)
         {
             try
@@ -113,7 +118,7 @@ namespace acme_backend.Controllers
 
         [HttpGet("ventas")]
         [Authorize(Roles = "Vendedor")]
-
+        [Authorize(Roles = "Admin,Vendedor")]
         public async Task<IActionResult> getVentasByEmpresa()
         {
             try

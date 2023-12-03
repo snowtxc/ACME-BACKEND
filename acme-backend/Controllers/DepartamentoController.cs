@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.IBLs;
 using DataAccessLayer.Models.Dtos.Ciudad;
 using DataAccessLayer.Models.Dtos.Departamento;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace acme_backend.Controllers
@@ -19,6 +20,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Vendedor,Usuario")]
         public async Task<IActionResult> listarDepartamentos()
         {
             try
@@ -33,6 +35,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin,Vendedor,Usuario")]
         public async Task<IActionResult> getDepartamentoById(int id)
         {
             try
@@ -47,6 +50,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> createDepartamento(DepartamentoCreateDTO depto)
         {
             try
@@ -61,6 +65,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> updateDepartamento(DepartamentoEditDTO departamento)
         {
             try
@@ -75,6 +80,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> deleteDepartamento(int id)
         {
             try
@@ -89,6 +95,7 @@ namespace acme_backend.Controllers
         }
 
         [HttpGet("{id}/ciudades")]
+        [Authorize(Roles = "Admin,Vendedor,Usuario")]
         public async Task<IActionResult> getCiudadesByDepartamento(int id)
         {
             try

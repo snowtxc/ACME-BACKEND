@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.IBLs;
 using DataAccessLayer.Models.Dtos;
 using DataAccessLayer.Models.Dtos.Reclamo;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace acme_backend.Controllers
@@ -34,6 +35,7 @@ namespace acme_backend.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Usuario")]
         public async Task<IActionResult> crearReclamo(ReclamoCreateDTO data)
         {
             try
@@ -53,6 +55,7 @@ namespace acme_backend.Controllers
 
 
         [HttpPut, Route("cerrar-reclamo/{reclamoId}")]
+        [Authorize(Roles = "Vendedor")]
         public async Task<IActionResult> cerrarReclamo(int reclamoId)
         {
             try

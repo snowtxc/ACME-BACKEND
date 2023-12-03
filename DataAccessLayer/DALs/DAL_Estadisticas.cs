@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DataAccessLayer.Db;
+using DataAccessLayer.Enums;
 using DataAccessLayer.IDALs;
 using DataAccessLayer.Models;
 using DataAccessLayer.Models.Dtos;
@@ -113,10 +114,10 @@ namespace DataAccessLayer.IDALs
             var ventasPorEmpresa = await _db.Empresas
                 .Where(empresa => _db.Compras
                     .Include(compra => compra.Empresa)
-                    .Where(c => c.Activo == true)
                     .Any(c => c.EmpresaId == empresa.Id &&
                               c.Fecha.Month == DateTime.Now.Month &&
-                              c.Fecha.Year == DateTime.Now.Year))
+                              c.Fecha.Year == DateTime.Now.Year &&
+                              c.Activo == true))
                 .Select(empresa => new VentasPorEmpresaDTO
                 {
                     EmpresaId = empresa.Id,
@@ -124,7 +125,8 @@ namespace DataAccessLayer.IDALs
                     CantidadVentasMesActual = _db.Compras
                         .Count(c => c.EmpresaId == empresa.Id &&
                                     c.Fecha.Month == DateTime.Now.Month &&
-                                    c.Fecha.Year == DateTime.Now.Year)
+                                    c.Fecha.Year == DateTime.Now.Year &&
+                                    c.Activo == true)
                 })
                 .ToListAsync();
 
@@ -139,7 +141,10 @@ namespace DataAccessLayer.IDALs
         {
             var empresaStats = new EmpresaEstadisticasDTO();
 
+            var fechaActual = DateTime.Now.Date;
             var fechaInicioMesPasado = DateTime.Now.AddMonths(-1).Date;
+            var fechaInicioAnioActual = new DateTime(DateTime.Now.Year, 1, 1);
+            var fechaInicioSemanaActual = DateTime.Now.AddDays(-(int)DateTime.Now.DayOfWeek).Date;
 
             var comprasUltimoMes = await _db.Compras
                 .Include(c => c.ComprasProductos)
@@ -166,12 +171,45 @@ namespace DataAccessLayer.IDALs
 
 
             var ventasPorMes = new List<VentasPorMesDTO>();
-            var fechaInicioAnioActual = new DateTime(DateTime.Now.Year, 1, 1);
 
             var comprasAnioActual = await _db.Compras
                 .Include(c => c.Empresa)
                 .Where(c => c.Activo == true && c.Fecha >= fechaInicioAnioActual && c.EmpresaId == empresaId)
                 .ToListAsync();
+
+            // todas las compras activas de la empresa, para hhacer el count de los metodos de pago.
+            var comprasEmpresa = await _db.Compras
+                .Where(c => c.Activo == true && c.EmpresaId == empresaId)
+                .ToListAsync();
+
+            var metodosPagoDTO = new MetodosPagoPreferidosDTO();
+            var metodosEnvioPrefDTO = new MetodosEnvioPreferidosDTO();
+
+            foreach (var compra in comprasEmpresa)
+            {
+                switch (compra.MetodoPago)
+                {
+                    case MetodoPago.MercadoPago:
+                        metodosPagoDTO.MercadoPago++;
+                        break;
+                    case MetodoPago.Tarjeta:
+                        metodosPagoDTO.Tarjeta++;
+                        break;
+                    case MetodoPago.Wallet:
+                        metodosPagoDTO.Wallet++;
+                        break;
+                }
+
+                switch (compra.MetodoEnvio)
+                {
+                    case MetodoEnvio.DireccionPropia:
+                        metodosEnvioPrefDTO.DireccionPropia++;
+                        break;
+                    case MetodoEnvio.RetiroPickup:
+                        metodosEnvioPrefDTO.RetiroPickup++;
+                        break;
+                }
+            }
 
             var todosLosMeses = Enumerable.Range(1, 12)
                 .Select(mes => new VentasPorMesDTO
@@ -201,6 +239,23 @@ namespace DataAccessLayer.IDALs
                     })
                 .ToList();
 
+            // acá obtengo las fechas de los últimos 7 dias, incluyendo hoy
+            var fechasDiasSemanaActual = Enumerable.Range(0, 7)
+                .Select(diasAtras => fechaActual.AddDays(-diasAtras))
+                .OrderBy(fecha => fecha)
+                .ToList();
+
+            var ventasAgrupadasPorDia = fechasDiasSemanaActual
+                .GroupJoin(comprasUltimoMes,
+                    dia => dia,
+                    compra => compra.Fecha.Date,
+                    (dia, ventas) => new VentasPorDiaDTO
+                    {
+                        Dia = $"{dia.ToString("dddd", CultureInfo.GetCultureInfo("es-ES"))} - {dia.Day}/{dia.Month:D2}",
+                        CantidadVentas = ventas.Count()
+                    })
+                .ToList();
+
             var productosRegistrados = _db.Productos
                 .Include(p => p.Empresa)
                 .Where(p => p.Activo == true && p.Empresa.Id == empresaId)
@@ -211,13 +266,21 @@ namespace DataAccessLayer.IDALs
                 .Where(u => u.Activo == true && u.EmpresaId == empresaId)
                 .ToList();
 
+
+            // contadores
             empresaStats.ProductosRegistrados = productosRegistrados.Count();
             empresaStats.UsuariosActivos = usuariosActivos.Count();
             empresaStats.ProductosVendidosEsteMes = comprasUltimoMes
                 .SelectMany(c => c.ComprasProductos)
                 .Sum(cp => cp.Cantidad);
+            empresaStats.MetodosPagoPreferidos = metodosPagoDTO;
+            empresaStats.MetodosEnvioPreferidos = metodosEnvioPrefDTO;
+
+
+            // estadísticas complejas
             empresaStats.ProductosMasVendidos = productosMasVendidos;
             empresaStats.VentasPorMes = allMonthsOrders;
+            empresaStats.VentasUltimaSemana = ventasAgrupadasPorDia;
             return empresaStats;
         }
     }
