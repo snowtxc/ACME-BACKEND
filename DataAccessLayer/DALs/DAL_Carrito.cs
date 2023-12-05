@@ -129,6 +129,7 @@ namespace DataAccessLayer.DALs
             else if (data.MetodoPago == 2)
             {
                 selectedMetodoPago = MetodoPago.Wallet;
+                isPaymentOk = true;
 
                 //validar wallet
             }
