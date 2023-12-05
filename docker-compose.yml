@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: PAYMENTS/Dockerfile
     ports:
-      - "5001:443"
+      - "5011:443"
       - "5001:80"
     networks:
         - local

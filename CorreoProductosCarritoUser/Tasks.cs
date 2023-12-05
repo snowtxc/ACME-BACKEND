@@ -34,14 +34,12 @@ namespace CorreoProductosCarritoUser
             var lineasCarrito = _db.LineasCarrito.Include((l) => l.Producto).Include((l) => l.Producto.Empresa).Include((l) => l.Usuario).Where((p) => p.correoEnviado == false).ToList();
 
             List<LineaCarritoUserDTO> usuariosToSendEmai = new List<LineaCarritoUserDTO>();
-            Console.WriteLine("aca 1");
 
             foreach (var lineaCarrito in lineasCarrito)
             {
                 var producto = lineaCarrito.Producto;
                 var usuario = lineaCarrito.Usuario;
                 var empresaCantidadDias = lineaCarrito.Producto.Empresa.DiasEnvioEmail;
-                Console.WriteLine("aca 2");
                 if (currentDate > lineaCarrito.CreatedAt.AddDays(empresaCantidadDias)) {
                     if (usuariosToSendEmai.Exists((u) => u.userId == usuario.Id && producto.Empresa.Id == u.empresaId) == false)
                     {
